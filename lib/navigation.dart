@@ -59,14 +59,6 @@ class NavigationState extends State<Navigation> {
             topLeft: Radius.circular(28),
             topRight: Radius.circular(28),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xFF433957),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, -2),
-            ),
-          ],
         ),
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
