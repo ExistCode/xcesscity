@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
@@ -26,9 +27,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-            fontFamily: 'Poppins',
-            primaryColor: Colors.amber,
-            scaffoldBackgroundColor: custom_colors.backgroundBlack),
+          fontFamily: 'Poppins',
+          scaffoldBackgroundColor: backgroundBlack,
+          primaryColor: white,
+          
+        ),
         home: Navigation(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
