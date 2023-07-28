@@ -118,7 +118,7 @@ class NavigationState extends State<Navigation> {
               BottomNavigationBarItem(
                 label: '',
                 icon: Icon(
-                  Icons.account_circle_rounded,
+                  Icons.person_pin_circle_rounded,
                   size: NavBarIconSize,
                 ),
               ),

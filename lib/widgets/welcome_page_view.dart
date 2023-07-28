@@ -22,13 +22,11 @@ class WelcomePageView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TopBanner(500, imageUrl, 'Welcome to XcessCITY'),
-             SizedBox(height: 20),
+            SizedBox(height: 20),
             Text(title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900)),
+                    color: white, fontSize: 28, fontWeight: FontWeight.w900)),
             const SizedBox(
               height: 20,
             ),
@@ -36,7 +34,7 @@ class WelcomePageView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 description,
-                style:  TextStyle(color: white, fontSize: 16),
+                style: TextStyle(color: white, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             )
