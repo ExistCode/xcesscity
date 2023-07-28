@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Poppins',
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
-          
         ),
         home: Navigation(),
         routes: {
