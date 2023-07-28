@@ -37,6 +37,7 @@ dependencies:
   firebase_core: ^2.15.0
   #Firebase database
   cloud_firestore: ^4.8.4
+  firebase_auth: ^4.7.2
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +67,7 @@ flutter:
   assets:
     - lib/assets/images/image_9.png
     - lib/assets/images/new-restaurant.jpg
-    
+
   fonts:
     - family: Poppins
       fonts:
