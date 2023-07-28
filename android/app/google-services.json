@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "309912021766",
+    "project_id": "xcesscity-94a0c",
+    "storage_bucket": "xcesscity-94a0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309912021766:android:4a676b39f6d5962a26cc87",
+        "android_client_info": {
+          "package_name": "com.example.xcesscity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309912021766-6iklp8qqjan4sh8m42l4vavt6i8ssa5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoAPR7BRN1u9NRUdGE5cJ33tJzt_LgUd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309912021766-6iklp8qqjan4sh8m42l4vavt6i8ssa5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
