@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:xcesscity/models/colors.dart';
-import 'package:xcesscity/widgets/explore_main_card.dart';
-
+import '../models/colors.dart' as custom_colors;
 import '../navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -30,5 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
       height: double.infinity,
       child: Column(children: [ExploreMainCard(), Text(user.email!)]),
     ));
+      
+                 
+    );
   }
 }

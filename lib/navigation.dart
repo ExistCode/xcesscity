@@ -53,12 +53,12 @@ class NavigationState extends State<Navigation> {
         height: 64,
         width: 64,
         child: FloatingActionButton(
-          backgroundColor: currentIndex==2? accentOrange :Color(0xFF433957) ,
+          backgroundColor: currentIndex == 2 ? accentOrange : Color(0xFF433957),
           onPressed: () => navigationBar.onTap!(2),
           child: Icon(
             Icons.shield,
             size: NavBarIconSize,
-            color: white ,
+            color: white,
           ),
         ),
       ),
@@ -76,7 +76,6 @@ class NavigationState extends State<Navigation> {
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(28), topRight: Radius.circular(28)),
           child: BottomNavigationBar(
-            
             type: BottomNavigationBarType.fixed,
             backgroundColor: Color(0xFF433957),
             selectedItemColor: accentOrange,
@@ -129,4 +128,4 @@ class NavigationState extends State<Navigation> {
       ),
     );
   }
-  }
+}
