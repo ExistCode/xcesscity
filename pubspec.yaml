@@ -66,7 +66,7 @@ flutter:
   assets:
     - lib/assets/images/image_9.png
     - lib/assets/images/new-restaurant.jpg
-    - lib/assets/images/image 3.png
+    - lib/assets/images/banner.png
     
   fonts:
     - family: Poppins
