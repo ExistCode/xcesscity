@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ]),
           ),
           Container(
+            padding: EdgeInsets.all(10),
             height: 200,
             width: 350,
             decoration: BoxDecoration(
@@ -66,14 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       blurRadius: 5,
                       offset: Offset(0, 10))
                 ],
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    custom_colors.black.withOpacity(0.7),
-                    custom_colors.black,
-                  ],
-                ),
+                color: Color(0xFFDEDEDE).withOpacity(0.12),
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -132,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       blurRadius: 5,
                       offset: Offset(0, 7))
                 ],
-                color: custom_colors.black,
+                color: Color(0xFFDEDEDE).withOpacity(0.12),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40)),
