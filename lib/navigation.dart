@@ -4,7 +4,6 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
-import './models/colors.dart' as custom_colors;
 import 'models/colors.dart';
 
 class Navigation extends StatefulWidget {
@@ -49,13 +48,26 @@ class NavigationState extends State<Navigation> {
     double NavBarIconSize = 32;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      
-      // body: _isLoading ? LoadingScreen() : screens[currentIndex],
+      backgroundColor: backgroundBlack,
+      floatingActionButton: Container(
+        height: 64,
+        width: 64,
+        child: FloatingActionButton(
+          backgroundColor: currentIndex==2? accentOrange :Color(0xFF433957) ,
+          onPressed: () => navigationBar.onTap!(2),
+          child: Icon(
+            Icons.shield,
+            size: NavBarIconSize,
+            color: white ,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: screens[currentIndex],
       bottomNavigationBar: Container(
-        height: 90,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+        height: 80,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(28),
             topRight: Radius.circular(28),
           ),
@@ -64,10 +76,11 @@ class NavigationState extends State<Navigation> {
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(28), topRight: Radius.circular(28)),
           child: BottomNavigationBar(
+            
             type: BottomNavigationBarType.fixed,
             backgroundColor: Color(0xFF433957),
-            selectedItemColor: white,
-            unselectedItemColor: custom_colors.white,
+            selectedItemColor: accentOrange,
+            unselectedItemColor: white,
             key: globalKey,
             showSelectedLabels: false,
             showUnselectedLabels: false,
@@ -75,58 +88,38 @@ class NavigationState extends State<Navigation> {
             onTap: (int newIndex) {
               setState(() {
                 currentIndex = newIndex;
-                
               });
             },
             items: [
               BottomNavigationBarItem(
                   label: '',
-                  activeIcon: selectedBox( Icon(
-                    Icons.home,
-                    size: NavBarIconSize,
-                  )),    
-                  icon:  Icon(
-                    Icons.home,
+                  icon: Icon(
+                    Icons.home_rounded,
                     size: NavBarIconSize,
                   )),
               BottomNavigationBarItem(
                   label: '',
-                  activeIcon: selectedBox(Icon(
-                    Icons.explore,
-                    size: NavBarIconSize)),
                   icon: Icon(
                     Icons.explore,
                     size: NavBarIconSize,
                   )),
-               BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 label: '',
-                activeIcon: selectedBox(Icon(
-                  Icons.shield_sharp,
-                  size: 32,
-                ),), 
                 icon: Icon(
-                  Icons.shield_sharp,
-                  size: 32,
+                  Icons.shield,
+                  size: 0,
                 ),
               ),
               BottomNavigationBarItem(
                   label: '',
-                  activeIcon: selectedBox(Icon(
-                    Icons.chat_bubble,
-                    size: NavBarIconSize,
-                  )),
                   icon: Icon(
-                    Icons.chat_bubble,
+                    Icons.forum_rounded,
                     size: NavBarIconSize,
                   )),
               BottomNavigationBarItem(
                 label: '',
-                activeIcon: selectedBox(Icon(
-                  Icons.pin_drop,
-                  size: NavBarIconSize,
-                ),),
                 icon: Icon(
-                  Icons.pin_drop,
+                  Icons.account_circle_rounded,
                   size: NavBarIconSize,
                 ),
               ),
@@ -136,12 +129,4 @@ class NavigationState extends State<Navigation> {
       ),
     );
   }
-}
-
-Widget selectedBox(icon) {
-  return Container(
-      decoration: BoxDecoration(
-          color: accentOrange, borderRadius: BorderRadius.circular(15)),
-      padding: EdgeInsets.all(10),
-      child: icon);
-}
+  }

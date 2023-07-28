@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/widgets/explore_main_card.dart';
 
 import '../navigation.dart';
 
@@ -18,16 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              children: [
-              Container(
-              width: 200, 
-              height: 200, 
-              color: black,
-              
-              )],
-            )));
+          padding: EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: 60,
+                    top: MediaQuery.of(context).padding.top + 20),
+      width: double.infinity,
+      height: double.infinity,
+      child: Column(children: [ExploreMainCard()]),
+      
+    ));
   }
 }

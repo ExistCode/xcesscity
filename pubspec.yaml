@@ -63,6 +63,10 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - lib/assets/images/image_9.png
+    - lib/assets/images/new-restaurant.jpg
+    
   fonts:
     - family: Poppins
       fonts:
