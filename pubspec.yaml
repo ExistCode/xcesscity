@@ -37,6 +37,8 @@ dependencies:
   firebase_core: ^2.15.0
   #Firebase database
   cloud_firestore: ^4.8.4
+  smooth_page_indicator: ^1.1.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,9 @@ flutter:
     - lib/assets/images/image_9.png
     - lib/assets/images/new-restaurant.jpg
     - lib/assets/images/banner.png
+    - lib/assets/images/police.png
+    - lib/assets/images/event.jpg
+    - lib/assets/images/connectingPeople.jpeg
     
   fonts:
     - family: Poppins

@@ -3,7 +3,7 @@ import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
-import 'package:xcesscity/screens/setting_screen.dart';
+import 'package:xcesscity/screens/home_screen.dart';
 import 'models/colors.dart';
 
 class Navigation extends StatefulWidget {
@@ -23,7 +23,7 @@ class NavigationState extends State<Navigation> {
   bool _isLoading = true;
 
   List<Widget> screens = [
-    SettingScreen(),
+    HomeScreen(),
     ExploreScreen(),
     EmergencyScreen(),
     ForumScreen(),
