@@ -37,6 +37,7 @@ dependencies:
   firebase_core: ^2.15.0
   #Firebase database
   cloud_firestore: ^4.8.4
+  firebase_auth: ^4.7.2
   smooth_page_indicator: ^1.1.0
   auto_size_text: ^3.0.0
 
@@ -72,7 +73,7 @@ flutter:
     - lib/assets/images/police.png
     - lib/assets/images/event.jpg
     - lib/assets/images/connectingPeople.jpeg
-    
+ 
   fonts:
     - family: Poppins
       fonts:

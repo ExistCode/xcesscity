@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:xcesscity/auth_widget_tree.dart';
 import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
+import 'package:xcesscity/sign_up_screen.dart';
+import 'package:xcesscity/testing_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/welcome_screen.dart';
 import 'navigation.dart';
@@ -34,7 +37,6 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Poppins',
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
-          
         ),
         home: WelcomeScreen(),
         routes: {
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
           ForumScreen.routeName: (context) => ForumScreen(),
           ExploreScreen.routeName: (context) => ExploreScreen(),
           EventScreen.routeName: (context) => EventScreen(),
+          TestingScreen.routeName: (context) => TestingScreen()
         });
   }
 }
