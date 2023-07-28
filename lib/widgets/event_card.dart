@@ -14,7 +14,7 @@ class _eventsCardState extends State<eventsCard> {
     return Container(
         padding: EdgeInsets.all(12),
         width: 152,
-        height: 210,
+        height: 200,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             image: DecorationImage(
