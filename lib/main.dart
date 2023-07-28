@@ -3,6 +3,7 @@ import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
+import 'package:xcesscity/screens/login_screen.dart';
 import 'navigation.dart';
 import 'screens/home_screen.dart';
 
@@ -30,12 +31,12 @@ class MyApp extends StatelessWidget {
 
         theme: ThemeData(fontFamily: 'Poppins', primaryColor: Colors.amber),
 
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          primaryColor: Colors.amber
+        // theme: ThemeData(
+        //   fontFamily: 'Poppins',
+        //   primaryColor: Colors.amber
          
-        ),
-        home: Navigation(),
+        // ),
+        home: LoginScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           EmergencyScreen.routeName: (context) => EmergencyScreen(),
