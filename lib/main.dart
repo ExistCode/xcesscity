@@ -5,6 +5,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
+import 'package:xcesscity/screens/welcome_screen.dart';
 import 'navigation.dart';
 import 'screens/setting_screen.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           primaryColor: white,
           
         ),
-        home: SettingScreen(),
+        home: WelcomeScreen(),
         routes: {
           SettingScreen.routeName: (context) => SettingScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),

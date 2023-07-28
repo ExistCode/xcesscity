@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../models/colors.dart';
@@ -16,26 +19,30 @@ class TopBanner extends StatelessWidget {
               child: Stack(children: [
                 Container(
                   width: double.infinity,
-                  height: 270,
+                  height: height-50,
                   decoration: BoxDecoration(
                       image: DecorationImage(
+                        fit:BoxFit.cover,
                           image: AssetImage(image)),
+                      
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: 160,
+                  child: Container(          
+                    padding:EdgeInsets.symmetric(vertical:6,horizontal:8),        
                     height: 40,
+                    width:200,                   
                     decoration: BoxDecoration(
                         color: accentOrange,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: Center(
                       child: Center(
-                        child: Text(
+                        child: AutoSizeText(                          
                           text,
-                          style: TextStyle(
-                              color: white, fontSize: 18),
+                          style: TextStyle(                            
+                              color: white, fontSize: 18, fontWeight: FontWeight.w700),
+                              maxLines: 1,
                         ),
                       ),
                     ),
