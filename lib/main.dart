@@ -37,8 +37,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
         ),
-
-        home: LoginScreen(),
+        home: AuthWidgetTree(),
         routes: {
           QuestionScreen.routeName: (context) => QuestionScreen(),
           SettingScreen.routeName: (context) => SettingScreen(),
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
           ForumScreen.routeName: (context) => ForumScreen(),
           ExploreScreen.routeName: (context) => ExploreScreen(),
           EventScreen.routeName: (context) => EventScreen(),
-          TestingScreen.routeName: (context) => TestingScreen(),
+          LoginScreen.routeName: (context) => LoginScreen(),
           CommunityDetailScreen.routeName: (context) => CommunityDetailScreen()
         });
   }

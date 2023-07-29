@@ -1,14 +1,16 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:xcesscity/models/colors.dart' as colors;
+import 'package:xcesscity/models/colors.dart' as custom_colors;
 import 'package:flutter_switch/flutter_switch.dart';
 
 import '../models/colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+  static const routeName = '/login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -16,8 +18,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool status = false;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 margin: const EdgeInsets.only(top: 75, left: 38),
                 child: Text("LOG IN",
                     style: TextStyle(
-                        color: colors.white,
+                        color: custom_colors.white,
                         fontSize: 35,
                         fontWeight: FontWeight.bold))),
             Expanded(
@@ -39,15 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(33),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: colors.secondary,
-                ),
+                    color: custom_colors.secondary,
+                    borderRadius: BorderRadius.circular(16)),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Email ",
                         style: TextStyle(
-                            color: colors.white,
+                            color: custom_colors.white,
                             fontSize: 17,
                             fontWeight: FontWeight.w600),
                       ),
@@ -55,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       TextField(
+                        textInputAction: TextInputAction.next,
                         controller: emailController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -63,11 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             contentPadding: const EdgeInsets.all(10),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.email_outlined),
-                              color: colors.primaryOrange.withOpacity(0.8),
+                              color:
+                                  custom_colors.primaryOrange.withOpacity(0.8),
                               onPressed: () {},
                             ),
                             hintText: "Email Address...",
-                            fillColor: colors.white),
+                            fillColor: custom_colors.white),
                       ),
                       const SizedBox(
                         height: 10,
@@ -75,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         "Password ",
                         style: TextStyle(
-                            color: colors.white,
+                            color: custom_colors.white,
                             fontSize: 17,
                             fontWeight: FontWeight.w600),
                       ),
@@ -83,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       TextField(
+                        textInputAction: TextInputAction.done,
                         controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -91,19 +102,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             suffixIcon: IconButton(
-                              icon: const Icon(Icons.remove_red_eye_outlined),
-                              color: colors.primaryOrange.withOpacity(0.8),
+                              icon: Icon(Icons.remove_red_eye_outlined),
+                              color:
+                                  custom_colors.primaryOrange.withOpacity(0.8),
                               onPressed: () {},
                             ),
                             hintText: "Password...",
-                            fillColor: colors.white),
+                            fillColor: custom_colors.white),
                       ),
+                      Expanded(child: SizedBox()),
                       Row(
                         children: [
                           Text(
                             "Remember Me",
                             style: TextStyle(
-                                color: colors.white,
+                                color: custom_colors.white,
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -123,12 +136,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             activeColor: primaryOrange,
                             width: 60.0,
                             height: 30.0,
-                            valueFontSize: 17.0,
+
                             toggleSize: 25.0,
                             value: status,
                             borderRadius: 30.0,
                             padding: 1.0,
-                            showOnOff: true,
+                            // showOnOff: true,
                             onToggle: (val) {
                               setState(() {
                                 status = val;
@@ -137,20 +150,31 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: primaryOrange,
-                            borderRadius: BorderRadius.circular(20)),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "LOGIN",
-                          style: (TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: white,
-                              fontSize: 16)),
-                        ),
+                      GestureDetector(
+                        onTap: signIn,
+                        child: Container(
+                            width: double.infinity,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: primaryOrange,
+                                borderRadius: BorderRadius.circular(20)),
+                            alignment: Alignment.center,
+                            child: Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: custom_colors.white),
+                            )
+
+                            // Text(
+                            //   "LOGIN",
+                            //   style: (TextStyle(
+                            //       fontWeight: FontWeight.bold,
+                            //       color: white,
+                            //       fontSize: 16)),
+                            // ),
+                            ),
                       ),
                       const SizedBox(
                         height: 10,
@@ -167,14 +191,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           )),
                         ),
                       ),
-                      const SizedBox(height: 50),
-                      Text(
-                        " -------------------- OR --------------------",
-                        style: (TextStyle(
-                          color: white,
-                        )),
+                      Expanded(child: SizedBox()),
+                      Center(
+                        child: Text(
+                          " OR",
+                          style: (TextStyle(
+                            color: white,
+                          )),
+                        ),
                       ),
-                      const SizedBox(height: 50),
+                      Expanded(child: SizedBox()),
                       Container(
                         width: double.infinity,
                         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -227,54 +253,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ]),
                               ),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: black),
-                              child: Container(
-                                width: double.infinity,
-                                height: 40,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  color: white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left: 5),
-                                        height: 30.0,
-                                        width: 30.0,
-                                        decoration: BoxDecoration(
-                                          image: const DecorationImage(
-                                              image: AssetImage(
-                                                  "lib/assets/images/appleicon.png"),
-                                              fit: BoxFit.cover),
-                                          shape: BoxShape.circle,
-                                          //color: white
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 55,
-                                      ),
-                                      const Text(
-                                        "Sign In with Apple",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    ]),
-                              ),
+                            const SizedBox(
+                              height: 8,
                             ),
                             Row(
                               children: [
                                 Text(
                                   "Don’t have an account? ",
                                   style: TextStyle(
-                                      color: colors.white,
+                                      color: custom_colors.white,
                                       fontSize: 14,
                                       fontWeight: FontWeight.normal),
                                 ),
@@ -302,6 +289,13 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
     );
   }
 }
