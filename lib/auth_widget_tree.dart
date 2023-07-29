@@ -20,6 +20,7 @@ class _AuthWidgetTreeState extends State<AuthWidgetTree> {
       stream: Auth().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          print("navigation");
           return Navigation();
         } else {
           print('welcome');

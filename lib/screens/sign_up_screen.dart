@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 import 'package:xcesscity/screens/login_screen.dart';
+import 'package:xcesscity/screens/question_screen.dart';
+
+import '../auth.dart';
 
 class signUpScreen extends StatefulWidget {
   const signUpScreen({super.key});
@@ -13,6 +16,7 @@ class signUpScreen extends StatefulWidget {
 }
 
 class _signUpScreenState extends State<signUpScreen> {
+  late String? errorMessage = '';
   bool status = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -26,6 +30,7 @@ class _signUpScreenState extends State<signUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         child: Column(
           children: [
@@ -147,7 +152,7 @@ class _signUpScreenState extends State<signUpScreen> {
                         ],
                       ),
                       GestureDetector(
-                        onTap: signIn,
+                        onTap: createUserWithEmailAndPassword,
                         child: Container(
                             width: double.infinity,
                             height: 50,
@@ -292,13 +297,23 @@ class _signUpScreenState extends State<signUpScreen> {
     );
   }
 
-  Future signIn() async {
+  Future<void> createUserWithEmailAndPassword() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
+      await Auth()
+          .createUserWithEmailAndPassword(
+            emailController.text.trim(),
+            passwordController.text.trim(),
+          )!
+          .then((value) =>
+              Navigator.of(context).pushNamed(QuestionScreen.routeName));
     } on FirebaseAuthException catch (e) {
-      print(e);
+      setState(
+        () {
+          print(errorMessage);
+          errorMessage = e.message;
+          print(errorMessage);
+        },
+      );
     }
   }
 }
