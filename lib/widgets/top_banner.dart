@@ -9,7 +9,7 @@ class TopBanner extends StatelessWidget {
   double height;
   String image;
   String text;
-  TopBanner(this.height,this.image,this.text);
+  TopBanner(this.height,this.image,this.text,);
 
   @override
   Widget build(BuildContext context) {

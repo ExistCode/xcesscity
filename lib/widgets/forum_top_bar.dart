@@ -8,8 +8,11 @@ class ForumTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Container(
-      padding:EdgeInsets.all(10),
-      height:100,
+      padding: EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: MediaQuery.of(context).padding.top),
+      height:110,
       width:double.infinity,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Color(0xFF372637),),      
       child:Row(
