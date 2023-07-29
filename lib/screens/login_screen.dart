@@ -11,8 +11,7 @@ import '../models/colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-  static const routeName = '/login';
-
+  static const routeName = './login';
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'XcessCITY',
         theme: ThemeData(
           fontFamily: 'Poppins',
           scaffoldBackgroundColor: backgroundBlack,
@@ -50,6 +50,9 @@ class MyApp extends StatelessWidget {
           LoginScreen.routeName: (context) => LoginScreen(),
           signUpScreen.routeName: (context) => signUpScreen(),
           CommunityDetailScreen.routeName: (context) => CommunityDetailScreen(),
+          TestingScreen.routeName: (context) => TestingScreen(),
+          LoginScreen.routeName: (context) => LoginScreen(),
+          CommunityDetailScreen.routeName: (context) => CommunityDetailScreen()
         });
   }
 }

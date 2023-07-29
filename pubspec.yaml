@@ -80,6 +80,7 @@ flutter:
     - lib/assets/images/connectingPeople.jpeg
     - lib/assets/images/news.png
     - lib/assets/images/discountpromo.png
+    - lib/assets/images/xcessCity.png
 
   fonts:
     - family: Poppins
