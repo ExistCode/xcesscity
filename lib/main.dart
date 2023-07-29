@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
         ),
-        home: Navigation(),
+        home: test123(),
         routes: {
           SettingScreen.routeName: (context) => SettingScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),
