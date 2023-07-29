@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
@@ -15,6 +17,7 @@ class Navigation extends StatefulWidget {
 class NavigationState extends State<Navigation> {
   static GlobalKey<NavigationState> globalKey =
       new GlobalKey<NavigationState>();
+
   BottomNavigationBar get navigationBar {
     return NavigationState.globalKey.currentWidget as BottomNavigationBar;
   }
@@ -30,18 +33,18 @@ class NavigationState extends State<Navigation> {
     EventScreen(),
   ];
 
-  // @override
-  // initState() {
-  //   Provider.of<UserProvider>(context, listen: false).fetchUserData().then(
-  //     (_) {
-  //       setState(
-  //         () {
-  //           _isLoading = false;
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
+  @override
+  initState() {
+    Provider.of<UserProvider>(context, listen: false).fetchUserData().then(
+      (_) {
+        setState(
+          () {
+            _isLoading = false;
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +56,12 @@ class NavigationState extends State<Navigation> {
         height: 64,
         width: 64,
         child: FloatingActionButton(
-          backgroundColor: currentIndex==2? accentOrange :Color(0xFF433957) ,
+          backgroundColor: currentIndex == 2 ? accentOrange : Color(0xFF433957),
           onPressed: () => navigationBar.onTap!(2),
           child: Icon(
             Icons.shield,
             size: NavBarIconSize,
-            color: white ,
+            color: white,
           ),
         ),
       ),
@@ -76,7 +79,6 @@ class NavigationState extends State<Navigation> {
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(28), topRight: Radius.circular(28)),
           child: BottomNavigationBar(
-            
             type: BottomNavigationBarType.fixed,
             backgroundColor: Color(0xFF433957),
             selectedItemColor: accentOrange,
@@ -119,7 +121,7 @@ class NavigationState extends State<Navigation> {
               BottomNavigationBarItem(
                 label: '',
                 icon: Icon(
-                  Icons.account_circle_rounded,
+                  Icons.person_pin_circle_rounded,
                   size: NavBarIconSize,
                 ),
               ),
@@ -129,4 +131,4 @@ class NavigationState extends State<Navigation> {
       ),
     );
   }
-  }
+}

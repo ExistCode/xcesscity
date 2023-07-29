@@ -8,6 +8,8 @@ import 'package:xcesscity/widgets/explore_row_category.dart';
 import '../models/colors.dart' as custom_colors;
 import '../navigation.dart';
 
+import '../models/colors.dart';
+
 class EmergencyScreen extends StatefulWidget {
   static const routeName = '/emergency';
   @override
