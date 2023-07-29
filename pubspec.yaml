@@ -39,7 +39,9 @@ dependencies:
   cloud_firestore: ^4.8.4
   toggle_switch: ^2.1.0
   flutter_switch: ^0.3.2
-
+  firebase_auth: ^4.7.2
+  smooth_page_indicator: ^1.1.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +63,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -71,7 +73,10 @@ flutter:
     - lib/assets/images/new-restaurant.jpg
     - lib/assets/images/googleicon.png
     - lib/assets/images/appleicon.png
-    
+    - lib/assets/images/banner.png
+    - lib/assets/images/police.png
+    - lib/assets/images/event.jpg
+    - lib/assets/images/connectingPeople.jpeg
   fonts:
     - family: Poppins
       fonts:
