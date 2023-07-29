@@ -9,6 +9,7 @@ import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
+import 'package:xcesscity/screens/write_report_screen.dart';
 import 'package:xcesscity/testing_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/question_screen.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         ),
 
         home: AuthWidgetTree(),
+
         routes: {
           QuestionScreen.routeName: (context) => QuestionScreen(),
           SettingScreen.routeName: (context) => SettingScreen(),
