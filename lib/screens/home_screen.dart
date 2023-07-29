@@ -22,6 +22,10 @@ BottomNavigationBar get navigationBar {
   return NavigationState.globalKey.currentWidget as BottomNavigationBar;
 }
 
+BottomNavigationBar get navigationBar {
+  return NavigationState.globalKey.currentWidget as BottomNavigationBar;
+}
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
