@@ -16,9 +16,6 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-BottomNavigationBar get navigationBar {
-  return NavigationState.globalKey.currentWidget as BottomNavigationBar;
-}
 
 BottomNavigationBar get navigationBar {
   return NavigationState.globalKey.currentWidget as BottomNavigationBar;
