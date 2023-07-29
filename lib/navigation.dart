@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
@@ -15,7 +17,7 @@ class Navigation extends StatefulWidget {
 class NavigationState extends State<Navigation> {
   static GlobalKey<NavigationState> globalKey =
       new GlobalKey<NavigationState>();
-      
+
   BottomNavigationBar get navigationBar {
     return NavigationState.globalKey.currentWidget as BottomNavigationBar;
   }
@@ -31,18 +33,18 @@ class NavigationState extends State<Navigation> {
     EventScreen(),
   ];
 
-  // @override
-  // initState() {
-  //   Provider.of<UserProvider>(context, listen: false).fetchUserData().then(
-  //     (_) {
-  //       setState(
-  //         () {
-  //           _isLoading = false;
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
+  @override
+  initState() {
+    Provider.of<UserProvider>(context, listen: false).fetchUserData().then(
+      (_) {
+        setState(
+          () {
+            _isLoading = false;
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

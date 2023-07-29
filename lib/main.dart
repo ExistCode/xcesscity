@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:xcesscity/auth_widget_tree.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/community_detail_screen.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
@@ -20,10 +22,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/firebase_options.dart';
 
-Future<void> main() async {
+void main() async {
+  // Initialize Firebase before running the app
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,32 +35,39 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'XcessCITY',
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          scaffoldBackgroundColor: backgroundBlack,
-          primaryColor: white,
-        ),
 
-        home: AuthWidgetTree(),
-
-        routes: {
-          QuestionScreen.routeName: (context) => QuestionScreen(),
-          SettingScreen.routeName: (context) => SettingScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
-          EmergencyScreen.routeName: (context) => EmergencyScreen(),
-          Navigation.routeName: (context) => Navigation(),
-          ForumScreen.routeName: (context) => ForumScreen(),
-          CreateNewForum.routeName: (context) => CreateNewForum(),
-          ExploreScreen.routeName: (context) => ExploreScreen(),
-          EventScreen.routeName: (context) => EventScreen(),
-          LoginScreen.routeName: (context) => LoginScreen(),
-          signUpScreen.routeName: (context) => signUpScreen(),
-          CommunityDetailScreen.routeName: (context) => CommunityDetailScreen(),
-          TestingScreen.routeName: (context) => TestingScreen(),
-          LoginScreen.routeName: (context) => LoginScreen(),
-          CommunityDetailScreen.routeName: (context) => CommunityDetailScreen()
-        });
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: UserProvider(),
+        )
+      ],
+      child: MaterialApp(
+          title: 'XcessCITY',
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+            scaffoldBackgroundColor: backgroundBlack,
+            primaryColor: white,
+          ),
+          home: LoginScreen(),
+          routes: {
+            QuestionScreen.routeName: (context) => QuestionScreen(),
+            SettingScreen.routeName: (context) => SettingScreen(),
+            HomeScreen.routeName: (context) => HomeScreen(),
+            EmergencyScreen.routeName: (context) => EmergencyScreen(),
+            Navigation.routeName: (context) => Navigation(),
+            ForumScreen.routeName: (context) => ForumScreen(),
+            ExploreScreen.routeName: (context) => ExploreScreen(),
+            EventScreen.routeName: (context) => EventScreen(),
+            LoginScreen.routeName: (context) => LoginScreen(),
+            signUpScreen.routeName: (context) => signUpScreen(),
+            CommunityDetailScreen.routeName: (context) =>
+                CommunityDetailScreen(),
+            TestingScreen.routeName: (context) => TestingScreen(),
+            LoginScreen.routeName: (context) => LoginScreen(),
+            CommunityDetailScreen.routeName: (context) =>
+                CommunityDetailScreen()
+          }),
+    );
   }
 }

@@ -43,6 +43,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   auto_size_text: ^3.0.0
   dropdown_button2: ^2.3.7
+  google_sign_in: ^6.1.4
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

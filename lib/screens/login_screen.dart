@@ -7,6 +7,7 @@ import 'package:xcesscity/models/colors.dart' as custom_colors;
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
 
+import '../auth.dart';
 import '../models/colors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -30,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         child: Column(
           children: [
@@ -219,38 +221,42 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ],
                                     tileMode: TileMode.mirror,
                                   )),
-                              child: Container(
-                                width: double.infinity,
-                                height: 40,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  color: white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 40.0,
-                                        width: 40.0,
-                                        decoration: BoxDecoration(
-                                          image: const DecorationImage(
-                                              image: AssetImage(
-                                                  "lib/assets/images/googleicon.png"),
-                                              fit: BoxFit.cover),
-                                          shape: BoxShape.circle,
-                                          //color: white
+                              child: GestureDetector(
+                                onTap: () => Auth().signInWithGoogle(),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 40,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                    color: white,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: 40.0,
+                                          width: 40.0,
+                                          decoration: BoxDecoration(
+                                            image: const DecorationImage(
+                                                image: AssetImage(
+                                                    "lib/assets/images/googleicon.png"),
+                                                fit: BoxFit.cover),
+                                            shape: BoxShape.circle,
+                                            //color: white
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        width: 50,
-                                      ),
-                                      const Text(
-                                        "Sign In with Google",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    ]),
+                                        const SizedBox(
+                                          width: 50,
+                                        ),
+                                        const Text(
+                                          "Sign In with Google",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ]),
+                                ),
                               ),
                             ),
                             const SizedBox(
