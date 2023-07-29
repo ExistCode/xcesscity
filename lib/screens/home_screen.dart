@@ -1,6 +1,15 @@
+
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/widgets/top_banner.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import '../models/colors.dart' as custom_colors;
+import '../navigation.dart';
+import '../widgets/explore_main_card.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       backgroundColor: Color(0xFF1A172F),
       body: SingleChildScrollView(
@@ -103,5 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+
   }
 }

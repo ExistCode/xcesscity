@@ -55,7 +55,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 700,
+              height: 671,
               color: Colors.white,
               child: PageView(
                 onPageChanged: _onPageViewChange,
