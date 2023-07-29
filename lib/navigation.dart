@@ -15,6 +15,7 @@ class Navigation extends StatefulWidget {
 class NavigationState extends State<Navigation> {
   static GlobalKey<NavigationState> globalKey =
       new GlobalKey<NavigationState>();
+      
   BottomNavigationBar get navigationBar {
     return NavigationState.globalKey.currentWidget as BottomNavigationBar;
   }
