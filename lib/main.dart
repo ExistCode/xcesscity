@@ -5,6 +5,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
+import 'package:xcesscity/screens/question_screen.dart';
 import 'package:xcesscity/screens/welcome_screen.dart';
 import 'navigation.dart';
 import 'screens/setting_screen.dart';
@@ -36,8 +37,9 @@ class MyApp extends StatelessWidget {
           primaryColor: white,
           
         ),
-        home: Navigation(),
+        home: QuestionScreen(),
         routes: {
+          QuestionScreen.routeName: (context) => QuestionScreen(),
           SettingScreen.routeName: (context) => SettingScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),
           EmergencyScreen.routeName: (context) => EmergencyScreen(),
