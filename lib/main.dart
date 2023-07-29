@@ -7,7 +7,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
-import 'package:xcesscity/sign_up_screen.dart';
+import 'package:xcesscity/screens/sign_up_screen.dart';
 import 'package:xcesscity/testing_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/question_screen.dart';
@@ -37,8 +37,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
         ),
-
-        home: WelcomeScreen(),
+        home: AuthWidgetTree(),
         routes: {
           QuestionScreen.routeName: (context) => QuestionScreen(),
           SettingScreen.routeName: (context) => SettingScreen(),
@@ -48,6 +47,9 @@ class MyApp extends StatelessWidget {
           ForumScreen.routeName: (context) => ForumScreen(),
           ExploreScreen.routeName: (context) => ExploreScreen(),
           EventScreen.routeName: (context) => EventScreen(),
+          LoginScreen.routeName: (context) => LoginScreen(),
+          signUpScreen.routeName: (context) => signUpScreen(),
+          CommunityDetailScreen.routeName: (context) => CommunityDetailScreen(),
           TestingScreen.routeName: (context) => TestingScreen(),
           LoginScreen.routeName: (context) => LoginScreen(),
           CommunityDetailScreen.routeName: (context) => CommunityDetailScreen()
