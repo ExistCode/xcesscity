@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/screens/setting_screen.dart';
 import 'package:xcesscity/widgets/top_banner.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 BottomNavigationBar get navigationBar {
   return NavigationState.globalKey.currentWidget as BottomNavigationBar;
 }
@@ -36,7 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TopBanner(300, 'lib/assets/images/banner.png', 'Change Info'),
+              GestureDetector(
+                onTap:() => {
+                  Navigator.of(context).pushNamed(SettingScreen.routeName),
+                },
+                  child: TopBanner(
+                      300, 'lib/assets/images/banner.png', 'Change Info')),
               Container(
                 padding: EdgeInsets.all(10),
                 child: Column(
@@ -88,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ]),
                                   Row(children: [
                                     Icon(Icons.remove_red_eye_sharp,
-                                        color: white),
+                                        color: accentOrange),
                                     Spacer(),
                                     Text("528", style: TextStyle(color: white))
                                   ]),

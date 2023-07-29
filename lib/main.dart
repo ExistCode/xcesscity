@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xcesscity/auth_widget_tree.dart';
 import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/screens/community_detail_screen.dart';
+import 'package:xcesscity/screens/create_new_forum.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
           EmergencyScreen.routeName: (context) => EmergencyScreen(),
           Navigation.routeName: (context) => Navigation(),
           ForumScreen.routeName: (context) => ForumScreen(),
+          CreateNewForum.routeName: (context) => CreateNewForum(),
           ExploreScreen.routeName: (context) => ExploreScreen(),
           EventScreen.routeName: (context) => EventScreen(),
           LoginScreen.routeName: (context) => LoginScreen(),

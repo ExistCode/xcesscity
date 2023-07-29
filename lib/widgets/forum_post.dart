@@ -51,13 +51,13 @@ class ForumPost extends StatelessWidget {
             "Someone hit my car and ran at Taylor’s Nania, that guy driving 1920 Bugatti Chiron, plate number BNC8888, bad guy +1. Help me find him and be beat him up. 👊 👊 ",
             style: TextStyle(color: white),
           ),
-          SizedBox(height:10),
+          SizedBox(height:20),
           Row(
             children: [
               Icon(Icons.thumb_up_alt, color: white),
-              SizedBox(width: 10),
+              SizedBox(width: 20),
               Icon(Icons.comment_rounded, color: white),
-              SizedBox(width: 10),
+              SizedBox(width: 20),
               Icon(Icons.ios_share, color: white)
             ],
           )
