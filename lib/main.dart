@@ -9,6 +9,13 @@ import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
+import 'package:xcesscity/screens/login_screen.dart';
+import 'package:xcesscity/screens/sign_up_screen.dart';
+import 'package:xcesscity/screens/write_report_screen.dart';
+import 'package:xcesscity/testing_screen.dart';
+import 'package:xcesscity/screens/home_screen.dart';
+import 'package:xcesscity/screens/question_screen.dart';
+import 'package:xcesscity/screens/welcome_screen.dart';
 import 'navigation.dart';
 import 'screens/setting_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,22 +35,38 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(fontFamily: 'Poppins', primaryColor: Colors.amber),
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          scaffoldBackgroundColor: backgroundBlack,
-          primaryColor: white,
-        ),
-        home: Navigation(),
-        routes: {
-          HomeScreen.routeName: (context) => HomeScreen(),
-          EmergencyScreen.routeName: (context) => EmergencyScreen(),
-          Navigation.routeName: (context) => Navigation(),
-          ForumScreen.routeName: (context) => ForumScreen(),
-          ExploreScreen.routeName: (context) => ExploreScreen(),
-          EventScreen.routeName: (context) => EventScreen(),
-        });
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: UserProvider(),
+        )
+      ],
+      child: MaterialApp(
+          title: 'XcessCITY',
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+            scaffoldBackgroundColor: backgroundBlack,
+            primaryColor: white,
+          ),
+          home: LoginScreen(),
+          routes: {
+            QuestionScreen.routeName: (context) => QuestionScreen(),
+            SettingScreen.routeName: (context) => SettingScreen(),
+            HomeScreen.routeName: (context) => HomeScreen(),
+            EmergencyScreen.routeName: (context) => EmergencyScreen(),
+            Navigation.routeName: (context) => Navigation(),
+            ForumScreen.routeName: (context) => ForumScreen(),
+            ExploreScreen.routeName: (context) => ExploreScreen(),
+            EventScreen.routeName: (context) => EventScreen(),
+            LoginScreen.routeName: (context) => LoginScreen(),
+            signUpScreen.routeName: (context) => signUpScreen(),
+            CommunityDetailScreen.routeName: (context) =>
+                CommunityDetailScreen(),
+            TestingScreen.routeName: (context) => TestingScreen(),
+            LoginScreen.routeName: (context) => LoginScreen(),
+            CommunityDetailScreen.routeName: (context) =>
+                CommunityDetailScreen()
+          }),
+    );
   }
 }
