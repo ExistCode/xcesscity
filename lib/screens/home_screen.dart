@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/colors.dart' as custom_colors;
 import '../navigation.dart';
+import '../widgets/explore_main_card.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -31,8 +32,5 @@ class _HomeScreenState extends State<HomeScreen> {
       height: double.infinity,
       child: Column(children: [ExploreMainCard(), Text(user.email!)]),
     ));
-      
-                 
-    );
   }
 }
