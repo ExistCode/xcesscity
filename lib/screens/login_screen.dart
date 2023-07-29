@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:xcesscity/screens/sign_up_screen.dart';
 
 import '../models/colors.dart';
 
@@ -269,14 +270,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: 50,
                                 ),
                                 const Spacer(),
-                                Text(
-                                  "SIGNUP",
-                                  style: (TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    color: white,
-                                    fontSize: 15,
-                                    decoration: TextDecoration.underline,
-                                  )),
+                                GestureDetector(
+                                  onTap: () => Navigator.of(context)
+                                      .pushNamed(signUpScreen.routeName),
+                                  child: Text(
+                                    "SIGNUP",
+                                    style: (TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: white,
+                                      fontSize: 15,
+                                      decoration: TextDecoration.underline,
+                                    )),
+                                  ),
                                 ),
                               ],
                             ),
