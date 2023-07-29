@@ -104,7 +104,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onTap: () {
                 currentPage == 2
                     ? Navigator.of(context)
-                        .pushReplacementNamed(LoginScreen.routeName)
+                        .pushReplacementNamed(Navigation.routeName)
                     : _controller.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeIn);
