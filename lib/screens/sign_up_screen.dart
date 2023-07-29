@@ -1,22 +1,18 @@
-import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-import 'package:xcesscity/models/colors.dart' as custom_colors;
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:xcesscity/screens/sign_up_screen.dart';
+import 'package:xcesscity/models/colors.dart' as custom_colors;
+import 'package:xcesscity/screens/login_screen.dart';
 
-import '../models/colors.dart';
+class signUpScreen extends StatefulWidget {
+  const signUpScreen({super.key});
+  static const routeName = '/signUp';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-  static const routeName = './login';
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<signUpScreen> createState() => _signUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _signUpScreenState extends State<signUpScreen> {
   bool status = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -36,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
                 alignment: Alignment.topLeft,
                 margin: const EdgeInsets.only(top: 75, left: 38),
-                child: Text("LOG IN",
+                child: Text("SIGN UP",
                     style: TextStyle(
                         color: custom_colors.white,
                         fontSize: 35,
@@ -133,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const Spacer(),
                           FlutterSwitch(
-                            activeColor: primaryOrange,
+                            activeColor: custom_colors.primaryOrange,
                             width: 60.0,
                             height: 30.0,
 
@@ -156,11 +152,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: double.infinity,
                             height: 50,
                             decoration: BoxDecoration(
-                                color: primaryOrange,
+                                color: custom_colors.primaryOrange,
                                 borderRadius: BorderRadius.circular(20)),
                             alignment: Alignment.center,
                             child: Text(
-                              'LOGIN',
+                              'SIGNUP',
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
@@ -185,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Reset Password",
                           style: (TextStyle(
                             fontWeight: FontWeight.w400,
-                            color: white,
+                            color: custom_colors.white,
                             fontSize: 15,
                             decoration: TextDecoration.underline,
                           )),
@@ -196,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           " OR",
                           style: (TextStyle(
-                            color: white,
+                            color: custom_colors.white,
                           )),
                         ),
                       ),
@@ -224,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 40,
                                 margin: EdgeInsets.all(2),
                                 decoration: BoxDecoration(
-                                  color: white,
+                                  color: custom_colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Row(
@@ -259,7 +255,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               children: [
                                 Text(
-                                  "Don’t have an account? ",
+                                  "Already have an account? ",
                                   style: TextStyle(
                                       color: custom_colors.white,
                                       fontSize: 14,
@@ -271,12 +267,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: () => Navigator.of(context)
-                                      .pushNamed(signUpScreen.routeName),
+                                      .pushNamed(LoginScreen.routeName),
                                   child: Text(
                                     "SIGNUP",
                                     style: (TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      color: white,
+                                      color: custom_colors.white,
                                       fontSize: 15,
                                       decoration: TextDecoration.underline,
                                     )),
@@ -297,9 +293,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 }
