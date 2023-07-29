@@ -4,15 +4,14 @@ import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
+import 'package:xcesscity/screens/rulespolicy_screen.dart';
+import 'package:xcesscity/widgets/crime_map.dart';
 import 'navigation.dart';
 import 'screens/home_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/firebase_options.dart';
-
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,14 +27,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-
-        theme: ThemeData(fontFamily: 'Poppins', primaryColor: Colors.amber),
-
         theme: ThemeData(
           fontFamily: 'Poppins',
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
-          
         ),
         home: Navigation(),
         routes: {
@@ -45,6 +40,7 @@ class MyApp extends StatelessWidget {
           ForumScreen.routeName: (context) => ForumScreen(),
           ExploreScreen.routeName: (context) => ExploreScreen(),
           EventScreen.routeName: (context) => EventScreen(),
+          rulesPolicy.routeName: (context) => rulesPolicy()
         });
   }
 }
