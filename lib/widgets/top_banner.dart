@@ -19,7 +19,7 @@ class TopBanner extends StatelessWidget {
               child: Stack(children: [
                 Container(
                   width: double.infinity,
-                  height: height-50,
+                  height: height-40,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                         fit:BoxFit.cover,

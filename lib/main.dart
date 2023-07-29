@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           primaryColor: white,
           
         ),
-        home: WelcomeScreen(),
+        home: Navigation(),
         routes: {
           SettingScreen.routeName: (context) => SettingScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),

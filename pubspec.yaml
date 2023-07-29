@@ -72,6 +72,8 @@ flutter:
     - lib/assets/images/police.png
     - lib/assets/images/event.jpg
     - lib/assets/images/connectingPeople.jpeg
+    - lib/assets/images/news.png
+    - lib/assets/images/discountpromo.png
     
   fonts:
     - family: Poppins
