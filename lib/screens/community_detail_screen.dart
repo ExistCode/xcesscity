@@ -45,7 +45,6 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.amber),
         width: double.infinity,
         height: double.infinity,
         child: Column(
