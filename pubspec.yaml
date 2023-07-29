@@ -42,6 +42,7 @@ dependencies:
   firebase_auth: ^4.7.2
   smooth_page_indicator: ^1.1.0
   auto_size_text: ^3.0.0
+  dropdown_button2: ^2.3.7
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,9 @@ flutter:
     - lib/assets/images/police.png
     - lib/assets/images/event.jpg
     - lib/assets/images/connectingPeople.jpeg
+    - lib/assets/images/news.png
+    - lib/assets/images/discountpromo.png
+
   fonts:
     - family: Poppins
       fonts:
