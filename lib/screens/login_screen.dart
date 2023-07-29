@@ -16,6 +16,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool status = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       TextField(
+                        controller: emailController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
@@ -80,6 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       TextField(
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                             filled: true,
