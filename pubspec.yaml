@@ -35,6 +35,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   firebase_core: ^2.15.0
+  google_maps_flutter: ^2.4.0
+
   #Firebase database
   cloud_firestore: ^4.8.4
   toggle_switch: ^2.1.0
@@ -83,6 +85,7 @@ flutter:
     - lib/assets/images/news.png
     - lib/assets/images/discountpromo.png
     - lib/assets/images/xcessCity.png
+    - lib/assets/maptheme/maptheme.json
 
   fonts:
     - family: Poppins
