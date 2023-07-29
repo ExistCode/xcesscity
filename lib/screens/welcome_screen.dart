@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:xcesscity/navigation.dart';
 import 'package:xcesscity/screens/home_screen.dart';
+import 'package:xcesscity/screens/login_screen.dart';
+import 'package:xcesscity/screens/question_screen.dart';
 import '../models/colors.dart';
 import '../widgets/welcome_page_view.dart';
 
@@ -55,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 671,
+              height: 700,
               color: Colors.white,
               child: PageView(
                 onPageChanged: _onPageViewChange,
@@ -102,7 +104,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onTap: () {
                 currentPage == 2
                     ? Navigator.of(context)
-                        .pushReplacementNamed(HomeScreen.routeName)
+                        .pushReplacementNamed(Navigation.routeName)
                     : _controller.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeIn);

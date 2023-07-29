@@ -31,14 +31,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'XcessCITY',
         theme: ThemeData(
           fontFamily: 'Poppins',
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
         ),
 
-        home: LoginScreen(),
+        home: WelcomeScreen(),
         routes: {
           QuestionScreen.routeName: (context) => QuestionScreen(),
           SettingScreen.routeName: (context) => SettingScreen(),
@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
           ExploreScreen.routeName: (context) => ExploreScreen(),
           EventScreen.routeName: (context) => EventScreen(),
           TestingScreen.routeName: (context) => TestingScreen(),
+          LoginScreen.routeName: (context) => LoginScreen(),
           CommunityDetailScreen.routeName: (context) => CommunityDetailScreen()
         });
   }
