@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           primaryColor: white,
           
         ),
-        home: Navigation(),
+        home: LoginScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           EmergencyScreen.routeName: (context) => EmergencyScreen(),

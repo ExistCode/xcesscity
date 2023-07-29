@@ -11,10 +11,6 @@ buildscript {
         classpath 'com.google.gms:google-services:4.3.15'
         // END: FlutterFire Configuration
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-<<<<<<< HEAD
-=======
-        
->>>>>>> 5e70a88a4c60786138e048c02000c31f20453985
     }
 }
 
