@@ -274,7 +274,7 @@ class _signUpScreenState extends State<signUpScreen> {
                                   onTap: () => Navigator.of(context)
                                       .pushNamed(LoginScreen.routeName),
                                   child: Text(
-                                    "SIGNUP",
+                                    "LOGIN",
                                     style: (TextStyle(
                                       fontWeight: FontWeight.w400,
                                       color: custom_colors.white,
@@ -301,8 +301,8 @@ class _signUpScreenState extends State<signUpScreen> {
     try {
       await Auth()
           .createUserWithEmailAndPassword(
-            emailController.text.trim(),
-            passwordController.text.trim(),
+            emailController.text,
+            passwordController.text,
           )!
           .then((value) =>
               Navigator.of(context).pushNamed(QuestionScreen.routeName));
