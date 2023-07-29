@@ -22,10 +22,6 @@ BottomNavigationBar get navigationBar {
   return NavigationState.globalKey.currentWidget as BottomNavigationBar;
 }
 
-BottomNavigationBar get navigationBar {
-  return NavigationState.globalKey.currentWidget as BottomNavigationBar;
-}
-
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -39,9 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap:() => {
-                  Navigator.of(context).pushNamed(SettingScreen.routeName),
-                },
+                  onTap: () => {
+                        Navigator.of(context)
+                            .pushNamed(SettingScreen.routeName),
+                      },
                   child: TopBanner(
                       300, 'lib/assets/images/banner.png', 'Change Info')),
               Container(

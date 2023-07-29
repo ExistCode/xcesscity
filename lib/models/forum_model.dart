@@ -7,6 +7,7 @@ class ForumModel {
   int numOfReplies;
   int numOfShares;
   String userProfileUrl;
+  String imageUrl;
 
   ForumModel(
       {required this.id,
@@ -16,5 +17,6 @@ class ForumModel {
       required this.numOfLikes,
       required this.numOfReplies,
       required this.numOfShares,
-      required this.userProfileUrl});
+      required this.userProfileUrl,
+      required this.imageUrl});
 }
