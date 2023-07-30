@@ -4,7 +4,7 @@ class crimeUdpatesModel {
   static final updates = [
     crimeUpdates(
         time: "Now",
-        updates: "A small sized pothole spotted at Jalan Merak 1/11")
+        updates: "A small sized pothole spotted \n at Jalan Merak 1/11")
   ];
 }
 

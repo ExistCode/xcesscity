@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 
@@ -18,7 +19,7 @@ class crimeUpdateCard extends StatelessWidget {
         Container(
           // Change to listview size
           height: 160,
-          width: 200,
+          width: double.infinity,
           child: Row(children: [
             SizedBox(
               width: 8,
@@ -29,8 +30,8 @@ class crimeUpdateCard extends StatelessWidget {
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Container(
-                  height: 20,
-                  width: 20,
+                  height: 12,
+                  width: 12,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: custom_colors.accentOrange,
@@ -68,10 +69,11 @@ class crimeUpdateCard extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    Text(
+                    AutoSizeText(
                       updates,
-                      style:
-                          TextStyle(fontSize: 16, color: custom_colors.white),
+                      style: TextStyle(
+                        color: custom_colors.white,
+                      ),
                     )
                   ]),
             )
