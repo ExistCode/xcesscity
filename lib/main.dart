@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:xcesscity/auth.dart';
 import 'package:xcesscity/auth_widget_tree.dart';
 import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/providers/user_provider.dart';
@@ -10,6 +11,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
+import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
 import 'package:xcesscity/screens/write_report_screen.dart';
 import 'package:xcesscity/testing_screen.dart';
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-          home: LoginScreen(),
+          home: WelcomeScreen(),
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),
@@ -60,10 +62,8 @@ class MyApp extends StatelessWidget {
             EventScreen.routeName: (context) => EventScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
             signUpScreen.routeName: (context) => signUpScreen(),
-            CommunityDetailScreen.routeName: (context) =>
-                CommunityDetailScreen(),
             TestingScreen.routeName: (context) => TestingScreen(),
-            LoginScreen.routeName: (context) => LoginScreen(),
+            rulesPolicy.routeName:(context)=>rulesPolicy(),  
             CommunityDetailScreen.routeName: (context) =>
                 CommunityDetailScreen()
           }),

@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             activeColor: primaryOrange,
                             width: 60.0,
                             height: 30.0,
-
+                            
                             toggleSize: 25.0,
                             value: status,
                             borderRadius: 30.0,

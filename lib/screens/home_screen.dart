@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/screens/setting_screen.dart';
 import 'package:xcesscity/widgets/top_banner.dart';
@@ -7,7 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/colors.dart' as custom_colors;
+import '../models/user_model.dart';
 import '../navigation.dart';
+import '../providers/user_provider.dart';
 import '../widgets/explore_main_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,8 +28,11 @@ BottomNavigationBar get navigationBar {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+
   Widget build(BuildContext context) {
     // final user = FirebaseAuth.instance.currentUser!;
+    UserModel currentUser =
+        Provider.of<UserProvider>(context, listen: false).userProviderData;
     return Scaffold(
       backgroundColor: Color(0xFF1A172F),
       body: SingleChildScrollView(
@@ -61,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Column(
                               children: [
-                                Text("Rex Lim",
+                                Text("${currentUser.name}",
                                     style:
                                         TextStyle(color: white, fontSize: 30)),
                                 Text("@rexklim",
