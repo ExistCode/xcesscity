@@ -20,23 +20,19 @@ class Auth {
     );
   }
 
-  Future<void> createUserWithEmailAndPassword(
+  Future<void>? createUserWithEmailAndPassword(
     String email,
     String password,
   ) async {
-    try {
-      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      // User created successfully, now store additional data in Firestore
-      await FirebaseFirestore.instance
-          .collection('user')
-          .doc(userCredential.user!.uid)
-          .set({
-        "email": userCredential.user!.email,
-        "id": userCredential.user!.uid,
+    await _firebaseAuth
+        .createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    )
+        .then((value) {
+      FirebaseFirestore.instance.collection('user').doc(value.user!.uid).set({
+        "email": value.user!.email,
+        "id": value.user!.uid,
         'name': '',
         'userName': '',
         'age': '',
@@ -44,11 +40,8 @@ class Auth {
         'userProfileUrl': '',
         'userBackgroundUrl': '',
       });
-    } catch (e) {
-      // Handle any errors that occurred during user creation or data storage
-      print("Error creating user: $e");
-      // You can also show a relevant error message to the user here
-    }
+    });
+    return null;
   }
 
   // Future<void> signOut(BuildContext context) async {

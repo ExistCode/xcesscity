@@ -16,7 +16,7 @@ class signUpScreen extends StatefulWidget {
 }
 
 class _signUpScreenState extends State<signUpScreen> {
-  late String? errorMessage = '';
+  String errorMessage = '';
   bool status = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -150,6 +150,12 @@ class _signUpScreenState extends State<signUpScreen> {
                             },
                           ),
                         ],
+                      ),
+                      Center(
+                        child: _errorMessage(),
+                      ),
+                      const SizedBox(
+                        height: 8,
                       ),
                       GestureDetector(
                         onTap: createUserWithEmailAndPassword,
@@ -297,6 +303,17 @@ class _signUpScreenState extends State<signUpScreen> {
     );
   }
 
+  Widget _errorMessage() {
+    return Text(
+      errorMessage == '' ? '' : 'Hmm? $errorMessage',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          color: custom_colors.primaryOrange,
+          fontSize: 14,
+          fontWeight: FontWeight.w600),
+    );
+  }
+
   Future<void> createUserWithEmailAndPassword() async {
     try {
       await Auth()
@@ -309,9 +326,7 @@ class _signUpScreenState extends State<signUpScreen> {
     } on FirebaseAuthException catch (e) {
       setState(
         () {
-          print(errorMessage);
-          errorMessage = e.message;
-          print(errorMessage);
+          errorMessage = e.message!;
         },
       );
     }
