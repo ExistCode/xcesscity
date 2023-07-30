@@ -86,6 +86,7 @@ flutter:
     - lib/assets/images/discountpromo.png
     - lib/assets/images/xcessCity.png
     - lib/assets/maptheme/maptheme.json
+    - lib/assets/images/tempfight.png
     - lib/assets/images/splashMania.png
     - lib/assets/images/Event2.png
     - lib/assets/images/rex-photo.png

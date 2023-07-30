@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:xcesscity/models/crime_updates.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
+import 'package:xcesscity/screens/detection_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/widgets/crime_map.dart';
 import 'package:xcesscity/widgets/crime_updates.dart';
@@ -181,9 +182,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () => Navigator.of(context)
-                          .pushNamed(CreateNewForum.routeName),
+                          .pushNamed(DetectionScreen.routeName),
                       child: Container(
-                        width: 200,
+                        width: 350,
                         height: 35,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
