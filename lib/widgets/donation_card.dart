@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 
 class donationCard extends StatelessWidget {
-  const donationCard({super.key});
+  String imageUrl;
+  String title;
+  donationCard({required this.imageUrl, required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +14,12 @@ class donationCard extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('lib/assets/images/new-restaurant.jpg'),
-                opacity: 0.7,
-                fit: BoxFit.cover)),
+                image: AssetImage(imageUrl), opacity: 0.9, fit: BoxFit.cover)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Spacer(),
           Text(
             // Change to the title
-            "Antenatal Class",
+            title,
             style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 12,
