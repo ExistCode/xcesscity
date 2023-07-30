@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xcesscity/screens/community_detail_screen.dart';
 import 'package:xcesscity/widgets/community_card.dart';
 import 'package:xcesscity/widgets/event_card.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
@@ -12,6 +13,7 @@ class EventScreen extends StatefulWidget {
 class _EventScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
       child: Column(children: [
         Container(
@@ -62,11 +64,19 @@ class _EventScreenState extends State<EventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        eventsCard(),
+                        eventsCard(
+                          imageUrl: "lib/assets/images/image_9.png",
+                          date: "30 July",
+                          title: "Antenatal Class",
+                        ),
                         SizedBox(
                           width: 36,
                         ),
-                        eventsCard(),
+                        eventsCard(
+                          imageUrl: "lib/assets/images/Event2.png",
+                          date: "20 Aug",
+                          title: "World Heart Day",
+                        ),
                       ]),
                 ),
               )
@@ -104,7 +114,21 @@ class _EventScreenState extends State<EventScreen> {
           height: 24,
         ),
         // Change to Listview Builder later
-        communityCard(),
+        communityCard(
+            distance: "Your community", numOfMem: 400, placeName: "USJ 1"),
+        const SizedBox(height: 20),
+        communityCard(
+          distance: "2km away",
+          numOfMem: 500,
+          placeName: "PJS 8",
+        ),
+        const SizedBox(height: 20),
+        communityCard(
+          distance: "4km away",
+          numOfMem: 600,
+          placeName: "USJ 7",
+        ),
+        const SizedBox(height: 40),
       ]),
     );
   }

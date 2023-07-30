@@ -6,6 +6,7 @@ import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/community_detail_screen.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
+import 'package:xcesscity/screens/detection_screen.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
@@ -67,7 +68,9 @@ class MyApp extends StatelessWidget {
             rulesPolicy.routeName: (context) => rulesPolicy(),
             CommunityDetailScreen.routeName: (context) =>
                 CommunityDetailScreen(),
-            CreateNewForum.routeName: (context) => CreateNewForum()
+            CreateNewForum.routeName: (context) => CreateNewForum(),
+            DetectionScreen.routeName: (context) => DetectionScreen(),
+            WriteReport.routeName: (context) => WriteReport()
           }),
     );
   }

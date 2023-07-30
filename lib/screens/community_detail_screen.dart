@@ -36,7 +36,7 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
         ),
         titleSpacing: 0,
         title: Text(
-          "PLACES_NAME",
+          "USJ 1",
           style: TextStyle(
               fontSize: 24,
               color: custom_colors.accentOrange,
@@ -68,7 +68,10 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 28.0),
-              child: newsCommunityCard(),
+              child: newsCommunityCard(
+                imageUrl: "lib/assets/images/dogss.png",
+                title: "MISSING DOG!",
+              ),
             ),
             SizedBox(
               height: 16,
@@ -89,11 +92,19 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                eventsCard(),
+                eventsCard(
+                  imageUrl: "lib/assets/images/image_9.png",
+                  date: "30 July",
+                  title: "Antenatal Class",
+                ),
                 SizedBox(
                   width: 24,
                 ),
-                eventsCard(),
+                eventsCard(
+                  imageUrl: "lib/assets/images/Event2.png",
+                  date: "20 Aug",
+                  title: "World Heart Day",
+                ),
               ],
             ),
             SizedBox(
@@ -112,15 +123,21 @@ class _CommunityDetailScreenState extends State<CommunityDetailScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                donationCard(),
+                donationCard(
+                  imageUrl: "lib/assets/images/rex-photo.png",
+                  title: "Basketball court",
+                ),
                 SizedBox(
                   width: 24,
                 ),
-                donationCard()
+                donationCard(
+                  imageUrl: "lib/assets/images/cottage.png",
+                  title: "Cottage",
+                )
               ],
             ),
             SizedBox(
-              height: 12,
+              height: 24,
             ),
             Center(
               child: Container(

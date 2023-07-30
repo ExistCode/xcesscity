@@ -13,30 +13,51 @@ class ExploreScreen extends StatefulWidget {
 class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      bottom: 60,
-                      top: MediaQuery.of(context).padding.top + 20),
-              width: double.infinity,
-              
-              child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          ExploreMainCard(),
-          SizedBox(height:20),
-          ExploreRowCategory(),
-          SizedBox(height:20),
-          Text("Newest Addition",style:TextStyle(color:white,fontWeight: FontWeight.bold, fontSize: 17)),
-          SizedBox(height:10),
-          ExploreBigRow(),
-        
-        
-              ],),
-            ),
-        ),);
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 60,
+              top: MediaQuery.of(context).padding.top + 20),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ExploreMainCard(),
+              SizedBox(height: 20),
+              ExploreRowCategory(),
+              SizedBox(height: 20),
+              Text("Newest Addition",
+                  style: TextStyle(
+                      color: white, fontWeight: FontWeight.bold, fontSize: 17)),
+              SizedBox(height: 10),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: [
+                  ExploreBigRow(),
+                  ExploreBigRow(),
+                  ExploreBigRow(),
+                ]),
+              ),
+              SizedBox(height: 10),
+              Text("Newest Addition",
+                  style: TextStyle(
+                      color: white, fontWeight: FontWeight.bold, fontSize: 17)),
+              SizedBox(height: 10),
+               SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: [
+                  ExploreBigRow(),
+                  ExploreBigRow(),
+                  ExploreBigRow(),
+                ]),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

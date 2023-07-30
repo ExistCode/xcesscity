@@ -25,14 +25,13 @@ BottomNavigationBar get navigationBar {
   return NavigationState.globalKey.currentWidget as BottomNavigationBar;
 }
 
-
 class _HomeScreenState extends State<HomeScreen> {
   @override
-
   Widget build(BuildContext context) {
     // final user = FirebaseAuth.instance.currentUser!;
     UserModel currentUser =
         Provider.of<UserProvider>(context, listen: false).userProviderData;
+
     return Scaffold(
       backgroundColor: Color(0xFF1A172F),
       body: SingleChildScrollView(
@@ -67,10 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Column(
                               children: [
-                                Text("${currentUser.name}",
+                                Text("Rex Lim",
                                     style:
                                         TextStyle(color: white, fontSize: 30)),
-                                Text("@rexklim",
+                                Text("@rexlim",
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 15))
                               ],
