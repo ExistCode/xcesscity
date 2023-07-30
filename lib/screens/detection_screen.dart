@@ -40,25 +40,19 @@ class _DetectionScreenState extends State<DetectionScreen> {
               ]),
           Container(
             width: 500,
-            height: 480,
-            child: Column(children: [
-              Container(
-                width: 500,
-                height: 480,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('lib/assets/images/tempfight.png')),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-              ),
-            ]),
+            height: 450,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('lib/assets/images/tempfight.png')),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
           ),
           Container(
             width: 600,
             height: 90,
             child: Column(children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                   Icon(
@@ -67,7 +61,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
                   ),
                   Text(
                     'Detected : Fight',
-                    style: TextStyle(color: custom_colors.white, fontSize: 13),
+                    style: TextStyle(color: custom_colors.white, fontSize: 12),
                   ),
                   Spacer(),
                   Container(
