@@ -16,35 +16,52 @@ class _ForumScreenState extends State<ForumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        child: Stack(children: [
-          Column(
-            children: [
-              ForumTopBar(),
-              SizedBox(height: 20),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(20),
-                child: ForumPost(),
-              )
-            ],
-          ),
-          Positioned(
-            bottom: 20,
-            right: 25,
-            child: GestureDetector(
-                onTap: () =>
-                    {Navigator.of(context).pushNamed(CreateNewForum.routeName)},
-                child: Container(
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: accentOrange),
-                    child: Icon(Icons.add, color: white))),
-          )
-        ]),
-      ),
-    );
+          width: double.infinity,
+          child: Stack(children: [
+            SingleChildScrollView(
+
+              child: Container(
+                
+                child: Column(
+                  children: [
+                    ForumTopBar(),
+                    SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(20),
+                      child: ForumPost(),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(20),
+                      child: ForumPost(),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(20),
+                      child: ForumPost(),
+                    ),
+                    
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 20,
+              right: 25,
+              child: GestureDetector(
+                  onTap: () =>
+                      {Navigator.of(context).pushNamed(CreateNewForum.routeName)},
+                  child: Container(
+                      height: 55,
+                      width: 55,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: accentOrange),
+                      child: Icon(Icons.add, color: white))),
+            )
+          ]),
+        ),
+      );
   }
 }
