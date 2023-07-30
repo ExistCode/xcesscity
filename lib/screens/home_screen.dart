@@ -67,10 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Column(
                               children: [
-                                Text("${currentUser.name}",
+                                Text("Rex Lim",
                                     style:
                                         TextStyle(color: white, fontSize: 30)),
-                                Text("@rexklim",
+                                Text("@rexlim",
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 15))
                               ],
