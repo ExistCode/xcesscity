@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-          home: AuthWidgetTree(),
+          home: Navigation(),
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),
@@ -67,7 +67,9 @@ class MyApp extends StatelessWidget {
             rulesPolicy.routeName: (context) => rulesPolicy(),
             CommunityDetailScreen.routeName: (context) =>
                 CommunityDetailScreen(),
-            CreateNewForum.routeName: (context) => CreateNewForum()
+            CreateNewForum.routeName: (context) => CreateNewForum(),
+            DetectionScreen.routeName: (context) => DetectionScreen(),
+            WriteReport.routeName: (context) => WriteReport()
           }),
     );
   }

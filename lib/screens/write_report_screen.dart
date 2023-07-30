@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/screens/detection_screen.dart';
 
 class WriteReport extends StatefulWidget {
+  static const routeName = '/writeReport';
   const WriteReport({super.key});
 
   @override
@@ -29,8 +31,13 @@ class _WriteReportState extends State<WriteReport> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.keyboard_arrow_left_rounded,
-                        color: white, size: 50),
+                    GestureDetector(
+                        onTap: () => {
+                              Navigator.of(context)
+                                  .pop(DetectionScreen.routeName)
+                            },
+                        child: Icon(Icons.keyboard_arrow_left_rounded,
+                            color: white, size: 50)),
                     Text("Write A Report",
                         style: TextStyle(
                             fontSize: 25,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:xcesscity/screens/emergency_screen.dart';
+import 'package:xcesscity/screens/write_report_screen.dart';
 import 'package:xcesscity/widgets/explore_row_category.dart';
 import '../models/colors.dart' as custom_colors;
 
 class DetectionScreen extends StatefulWidget {
-  static const routeName = '/';
+  static const routeName = '/detectionScreen';
   const DetectionScreen({super.key});
 
   @override
@@ -28,9 +30,10 @@ class _DetectionScreenState extends State<DetectionScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
+                  onTap: () => {Navigator.of(context).pop()},
                   child: Icon(
-                    Icons.arrow_back,
-                    size: 25,
+                    Icons.keyboard_arrow_left_rounded,
+                    size: 35,
                     color: custom_colors.white,
                   ),
                 ),
@@ -124,10 +127,14 @@ class _DetectionScreenState extends State<DetectionScreen> {
                 ),
               ),
               Spacer(),
-              Icon(
-                Icons.folder_outlined,
-                color: custom_colors.white,
-              )
+              GestureDetector(
+                onTap: () =>
+                    {Navigator.of(context).pushNamed(WriteReport.routeName)},
+                child: Icon(
+                  Icons.folder_outlined,
+                  color: custom_colors.white,
+                ),
+              ),
             ]),
           )
         ],
