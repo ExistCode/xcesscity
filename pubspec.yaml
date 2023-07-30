@@ -86,12 +86,14 @@ flutter:
     - lib/assets/images/discountpromo.png
     - lib/assets/images/xcessCity.png
     - lib/assets/maptheme/maptheme.json
+    - lib/assets/images/restaurant1.png
     - lib/assets/images/tempfight.png
     - lib/assets/images/splashMania.png
     - lib/assets/images/Event2.png
     - lib/assets/images/rex-photo.png
     - lib/assets/images/dogss.png
     - lib/assets/images/cottage.png
+
 
   fonts:
     - family: Poppins

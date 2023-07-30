@@ -12,6 +12,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
+import 'package:xcesscity/screens/restaurant_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
 import 'package:xcesscity/screens/write_report_screen.dart';
