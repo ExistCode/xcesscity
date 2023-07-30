@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/screens/detection_screen.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgroundBlack,
           primaryColor: white,
         ),
-        home: Navigation(),
+        home: DetectionScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           EmergencyScreen.routeName: (context) => EmergencyScreen(),

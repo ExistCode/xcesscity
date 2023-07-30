@@ -65,6 +65,7 @@ flutter:
   assets:
     - lib/assets/images/new-restaurant.jpg
     - lib/assets/maptheme/maptheme.json
+    - lib/assets/images/tempfight.png
     
   fonts:
     - family: Poppins

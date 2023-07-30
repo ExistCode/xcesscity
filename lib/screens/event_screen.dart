@@ -9,12 +9,11 @@ class EventScreen extends StatefulWidget {
 class _EventScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-
-      body:Container(
+    return Scaffold(
+      body: Container(
         width: double.infinity,
-        height:double.infinity,
-      )
+        height: double.infinity,
+      ),
     );
   }
 }
