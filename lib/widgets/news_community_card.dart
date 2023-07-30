@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 
 class newsCommunityCard extends StatefulWidget {
-  const newsCommunityCard({super.key});
+  String imageUrl;
+  String title;
+  newsCommunityCard({required this.imageUrl, required this.title, super.key});
 
   @override
   State<newsCommunityCard> createState() => _newsCommunityCardState();
@@ -19,7 +21,7 @@ class _newsCommunityCardState extends State<newsCommunityCard> {
             borderRadius: BorderRadius.circular(12),
             image: DecorationImage(
                 // change to images link from database
-                image: AssetImage("lib/assets/images/image_9.png"),
+                image: AssetImage(widget.imageUrl),
                 opacity: 0.4,
                 fit: BoxFit.cover),
             boxShadow: [
@@ -36,7 +38,7 @@ class _newsCommunityCardState extends State<newsCommunityCard> {
             Spacer(),
             Text(
               // Change to the title
-              "Antenatal Class",
+              widget.title,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 24,

@@ -3,7 +3,14 @@ import 'package:xcesscity/models/colors.dart' as custom_colors;
 import 'package:xcesscity/screens/community_detail_screen.dart';
 
 class communityCard extends StatefulWidget {
-  const communityCard({super.key});
+  String distance;
+  String placeName;
+  int numOfMem;
+  communityCard(
+      {required this.distance,
+      required this.placeName,
+      required this.numOfMem,
+      super.key});
 
   @override
   State<communityCard> createState() => _communityCardState();
@@ -15,28 +22,28 @@ class _communityCardState extends State<communityCard> {
     return Container(
       width: 340,
       height: 120,
-      padding: EdgeInsets.only(right: 24, top: 12, left: 36, bottom: 16),
+      padding: EdgeInsets.only(right: 24, top: 12, left: 36, bottom: 9),
       decoration: BoxDecoration(
           color: custom_colors.white, borderRadius: BorderRadius.circular(16)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Align(
           alignment: Alignment.topRight,
           child: Text(
-            "Distance",
+            widget.distance,
             style: TextStyle(decoration: TextDecoration.underline),
           ),
         ),
         Text(
-          "Place",
+          widget.placeName,
           style: TextStyle(
-              fontSize: 32,
+              fontSize: 28,
               fontWeight: FontWeight.w700,
               decoration: TextDecoration.underline,
               color: custom_colors.primaryOrange),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text("numOfMem"), viewButton()],
+          children: [Text(widget.numOfMem.toString()), viewButton()],
         )
       ]),
     );

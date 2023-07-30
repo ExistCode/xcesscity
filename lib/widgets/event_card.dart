@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 
 class eventsCard extends StatefulWidget {
-  const eventsCard({super.key});
+  String imageUrl;
+  String date;
+  String title;
+  eventsCard(
+      {required this.imageUrl,
+      required this.date,
+      required this.title,
+      super.key});
 
   @override
   State<eventsCard> createState() => _eventsCardState();
@@ -19,7 +26,7 @@ class _eventsCardState extends State<eventsCard> {
             borderRadius: BorderRadius.circular(12),
             image: DecorationImage(
                 // change to images link from database
-                image: AssetImage("lib/assets/images/image_9.png"),
+                image: AssetImage(widget.imageUrl),
                 opacity: 0.4,
                 fit: BoxFit.cover),
             boxShadow: [
@@ -41,7 +48,7 @@ class _eventsCardState extends State<eventsCard> {
                   color: Colors.white, borderRadius: BorderRadius.circular(8)),
               child: Text(
                 // Change the real date
-                "Date",
+                widget.date,
                 style: TextStyle(
                     color: custom_colors.accentOrange,
                     fontWeight: FontWeight.w600,
@@ -51,7 +58,7 @@ class _eventsCardState extends State<eventsCard> {
             Spacer(),
             Text(
               // Change to the title
-              "Antenatal Class",
+              widget.title,
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
