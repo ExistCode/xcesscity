@@ -58,36 +58,44 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         GestureDetector(
-                          child: Icon(
-                            Icons.pin_drop,
-                            size: 18,
-                            color: custom_colors.secondary,
+                          child: Container(
+                            child: Row(children: [
+                              Icon(
+                                Icons.pin_drop,
+                                size: 18,
+                                color: custom_colors.secondary,
+                              ),
+                              Text(
+                                'ADJUST LOCATION',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: custom_colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ]),
                           ),
-                        ),
-                        Text(
-                          'ADJUST LOCATION',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: custom_colors.white,
-                              fontWeight: FontWeight.bold),
                         ),
                         Spacer(),
                         GestureDetector(
                           onTap: () => Navigator.of(context)
                               .pushNamed(rulesPolicy.routeName),
-                          child: Icon(
-                            Icons.flag,
-                            size: 18,
-                            color: Colors.red,
+                          child: Container(
+                            child: Row(children: [
+                              Icon(
+                                Icons.flag,
+                                size: 18,
+                                color: Colors.red,
+                              ),
+                              Text(
+                                'RULES & POLICY',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: custom_colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ]),
                           ),
-                        ),
-                        Text(
-                          'RULES & POLICY',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: custom_colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        )
                       ],
                     ),
                     //MAP WIDGET//
@@ -101,7 +109,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       clipBehavior: Clip.hardEdge,
                       child: MapSample(),
                     ),
-                    SizedBox(height:20),
+                    SizedBox(height: 20),
                     ToggleSwitch(
                       cornerRadius: 10,
                       minWidth: 150,
@@ -109,15 +117,15 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       activeFgColor: white,
                       inactiveBgColor: white,
                       inactiveFgColor: secondary,
-                      customTextStyles: [TextStyle(fontWeight:FontWeight.bold)],
+                      customTextStyles: [
+                        TextStyle(fontWeight: FontWeight.bold)
+                      ],
                       initialLabelIndex: 1,
                       totalSwitches: 2,
                       labels: ['Incident Alert', 'Pothole Alert'],
-                      onToggle: (index) {                        
-                      },
-                      
+                      onToggle: (index) {},
                     ),
-                    SizedBox(height:20),
+                    SizedBox(height: 20),
                     // Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     //   SizedBox(
                     //     height: 50,

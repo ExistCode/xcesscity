@@ -4,7 +4,7 @@ class UserModel {
   String userName;
   String email;
   String gender;
-  int age;
+  String age;
   dynamic userProfileUrl;
   dynamic userBackgroundUrl;
 
