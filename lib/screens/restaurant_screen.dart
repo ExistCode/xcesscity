@@ -5,6 +5,7 @@ import '../widgets/crime_map.dart';
 
 class RestaurantScreen extends StatefulWidget {
   const RestaurantScreen({super.key});
+  static const routeName = '/restaurant';
 
   @override
   State<RestaurantScreen> createState() => _RestaurantScreenState();
@@ -25,8 +26,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
               Container(
                 child: Row(
                   children: [
-                    Icon(Icons.keyboard_arrow_left_rounded,
-                        color: white, size: 50),
+                    GestureDetector(
+                      onTap: ()=>{Navigator.of(context).pop()},
+                      child: Icon(Icons.keyboard_arrow_left_rounded,
+                          color: white, size: 50),
+                    ),
                     Text("Restaurants",
                         style: TextStyle(
                             fontSize: 25,
