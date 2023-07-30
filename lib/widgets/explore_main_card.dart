@@ -23,7 +23,7 @@ class ExploreMainCard extends StatelessWidget {
         padding: EdgeInsets.all(10),
         color: accentOrange,
         width: double.infinity,
-        height: 70,
+        height: 80,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -50,7 +50,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
               Container(
                 padding: EdgeInsets.only(
                     left: 20,
-                    right: 20,
+                    right: 16,
                     bottom: 60,
                     top: MediaQuery.of(context).padding.top + 20),
                 width: double.infinity,
@@ -104,7 +104,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     Container(
                       height: 310,
                       width: double.infinity,
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(
+                        top: 8,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                       ),
