@@ -32,8 +32,7 @@ class _MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(
+    return GoogleMap(
         mapType: MapType.normal,
         myLocationButtonEnabled: true,
         markers: {
@@ -46,7 +45,6 @@ class _MapSampleState extends State<MapSample> {
           target: LatLng(3.064892920362661, 101.61683399057945),
           zoom: 11.0,
         ),
-      ),
-    );
+      );
   }
 }
