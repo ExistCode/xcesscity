@@ -65,7 +65,8 @@ class MyApp extends StatelessWidget {
             TestingScreen.routeName: (context) => TestingScreen(),
             rulesPolicy.routeName: (context) => rulesPolicy(),
             CommunityDetailScreen.routeName: (context) =>
-                CommunityDetailScreen()
+                CommunityDetailScreen(),
+            CreateNewForum.routeName: (context) => CreateNewForum()
           }),
     );
   }
