@@ -10,7 +10,7 @@ class UserProvider with ChangeNotifier {
     userName: '', // Initialize with the desired value
     email: '', // Initialize with the desired value
     gender: '', // Initialize with the desired value
-    age: 0, // Initialize with the desired value
+    age: '', // Initialize with the desired value
     userProfileUrl: null, // Initialize with the desired value
     userBackgroundUrl: null, // Initialize with the desired value
   );

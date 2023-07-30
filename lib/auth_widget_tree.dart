@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
+import 'package:xcesscity/screens/welcome_screen.dart';
 import 'package:xcesscity/testing_screen.dart';
 import 'auth.dart';
 import 'navigation.dart';
@@ -24,7 +25,7 @@ class _AuthWidgetTreeState extends State<AuthWidgetTree> {
           return Navigation();
         } else {
           print('welcome');
-          return LoginScreen();
+          return WelcomeScreen();
         }
       },
     );
