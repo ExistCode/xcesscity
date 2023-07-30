@@ -9,6 +9,7 @@ import 'package:xcesscity/screens/sign_up_screen.dart';
 
 import '../auth.dart';
 import '../models/colors.dart';
+import '../navigation.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String errorMessage = '';
   bool status = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -122,14 +124,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600),
                           ),
-                          // ToggleSwitch(
-                          //   totalSwitches: 2,
-                          //   activeBgColor: [colors.accentOrange],
-                          //   inactiveBgColor: backgroundBlack,
-                          //   cornerRadius: 20,
-                          //   minWidth: 32,
-                          //   minHeight: 17,
-                          // )
                           const SizedBox(
                             height: 50,
                           ),
@@ -152,8 +146,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
+                      Center(
+                        child: _errorMessage(),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       GestureDetector(
-                        onTap: signIn,
+                        onTap: signInWithEmailAndPassword,
                         child: Container(
                             width: double.infinity,
                             height: 50,
@@ -302,10 +302,32 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
+  Widget _errorMessage() {
+    return Text(
+      errorMessage == '' ? '' : 'Hmm? $errorMessage',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          color: custom_colors.primaryOrange,
+          fontSize: 14,
+          fontWeight: FontWeight.w600),
     );
+  }
+
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      await Auth()
+          .signInWithEmailAndPassword(
+            emailController.text,
+            passwordController.text,
+          )
+          .then(
+              (value) => Navigator.of(context).pushNamed(Navigation.routeName));
+    } on FirebaseAuthException catch (e) {
+      setState(
+        () {
+          errorMessage = e.message!;
+        },
+      );
+    }
   }
 }
