@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:xcesscity/models/crime_updates.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
@@ -68,6 +69,15 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                                 size: 18,
                                 color: custom_colors.secondary,
                               ),
+                              /*GestureDetector(
+                                onTap: () {
+                                  _getCurrentLocation().then((value) {
+                                    lat = '${value.latitude}';
+                                    long = '${value.longitude}';
+                                    print('Latitude: $lat , Longitude: $long');
+                                  });
+                                  _liveLocation();
+                                },*/
                               Text(
                                 'ADJUST LOCATION',
                                 style: TextStyle(
@@ -200,3 +210,16 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
         ));
   }
 }
+
+/*void _liveLocation() {
+  LocationSettings locationSettings = const LocationSettings(
+    accuracy: LocationAccuracy.high,
+  );
+
+  Geolocator.getPositionStream(locationSettings: locationSettings)
+      .listen((Position position) {
+    lat = position.latitude.toString();
+    long = position.longitude.toString();
+    print('Latitude:$lat , Longitude:$long');
+  });
+}*/
