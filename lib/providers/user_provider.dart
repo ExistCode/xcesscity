@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../assets/repositories/storage/storage_repository.dart';
 import '../auth.dart';
 import '../models/user_model.dart';
 
 class UserProvider with ChangeNotifier {
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   UserModel userProviderData = UserModel(
     id: '', // Initialize with the desired value
     name: '', // Initialize with the desired value
@@ -16,7 +18,7 @@ class UserProvider with ChangeNotifier {
   );
 
   Future<void> setUserName(String userName) async {
-    await FirebaseFirestore.instance
+    await _firebaseFirestore
         .collection('user')
         .doc(Auth().currentUser!.uid)
         .update({"userName": userName});
@@ -24,7 +26,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> setName(String name) async {
-    await FirebaseFirestore.instance
+    await _firebaseFirestore
         .collection('user')
         .doc(Auth().currentUser!.uid)
         .update({"name": name});
@@ -32,7 +34,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> setAge(String age) async {
-    await FirebaseFirestore.instance
+    await _firebaseFirestore
         .collection('user')
         .doc(Auth().currentUser!.uid)
         .update({"age": age});
@@ -40,7 +42,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> setGender(String gender) async {
-    await FirebaseFirestore.instance
+    await _firebaseFirestore
         .collection('user')
         .doc(Auth().currentUser!.uid)
         .update({"gender": gender});
@@ -48,7 +50,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> setUserProfileUrl(String userProfileUrl) async {
-    await FirebaseFirestore.instance
+    await _firebaseFirestore
         .collection('user')
         .doc(Auth().currentUser!.uid)
         .update({"userProfileUrl": userProfileUrl});
@@ -56,7 +58,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> setUserBackgroundUrl(String userBackgroundUrl) async {
-    await FirebaseFirestore.instance
+    await _firebaseFirestore
         .collection('user')
         .doc(Auth().currentUser!.uid)
         .update({"userBackgroundUrl": userBackgroundUrl});
@@ -64,7 +66,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> fetchUserData() async {
-    await FirebaseFirestore.instance
+    await _firebaseFirestore
         .collection('user')
         .doc(Auth().currentUser!.uid)
         .get()
@@ -81,5 +83,17 @@ class UserProvider with ChangeNotifier {
             snapshot.data()!['userBackgroundUrl'];
       },
     );
+  }
+
+  Future<void> updateUserPictures(UserModel user, String imageName) async {
+    String downloadUrl =
+        await StorageRepository().getDownloadUrl(user, imageName);
+
+    return _firebaseFirestore
+        .collection('user')
+        .doc(Auth().currentUser!.uid)
+        .update({
+      'userProfileUrl': FieldValue.arrayUnion([downloadUrl])
+    });
   }
 }
