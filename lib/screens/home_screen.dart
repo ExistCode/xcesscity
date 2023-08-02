@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xcesscity/models/colors.dart';
@@ -58,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             .pushNamed(SettingScreen.routeName),
                       },
                   child: TopBanner(
-                      300, 'lib/assets/images/banner.png', 'Change Info')),
+                      300, "lib/assets/images/banner.png", 'Change Info')),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
                 child: Column(
