@@ -7,15 +7,15 @@ import 'package:xcesscity/screens/question_screen.dart';
 
 import '../auth.dart';
 
-class signUpScreen extends StatefulWidget {
-  const signUpScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
   static const routeName = '/signUp';
 
   @override
-  State<signUpScreen> createState() => _signUpScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _signUpScreenState extends State<signUpScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   String errorMessage = '';
   bool status = false;
   final TextEditingController emailController = TextEditingController();

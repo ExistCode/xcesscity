@@ -81,7 +81,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         Spacer(),
                         GestureDetector(
                           onTap: () => Navigator.of(context)
-                              .pushNamed(rulesPolicy.routeName),
+                              .pushNamed(RulesPolicy.routeName),
                           child: Container(
                             child: Row(children: [
                               Icon(

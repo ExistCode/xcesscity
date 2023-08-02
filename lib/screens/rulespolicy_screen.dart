@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import '../models/colors.dart' as custom_colors;
 
-class rulesPolicy extends StatelessWidget {
+class RulesPolicy extends StatelessWidget {
   static const routeName = '/rulespolicy';
-  const rulesPolicy({super.key});
+  const RulesPolicy({super.key});
 
   @override
   Widget build(BuildContext context) {

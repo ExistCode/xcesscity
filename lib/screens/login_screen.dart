@@ -277,7 +277,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const Spacer(),
                                 GestureDetector(
                                   onTap: () => Navigator.of(context)
-                                      .pushNamed(signUpScreen.routeName),
+                                      .pushNamed(SignUpScreen.routeName),
                                   child: Text(
                                     "SIGNUP",
                                     style: (TextStyle(
