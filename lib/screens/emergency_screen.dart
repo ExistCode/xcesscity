@@ -55,6 +55,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     top: MediaQuery.of(context).padding.top + 20),
                 width: double.infinity,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -114,20 +115,13 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       child: MapSample(),
                     ),
                     SizedBox(height: 20),
-                    ToggleSwitch(
-                      cornerRadius: 10,
-                      minWidth: 150,
-                      activeBgColor: [accentOrange],
-                      activeFgColor: white,
-                      inactiveBgColor: white,
-                      inactiveFgColor: secondary,
-                      customTextStyles: [
-                        TextStyle(fontWeight: FontWeight.bold)
-                      ],
-                      initialLabelIndex: 1,
-                      totalSwitches: 2,
-                      labels: ['Incident Alert', 'Pothole Alert'],
-                      onToggle: (index) {},
+                    Text(
+                      "Incident Alert",
+                      style: TextStyle(
+                          color: custom_colors.primaryOrange,
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w600),
                     ),
                     SizedBox(height: 20),
                     // Row(mainAxisAlignment: MainAxisAlignment.start, children: [

@@ -26,11 +26,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/firebase_options.dart';
 
-void main() async {
-  // Initialize Firebase before running the app
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-          home: Navigation(),
+          home: AuthWidgetTree(),
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
             CreateNewForum.routeName: (context) => CreateNewForum(),
             DetectionScreen.routeName: (context) => DetectionScreen(),
             WriteReport.routeName: (context) => WriteReport(),
-            RestaurantScreen.routeName:(context)=>RestaurantScreen()
+            RestaurantScreen.routeName: (context) => RestaurantScreen()
           }),
     );
   }

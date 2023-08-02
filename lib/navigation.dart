@@ -6,6 +6,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
+import 'package:xcesscity/screens/loading_screen.dart';
 import 'models/colors.dart';
 
 class Navigation extends StatefulWidget {
@@ -66,7 +67,7 @@ class NavigationState extends State<Navigation> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: screens[currentIndex],
+      body: _isLoading ? LoadingScreen() : screens[currentIndex],
       bottomNavigationBar: Container(
         height: 80,
         decoration: BoxDecoration(
