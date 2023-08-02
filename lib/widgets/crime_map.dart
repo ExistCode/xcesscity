@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 String mapTheme = '';
@@ -13,11 +14,10 @@ class MapSample extends StatefulWidget {
 class _MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static final Marker _kGooglePlexMarker = Marker(
-      markerId: MarkerId('_kGooglePlex'),
-      infoWindow: InfoWindow(title: 'Incident'),
-      icon: BitmapDescriptor.defaultMarker,
-      position: LatLng(3.064892920362661, 101.61683399057945));
+  CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.4226711, -122.0849872),
+    zoom: 14,
+  );
 
   @override
   void initState() {
@@ -33,18 +33,20 @@ class _MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-        mapType: MapType.normal,
-        myLocationButtonEnabled: true,
-        markers: {
-          _kGooglePlexMarker,
-        },
-        onMapCreated: (GoogleMapController controller) {
-          controller.setMapStyle(mapTheme);
-        },
-        initialCameraPosition: CameraPosition(
-          target: LatLng(3.064892920362661, 101.61683399057945),
-          zoom: 11.0,
-        ),
-      );
+      mapType: MapType.normal,
+      myLocationButtonEnabled: true,
+      markers: <Marker>{_setMarker()},
+      onMapCreated: (GoogleMapController controller) {
+        controller.setMapStyle(mapTheme);
+      },
+      initialCameraPosition: _kGooglePlex,
+    );
+  }
+
+  _setMarker() {
+    return Marker(
+        markerId: MarkerId("marker 1"),
+        icon: BitmapDescriptor.defaultMarker,
+        position: LatLng(37.4226711, -122.0849872));
   }
 }
