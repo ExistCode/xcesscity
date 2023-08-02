@@ -1,8 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/write_report_screen.dart';
+import 'package:xcesscity/widgets/crime_map.dart';
 import 'package:xcesscity/widgets/explore_row_category.dart';
 import '../models/colors.dart' as custom_colors;
+import 'package:xcesscity/widgets/crime_map.dart';
 
 class DetectionScreen extends StatefulWidget {
   static const routeName = '/detectionScreen';
@@ -13,6 +20,36 @@ class DetectionScreen extends StatefulWidget {
 }
 
 class _DetectionScreenState extends State<DetectionScreen> {
+  late String lat;
+  late String long;
+
+  Future<Position> _getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled');
+    }
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location permission are permanently denied');
+    }
+    return await Geolocator.getCurrentPosition();
+  }
+
+  File? imageFile;
+  final imagePicker = ImagePicker();
+  Future getImage() async {
+    final image = await imagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      imageFile = File(image!.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +76,12 @@ class _DetectionScreenState extends State<DetectionScreen> {
                 ),
               ]),
           Container(
-            width: 500,
-            height: 450,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('lib/assets/images/tempfight.png')),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-          ),
+              child: imageFile == null
+                  ? Container(
+                      width: 300,
+                      height: 480,
+                    )
+                  : Image.file(imageFile!)),
           Container(
             width: 600,
             height: 90,
@@ -108,17 +143,29 @@ class _DetectionScreenState extends State<DetectionScreen> {
                 color: custom_colors.white,
               ),
               Spacer(),
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: custom_colors.accentOrange,
-                    border: Border.all(color: custom_colors.white, width: 2)),
-                child: Icon(
-                  Icons.camera_alt,
-                  color: custom_colors.white,
+              //Camera Button//
+              GestureDetector(
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: custom_colors.accentOrange,
+                      border: Border.all(color: custom_colors.white, width: 2)),
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: custom_colors.white,
+                  ),
                 ),
+                //This is wehre it will pass the detected lat/lng when camera btn pressed//
+                onTap: () => {
+                  _getCurrentLocation().then((value) {
+                    lat = '${value.latitude}';
+                    long = '${value.longitude}';
+                    print('Lat:$lat , Long:$long');
+                  }),
+                  getImage()
+                },
               ),
               Spacer(),
               GestureDetector(
@@ -134,5 +181,19 @@ class _DetectionScreenState extends State<DetectionScreen> {
         ],
       ),
     ));
+  }
+
+  void _liveLocation() {
+    LocationSettings locationSettings = const LocationSettings(
+      accuracy: LocationAccuracy.high,
+    );
+
+    Geolocator.getPositionStream(locationSettings: locationSettings)
+        .listen((Position position) {
+      lat = position.latitude.toString();
+      long = position.longitude.toString();
+
+      print('Latitude:$lat , Longitude:$long');
+    });
   }
 }
