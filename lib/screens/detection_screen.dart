@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/write_report_screen.dart';
 import 'package:xcesscity/widgets/explore_row_category.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../models/colors.dart' as custom_colors;
 
 class DetectionScreen extends StatefulWidget {
@@ -82,21 +87,28 @@ class _DetectionScreenState extends State<DetectionScreen> {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10))),
               ),
-              Container(
-                width: 500,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: custom_colors.secondary,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10))),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    'Submit',
-                    style: TextStyle(color: custom_colors.white, fontSize: 18),
-                  )
-                ]),
+              GestureDetector(
+                onTap: (() {
+                  sendEmail();
+                }),
+                child: Container(
+                  width: 500,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: custom_colors.secondary,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10))),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Submit',
+                          style: TextStyle(
+                              color: custom_colors.white, fontSize: 18),
+                        )
+                      ]),
+                ),
               ),
             ]),
           ),
@@ -134,5 +146,42 @@ class _DetectionScreenState extends State<DetectionScreen> {
         ],
       ),
     ));
+  }
+
+  void showSnackBar(String text) {
+    final snackBar = SnackBar(
+      content: Text(
+        text,
+        style: TextStyle(fontSize: 20),
+      ),
+      backgroundColor: Colors.green[400],
+    );
+
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  Future sendEmail() async {
+    var url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    const serviceId = "service_1tcx2fe";
+    const templateId = "template_qax32ig";
+    const userId = "r1orxg9QLHg53YbPM";
+
+    final response = await http.post(url,
+        headers: {
+          'origin': 'http://localhost',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({
+          "service_id": serviceId,
+          "template_id": templateId,
+          "user_id": userId,
+          // "template_params": {
+          //   "message": 'The pothole is spotted at LOCATION',
+          // }
+        }));
+    showSnackBar('Report sent Successfully!');
+    return response.statusCode;
   }
 }

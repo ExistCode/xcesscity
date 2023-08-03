@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
             CreateNewForum.routeName: (context) => CreateNewForum(),
             DetectionScreen.routeName: (context) => DetectionScreen(),
             WriteReport.routeName: (context) => WriteReport(),
-            RestaurantScreen.routeName:(context)=>RestaurantScreen()
+            RestaurantScreen.routeName: (context) => RestaurantScreen()
           }),
     );
   }
