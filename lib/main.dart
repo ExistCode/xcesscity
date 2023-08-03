@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xcesscity/auth_widget_tree.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/providers/forum_provider.dart';
 import 'package:xcesscity/providers/location_provider.dart';
 import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/community_detail_screen.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: UserProvider(),
         ),
-        ChangeNotifierProvider.value(value: LocationProvider())
+        ChangeNotifierProvider.value(value: LocationProvider()),
+        ChangeNotifierProvider.value(value: ForumProvider())
       ],
       child: MaterialApp(
           title: 'XcessCITY',
