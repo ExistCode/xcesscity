@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/colors.dart' as custom_colors;
-import 'crime_map.dart';
 
 class camera extends StatefulWidget {
   final VoidCallback setMarker;
@@ -15,7 +14,7 @@ class _cameraState extends State<camera> {
   Widget build(BuildContext context) {
     return Container(
       width: 50,
-      height: 50,
+      height: 20,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: custom_colors.accentOrange,

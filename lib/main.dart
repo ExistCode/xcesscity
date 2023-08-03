@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:xcesscity/auth.dart';
 import 'package:xcesscity/auth_widget_tree.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/providers/location_provider.dart';
 import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/community_detail_screen.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
@@ -15,6 +15,7 @@ import 'package:xcesscity/screens/login_screen.dart';
 import 'package:xcesscity/screens/restaurant_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
+
 import 'package:xcesscity/screens/write_report_screen.dart';
 import 'package:xcesscity/testing_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: UserProvider(),
-        )
+        ),
+        ChangeNotifierProvider.value(value: LocationProvider())
       ],
       child: MaterialApp(
           title: 'XcessCITY',

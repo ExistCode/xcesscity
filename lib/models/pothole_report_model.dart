@@ -1,10 +1,12 @@
 class PotholeReportModel {
-  String id;
+  String latitude;
+  String longitude;
   DateTime potholeReportDate;
-  String content;
+  String title;
 
   PotholeReportModel(
-      {required this.id,
+      {required this.latitude,
+      required this.longitude,
       required this.potholeReportDate,
-      required this.content});
+      required this.title});
 }
