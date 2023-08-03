@@ -7,7 +7,7 @@ import '../models/colors.dart';
 
 class TopBanner extends StatelessWidget {
   double height;
-  String image;
+  final image;
   String text;
   TopBanner(
     this.height,
@@ -26,7 +26,7 @@ class TopBanner extends StatelessWidget {
           height: height - 40,
           decoration: BoxDecoration(
               image:
-                  DecorationImage(fit: BoxFit.cover, image: AssetImage(image)),
+                  DecorationImage(fit: BoxFit.cover, image:image),
               borderRadius: BorderRadius.all(Radius.circular(30))),
         ),
         Align(

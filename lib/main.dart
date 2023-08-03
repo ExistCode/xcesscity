@@ -63,9 +63,9 @@ class MyApp extends StatelessWidget {
             ExploreScreen.routeName: (context) => ExploreScreen(),
             EventScreen.routeName: (context) => EventScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
-            signUpScreen.routeName: (context) => signUpScreen(),
+            SignUpScreen.routeName: (context) => SignUpScreen(),
             TestingScreen.routeName: (context) => TestingScreen(),
-            rulesPolicy.routeName: (context) => rulesPolicy(),
+            RulesPolicy.routeName: (context) => RulesPolicy(),
             CommunityDetailScreen.routeName: (context) =>
                 CommunityDetailScreen(),
             CreateNewForum.routeName: (context) => CreateNewForum(),

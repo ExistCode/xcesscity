@@ -46,6 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
     UserModel currentUser =
         Provider.of<UserProvider>(context, listen: false).userProviderData;
 
+    final bannerURL = currentUser.userBackgroundUrl;    
+
     return Scaffold(
       backgroundColor: Color(0xFF1A172F),
       body: SingleChildScrollView(
@@ -60,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             .pushNamed(SettingScreen.routeName),
                       },
                   child: TopBanner(
-                      300, "lib/assets/images/banner.png", 'Change Info')),
+                      300, NetworkImage(bannerURL), 'Change Info')),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
                 child: Column(

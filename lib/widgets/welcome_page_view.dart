@@ -21,7 +21,7 @@ class WelcomePageView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            TopBanner(500, imageUrl, 'Welcome to XcessCITY'),
+            TopBanner(500, AssetImage(imageUrl), 'Welcome to XcessCITY'),
             SizedBox(height: 20),
             Text(title,
                 textAlign: TextAlign.center,
