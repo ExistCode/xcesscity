@@ -1,10 +1,18 @@
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+
 import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/write_report_screen.dart';
 import 'package:image/image.dart' as img;
@@ -12,6 +20,8 @@ import 'package:xcesscity/widgets/crime_map.dart';
 import 'package:xcesscity/widgets/explore_row_category.dart';
 import 'package:xcesscity/widgets/pothole_view.dart';
 import '../classifier/classifier.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../models/colors.dart' as custom_colors;
 import 'package:xcesscity/widgets/crime_map.dart';
 
@@ -73,6 +83,8 @@ class _DetectionScreenState extends State<DetectionScreen> {
       // Handle the error if necessary
     }
   }
+  String stAddress = '';
+  String stTime = '';
 
   Future<void>? createNewPothole(
       String title, String lat, String long, DateTime time) {
@@ -160,9 +172,9 @@ class _DetectionScreenState extends State<DetectionScreen> {
                   Spacer(),
                   Container(
                     child: Column(children: [
-                      Text('Jalan Merak 3/PJ',
+                      Text(stAddress,
                           style: TextStyle(color: custom_colors.white)),
-                      Text('SUNDAY 21/7 , 15:00',
+                      Text(stTime,
                           style: TextStyle(
                               color: custom_colors.accentOrange, fontSize: 12)),
                     ]),
@@ -176,21 +188,28 @@ class _DetectionScreenState extends State<DetectionScreen> {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10))),
               ),
-              Container(
-                width: 500,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: custom_colors.secondary,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10))),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    'Submit',
-                    style: TextStyle(color: custom_colors.white, fontSize: 18),
-                  )
-                ]),
+              GestureDetector(
+                onTap: (() {
+                  sendEmail();
+                }),
+                child: Container(
+                  width: 500,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: custom_colors.secondary,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10))),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Submit',
+                          style: TextStyle(
+                              color: custom_colors.white, fontSize: 18),
+                        )
+                      ]),
+                ),
               ),
             ]),
           ),
@@ -204,30 +223,38 @@ class _DetectionScreenState extends State<DetectionScreen> {
               Spacer(),
               //Camera Button//
               GestureDetector(
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: custom_colors.accentOrange,
-                      border: Border.all(color: custom_colors.white, width: 2)),
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: custom_colors.white,
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: custom_colors.accentOrange,
+                        border:
+                            Border.all(color: custom_colors.white, width: 2)),
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: custom_colors.white,
+                    ),
                   ),
-                ),
-                //This is wehre it will pass the detected lat/lng when camera btn pressed//
-                onTap: () => {
-                  _getCurrentLocation().then((value) {
-                    lat = '${value.latitude}';
-                    long = '${value.longitude}';
-                    createNewPothole("Marker1", lat, long, DateTime.now());
-                    print('Lat:$lat , Long:$long');
-                  }),
-                  getImage(),
-                  Navigator.of(context).pushNamed(EmergencyScreen.routeName)
-                },
-              ),
+                  //This is where it will pass the detected lat/lng when camera btn pressed//
+                  onTap: (() {
+                    _getCurrentLocation().then((value) async {
+                      lat = '${value.latitude}';
+                      long = '${value.longitude}';
+                      createNewPothole("Marker1", lat, long, DateTime.now());
+                      changeToAddress(double.parse(lat), double.parse(long));
+
+                      // Convert//
+
+                      print('Lat:$lat , Long:$long');
+                    });
+                    getImage();
+                  })
+                  // () => {
+
+                  //   //Navigator.of(context).pushNamed(DetectionScreen.routeName)
+                  // },
+                  ),
               Spacer(),
               GestureDetector(
                 onTap: () =>
@@ -243,6 +270,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
       ),
     ));
   }
+
 
   void _onPickPhoto(ImageSource source) async {
     final pickedFile = await imagePicker.pickImage(source: source);
@@ -283,6 +311,44 @@ class _DetectionScreenState extends State<DetectionScreen> {
     });
   }
 
+
+  void showSnackBar(String text) {
+    final snackBar = SnackBar(
+      content: Text(
+        text,
+        style: TextStyle(fontSize: 20),
+      ),
+      backgroundColor: Colors.green[400],
+    );
+
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  Future sendEmail() async {
+    var url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    const serviceId = "service_1tcx2fe";
+    const templateId = "template_qax32ig";
+    const userId = "r1orxg9QLHg53YbPM";
+
+    final response = await http.post(url,
+        headers: {
+          'origin': 'http://localhost',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({
+          "service_id": serviceId,
+          "template_id": templateId,
+          "user_id": userId,
+          // "template_params": {
+          //   "message": 'The pothole is spotted at LOCATION',
+          // }
+        }));
+    showSnackBar('Report sent Successfully!');
+    return response.statusCode;
+
+
   void _liveLocation() {
     LocationSettings locationSettings = const LocationSettings(
       accuracy: LocationAccuracy.high,
@@ -295,6 +361,14 @@ class _DetectionScreenState extends State<DetectionScreen> {
 
       print('Latitude:$lat , Longitude:$long');
     });
+
+  }
+
+  Future<void> changeToAddress(double lat, double long) async {
+    List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
+    stAddress = placemark.reversed.last.subAdministrativeArea.toString();
+    stTime = DateTime.now().toString();
+    print("Testing Address: ${stAddress}");
   }
 
   Widget _buildPhotoView() {
