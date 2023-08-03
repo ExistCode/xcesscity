@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:xcesscity/models/crime_updates.dart';
+import 'package:xcesscity/providers/location_provider.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
 import 'package:xcesscity/screens/detection_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
@@ -25,10 +27,29 @@ BottomNavigationBar get navigationBar {
 }
 
 class _EmergencyScreenState extends State<EmergencyScreen> {
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    var _provider = Provider.of<LocationProvider>(context, listen: false);
+    if (_provider.potholeIdList.isEmpty) {
+      _provider.fetchPotholeId().then((_) {
+        print('Successfuly fetched ${_provider.potholeIdList.length} ids');
+        _provider.fetchAllPotholeReported().then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     //Create dummylist first...//
     final dummyList = List.generate(3, (index) => crimeUdpatesModel.updates[0]);
+    var _provider = Provider.of<LocationProvider>(context, listen: false);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -56,6 +77,8 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     top: MediaQuery.of(context).padding.top + 20),
                 width: double.infinity,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -124,57 +147,16 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       child: MapSample(),
                     ),
                     SizedBox(height: 20),
-                    ToggleSwitch(
-                      cornerRadius: 10,
-                      minWidth: 150,
-                      activeBgColor: [accentOrange],
-                      activeFgColor: white,
-                      inactiveBgColor: white,
-                      inactiveFgColor: secondary,
-                      customTextStyles: [
-                        TextStyle(fontWeight: FontWeight.bold)
-                      ],
-                      initialLabelIndex: 1,
-                      totalSwitches: 2,
-                      labels: ['Incident Alert', 'Pothole Alert'],
-                      onToggle: (index) {},
+                    Text(
+                      "Pothole Alert",
+                      style: TextStyle(
+                          color: custom_colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline),
                     ),
                     SizedBox(height: 20),
-                    // Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    //   SizedBox(
-                    //     height: 50,
-                    //   ),
-                    //   GestureDetector(
-                    //     child: Icon(
-                    //       Icons.pin_drop,
-                    //       size: 20,
-                    //       color: custom_colors.accentOrange,
-                    //     ),
-                    //   ),
-                    //   Text(
-                    //     'Incident Alert',
-                    //     style: TextStyle(
-                    //       fontSize: 18,
-                    //       color: custom_colors.white,
-                    //     ),
-                    //   ),
-                    //   Spacer(),
-                    //   GestureDetector(
-                    //     child: Icon(
-                    //       Icons.circle,
-                    //       size: 18,
-                    //       color: custom_colors.secondary,
-                    //     ),
-                    //   ),
-                    //   Text(
-                    //     'PotHole Alert',
-                    //     style: TextStyle(
-                    //       decoration: TextDecoration.underline,
-                    //       fontSize: 18,
-                    //       color: custom_colors.white,
-                    //     ),
-                    //   ),
-                    // ]),
+
                     Container(
                       height: 230,
                       decoration: BoxDecoration(

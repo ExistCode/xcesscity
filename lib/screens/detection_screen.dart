@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -20,8 +21,26 @@ class DetectionScreen extends StatefulWidget {
 }
 
 class _DetectionScreenState extends State<DetectionScreen> {
-  late String lat;
-  late String long;
+  static late String lat;
+  static late String long;
+
+  Future<void>? createNewPothole(
+      String title, String lat, String long, DateTime time) {
+    FirebaseFirestore.instance.collection('Pothole').doc().set({
+      "title": title,
+      "lat": lat,
+      "long": long,
+      "reportedDate": time,
+    });
+  }
+
+  static Future<String> getLatitude() async {
+    return lat;
+  }
+
+  static Future<String> getLongitude() async {
+    return long;
+  }
 
   Future<Position> _getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -79,7 +98,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
               child: imageFile == null
                   ? Container(
                       width: 300,
-                      height: 472,
+                      height: 420,
                     )
                   : Image.file(imageFile!)),
           Container(
@@ -162,9 +181,11 @@ class _DetectionScreenState extends State<DetectionScreen> {
                   _getCurrentLocation().then((value) {
                     lat = '${value.latitude}';
                     long = '${value.longitude}';
+                    createNewPothole("Marker1", lat, long, DateTime.now());
                     print('Lat:$lat , Long:$long');
                   }),
-                  getImage()
+                  getImage(),
+                  Navigator.of(context).pushNamed(EmergencyScreen.routeName)
                 },
               ),
               Spacer(),
