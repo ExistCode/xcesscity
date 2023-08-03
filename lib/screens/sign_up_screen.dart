@@ -135,6 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           const Spacer(),
                           FlutterSwitch(
                             activeColor: custom_colors.primaryOrange,
+                            inactiveColor: custom_colors.secondary,
                             width: 60.0,
                             height: 30.0,
 
