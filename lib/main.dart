@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:xcesscity/auth.dart';
 import 'package:xcesscity/auth_widget_tree.dart';
 import 'package:xcesscity/models/colors.dart';
+import 'package:xcesscity/providers/location_provider.dart';
 import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/community_detail_screen.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
@@ -15,6 +15,7 @@ import 'package:xcesscity/screens/login_screen.dart';
 import 'package:xcesscity/screens/restaurant_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
+
 import 'package:xcesscity/screens/write_report_screen.dart';
 import 'package:xcesscity/testing_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
@@ -26,11 +27,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/firebase_options.dart';
 
-void main() async {
-  // Initialize Firebase before running the app
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: UserProvider(),
-        )
+        ),
+        ChangeNotifierProvider.value(value: LocationProvider())
       ],
       child: MaterialApp(
           title: 'XcessCITY',
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-          home: Navigation(),
+          home: AuthWidgetTree(),
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),
@@ -63,9 +65,9 @@ class MyApp extends StatelessWidget {
             ExploreScreen.routeName: (context) => ExploreScreen(),
             EventScreen.routeName: (context) => EventScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
-            signUpScreen.routeName: (context) => signUpScreen(),
+            SignUpScreen.routeName: (context) => SignUpScreen(),
             TestingScreen.routeName: (context) => TestingScreen(),
-            rulesPolicy.routeName: (context) => rulesPolicy(),
+            RulesPolicy.routeName: (context) => RulesPolicy(),
             CommunityDetailScreen.routeName: (context) =>
                 CommunityDetailScreen(),
             CreateNewForum.routeName: (context) => CreateNewForum(),

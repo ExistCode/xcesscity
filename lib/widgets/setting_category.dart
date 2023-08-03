@@ -12,28 +12,28 @@ class SettingCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:EdgeInsets.all(15),
+      margin: EdgeInsets.all(15),
       child: Row(
         children: [
           Container(
             child: Icon(
               icon,
-              size: 25,
+              size: 20,
               color: white,
             ),
           ),
-          SizedBox(width:10),
+          SizedBox(width: 10),
           Text(
             category,
             style: TextStyle(
               color: white,
-              fontSize: 18,
+              fontSize: 14,
             ),
           ),
           Spacer(),
           Text(
             data,
-            style: TextStyle(fontSize: 15, color: white.withOpacity(0.5)),
+            style: TextStyle(fontSize: 14, color: white.withOpacity(0.5)),
           ),
         ],
       ),

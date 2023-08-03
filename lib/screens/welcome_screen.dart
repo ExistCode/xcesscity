@@ -57,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 700,
+              height: 660,
               color: Colors.white,
               child: PageView(
                 onPageChanged: _onPageViewChange,
@@ -103,8 +103,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             GestureDetector(
               onTap: () {
                 currentPage == 2
-                    ? Navigator.of(context)
-                        .pushNamed(LoginScreen.routeName)
+                    ? Navigator.of(context).pushNamed(LoginScreen.routeName)
                     : _controller.nextPage(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeIn);
