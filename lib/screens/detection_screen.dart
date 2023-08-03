@@ -8,6 +8,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,6 +33,8 @@ class DetectionScreen extends StatefulWidget {
 class _DetectionScreenState extends State<DetectionScreen> {
   static late String lat;
   static late String long;
+  String stAddress = '';
+  String stTime = '';
 
   Future<void>? createNewPothole(
       String title, String lat, String long, DateTime time) {
@@ -129,9 +132,9 @@ class _DetectionScreenState extends State<DetectionScreen> {
                   Spacer(),
                   Container(
                     child: Column(children: [
-                      Text('Jalan Merak 3/PJ',
+                      Text(stAddress,
                           style: TextStyle(color: custom_colors.white)),
-                      Text('SUNDAY 21/7 , 15:00',
+                      Text(stTime,
                           style: TextStyle(
                               color: custom_colors.accentOrange, fontSize: 12)),
                     ]),
@@ -180,30 +183,38 @@ class _DetectionScreenState extends State<DetectionScreen> {
               Spacer(),
               //Camera Button//
               GestureDetector(
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: custom_colors.accentOrange,
-                      border: Border.all(color: custom_colors.white, width: 2)),
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: custom_colors.white,
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: custom_colors.accentOrange,
+                        border:
+                            Border.all(color: custom_colors.white, width: 2)),
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: custom_colors.white,
+                    ),
                   ),
-                ),
-                //This is wehre it will pass the detected lat/lng when camera btn pressed//
-                onTap: () => {
-                  _getCurrentLocation().then((value) {
-                    lat = '${value.latitude}';
-                    long = '${value.longitude}';
-                    createNewPothole("Marker1", lat, long, DateTime.now());
-                    print('Lat:$lat , Long:$long');
-                  }),
-                  getImage(),
-                  Navigator.of(context).pushNamed(EmergencyScreen.routeName)
-                },
-              ),
+                  //This is where it will pass the detected lat/lng when camera btn pressed//
+                  onTap: (() {
+                    _getCurrentLocation().then((value) async {
+                      lat = '${value.latitude}';
+                      long = '${value.longitude}';
+                      createNewPothole("Marker1", lat, long, DateTime.now());
+                      changeToAddress(double.parse(lat), double.parse(long));
+
+                      // Convert//
+
+                      print('Lat:$lat , Long:$long');
+                    });
+                    getImage();
+                  })
+                  // () => {
+
+                  //   //Navigator.of(context).pushNamed(DetectionScreen.routeName)
+                  // },
+                  ),
               Spacer(),
               GestureDetector(
                 onTap: () =>
@@ -270,5 +281,12 @@ class _DetectionScreenState extends State<DetectionScreen> {
       print('Latitude:$lat , Longitude:$long');
     });
 
+  }
+
+  Future<void> changeToAddress(double lat, double long) async {
+    List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
+    stAddress = placemark.reversed.last.subAdministrativeArea.toString();
+    stTime = DateTime.now().toString();
+    print("Testing Address: ${stAddress}");
   }
 }
