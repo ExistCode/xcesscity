@@ -21,6 +21,7 @@ class _MapSampleState extends State<MapSample> {
   double _currentLatitude = 0;
   double _currentLongitude = 0;
   Position? position;
+  List<Marker> _marker = [];
   Completer<GoogleMapController> _controller = Completer();
 
   Future<void> _determinePosition() async {
@@ -59,6 +60,15 @@ class _MapSampleState extends State<MapSample> {
         _provider.fetchAllPotholeReported().then((_) {
           setState(() {
             print("isloading: {$_isLoading}");
+            for (int i = 0; i < _provider.potholeIdList.length; i++) {
+              _marker.add(_setMarker(
+                  "Marker {i}",
+                  double.parse(
+                    _provider.loadedPotholeReported[i].latitude,
+                  ),
+                  double.parse(_provider.loadedPotholeReported[i].longitude)));
+              print("added ");
+            }
             _isLoading = false;
           });
         });
@@ -86,34 +96,26 @@ class _MapSampleState extends State<MapSample> {
     });
   }
 
+  // on below line we have created list of markers
+
   @override
   Widget build(BuildContext context) {
-    CameraPosition _kGooglePlex = CameraPosition(
+    CameraPosition initialCameraPosition = CameraPosition(
       target: LatLng(3.0636507, 101.615879),
-      zoom: 14,
+      zoom: 8,
     );
     var _provider = Provider.of<LocationProvider>(context, listen: false);
+
     return _isLoading
         ? LoadingScreen()
         : GoogleMap(
             mapType: MapType.normal,
             myLocationButtonEnabled: true,
-            markers: <Marker>{
-              // _setMarker("1st Marker", 3.0836357, 102.6158714),
-              // _setMarker("Marker 2", 3.0636507, 101.615879),
-              _setMarker(
-                  _provider.loadedPotholeReported[0].title,
-                  double.parse(_provider.loadedPotholeReported[0].latitude),
-                  double.parse(_provider.loadedPotholeReported[0].longitude)),
-              _setMarker(
-                  _provider.loadedPotholeReported[1].title,
-                  double.parse(_provider.loadedPotholeReported[1].latitude),
-                  double.parse(_provider.loadedPotholeReported[1].longitude))
-            },
+            markers: _marker.toSet(),
             onMapCreated: (GoogleMapController controller) {
               controller.setMapStyle(mapTheme);
             },
-            initialCameraPosition: _kGooglePlex,
+            initialCameraPosition: initialCameraPosition,
           );
   }
 
