@@ -31,14 +31,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   firebase_core: ^2.15.0
   google_maps_flutter: ^2.4.0
   geolocator: ^8.2.1
-
+  image: ^3.2.2
 
   #Firebase database
   cloud_firestore: ^4.8.4
@@ -51,7 +50,18 @@ dependencies:
   google_sign_in: ^6.1.4
   provider: ^6.0.5
   firebase_storage: ^11.2.5
-
+  image_picker: ^1.0.1
+  tflite_flutter: ^0.9.0
+  tflite_flutter_helper:
+    git:
+      url: https://github.com/filofan1/tflite_flutter_helper.git
+      ref: 783f15e5a87126159147d8ea30b98eea9207ac70
+dependency_overrides:
+  tflite_flutter: ^0.9.0
+  tflite_flutter_helper:
+    git:
+      url: https://github.com/filofan1/tflite_flutter_helper.git
+      ref: 783f15e5a87126159147d8ea30b98eea9207ac70
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,6 @@
+0 Neutral
+1 Happy
+2 Surprised
+3 Sad
+4 Fear
+5 Angry
