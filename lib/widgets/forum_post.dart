@@ -32,7 +32,8 @@ class ForumPost extends StatelessWidget {
                 height: 50,
                 width: 50,
                 decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: accentOrange),
+                    BoxDecoration(shape: BoxShape.circle,),
+                    child:Icon(Icons.account_circle_rounded, size:50, color:Colors.grey)
               ),
               SizedBox(width: 10),
               Column(
@@ -43,7 +44,7 @@ class ForumPost extends StatelessWidget {
                     style: TextStyle(color: white),
                   ),
                   Text(
-                    "@${userName}",
+                    "${userName}",
                     style: TextStyle(color: white),
                   )
                 ],

@@ -78,54 +78,51 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 80,
                               width: 80,
                               decoration: BoxDecoration(
-                                  color: accentOrange, shape: BoxShape.circle),
+                                   shape: BoxShape.circle,),
+                                  child:Icon(Icons.account_circle_rounded, size:80, color:Colors.grey)
                             ),
-                            SizedBox(
-                              width: 56,
-                            ),
+
                             Column(
                               children: [
                                 Text(currentUser.name,
                                     style:
                                         TextStyle(color: white, fontSize: 28)),
-                                Text(currentUser.userName,
+                                Text("@${currentUser.userName}",
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 16))
                               ],
+                            ),                           
+                            Container(
+                              height: 98,
+                              width: 85,
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                  color: Color(0xFF4D5390).withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(children: [
+                                    Icon(Icons.thumb_up_alt,
+                                        color: accentOrange),
+                                    Spacer(),
+                                    Text("150",
+                                        style: TextStyle(color: Colors.white))
+                                  ]),
+                                  Row(children: [
+                                    Icon(Icons.star, color: accentOrange),
+                                    Spacer(),
+                                    Text("1.2k", style: TextStyle(color: white))
+                                  ]),
+                                  Row(children: [
+                                    Icon(Icons.remove_red_eye_sharp,
+                                        color: accentOrange),
+                                    Spacer(),
+                                    Text("528", style: TextStyle(color: white))
+                                  ]),
+                                ],
+                              ),
                             ),
-                            Expanded(child: SizedBox())
-                            // // Icon
-                            // Container(
-                            //   height: 98,
-                            //   width: 85,
-                            //   padding: EdgeInsets.symmetric(horizontal: 10),
-                            //   decoration: BoxDecoration(
-                            //       color: Color(0xFF4D5390).withOpacity(0.5),
-                            //       borderRadius: BorderRadius.circular(20)),
-                            //   child: Column(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: [
-                            //       Row(children: [
-                            //         Icon(Icons.thumb_up_alt,
-                            //             color: accentOrange),
-                            //         Spacer(),
-                            //         Text("150",
-                            //             style: TextStyle(color: Colors.white))
-                            //       ]),
-                            //       Row(children: [
-                            //         Icon(Icons.star, color: accentOrange),
-                            //         Spacer(),
-                            //         Text("1.2k", style: TextStyle(color: white))
-                            //       ]),
-                            //       Row(children: [
-                            //         Icon(Icons.remove_red_eye_sharp,
-                            //             color: accentOrange),
-                            //         Spacer(),
-                            //         Text("528", style: TextStyle(color: white))
-                            //       ]),
-                            //     ],
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
