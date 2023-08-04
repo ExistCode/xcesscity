@@ -54,23 +54,20 @@ dependencies:
   http: ^1.1.0
 
   firebase_storage: ^11.2.5
-  image_picker: ^1.0.1
-
-  tflite_flutter: ^0.9.0
-  tflite_flutter_helper:
-    git:
-      url: https://github.com/filofan1/tflite_flutter_helper.git
-      ref: 783f15e5a87126159147d8ea30b98eea9207ac70
-dependency_overrides:
-  tflite_flutter: ^0.9.0
-  tflite_flutter_helper:
-    git:
-      url: https://github.com/filofan1/tflite_flutter_helper.git
-      ref: 783f15e5a87126159147d8ea30b98eea9207ac70
-
+  image_picker: ^0.8.6
   geocoding: ^2.1.0
+  tflite_flutter: ^0.9.0
+  tflite_flutter_helper:
+    git:
+      url: https://github.com/filofan1/tflite_flutter_helper.git
+      ref: 783f15e5a87126159147d8ea30b98eea9207ac70
 
-
+dependency overrides:
+  tflite_flutter: ^0.9.0
+  tflite_flutter_helper:
+    git:
+      url: https://github.com/filofan1/tflite_flutter_helper.git
+      ref: 783f15e5a87126159147d8ea30b98eea9207ac70
 
 dev_dependencies:
   flutter_test:
@@ -117,6 +114,8 @@ flutter:
     - lib/assets/images/rex-photo.png
     - lib/assets/images/dogss.png
     - lib/assets/images/cottage.png
+    - assets/labels.txt
+    - assets/model_unquant.tflite
 
   fonts:
     - family: Poppins

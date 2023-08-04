@@ -10,10 +10,10 @@ class PotholePhotoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
-      height: 250,
+      width: 300,
+      height: 300,
       decoration: BoxDecoration(
-          color: custom_colors.backgroundBlack,
+          color: custom_colors.accentOrange.withOpacity(0.9),
           borderRadius: BorderRadius.circular(20)),
       child: (file == null)
           ? _buildEmptyView()

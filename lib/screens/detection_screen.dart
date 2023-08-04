@@ -1,8 +1,10 @@
+import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
+import 'package:xcesscity/models/colors.dart' as custom_colors;
 
 import 'dart:io';
 
@@ -19,21 +21,19 @@ import 'package:image/image.dart' as img;
 import 'package:xcesscity/widgets/crime_map.dart';
 import 'package:xcesscity/widgets/explore_row_category.dart';
 import 'package:xcesscity/widgets/pothole_view.dart';
-import '../classifier/classifier.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../models/colors.dart' as custom_colors;
-import 'package:xcesscity/widgets/crime_map.dart';
+
+import '../classifier/classifier.dart';
 
 const _labelsFileName = 'assets/labels.txt';
 const _modelFileName = 'model_unquant.tflite';
 
-class DetectionScreen extends StatefulWidget {
+class PotholeDetectionScreen extends StatefulWidget {
+  const PotholeDetectionScreen({super.key});
   static const routeName = '/detectionScreen';
-  const DetectionScreen({super.key});
 
   @override
-  State<DetectionScreen> createState() => _DetectionScreenState();
+  State<PotholeDetectionScreen> createState() => _PotholeDetectionScreenState();
 }
 
 enum _ResultStatus {
@@ -42,15 +42,17 @@ enum _ResultStatus {
   found,
 }
 
-class _DetectionScreenState extends State<DetectionScreen> {
+class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
   bool _isAnalyzing = false;
+
   static late String lat;
   static late String long;
+  final picker = ImagePicker();
   File? _selectedImageFile;
-  final imagePicker = ImagePicker();
+
   // Result
   _ResultStatus _resultStatus = _ResultStatus.notStarted;
-  String _potHoleStatus = ''; // Name of Error Message
+  String _plantLabel = ''; // Name of Error Message
   double _accuracy = 0.0;
   double _focus = 0.0;
 
@@ -59,7 +61,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
   @override
   void initState() {
     super.initState();
-    // _loadClassifier();
+    _loadClassifier();
   }
 
   Future<void> _loadClassifier() async {
@@ -83,197 +85,134 @@ class _DetectionScreenState extends State<DetectionScreen> {
       // Handle the error if necessary
     }
   }
-  String stAddress = '';
-  String stTime = '';
-
-  Future<void>? createNewPothole(
-      String title, String lat, String long, DateTime time) {
-    FirebaseFirestore.instance.collection('Pothole').doc().set({
-      "title": title,
-      "lat": lat,
-      "long": long,
-      "reportedDate": time,
-    });
-  }
-
-  Future<Position> _getCurrentLocation() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
-    }
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error('Location permission are permanently denied');
-    }
-    return await Geolocator.getCurrentPosition();
-  }
-
-  Future getImage() async {
-    final image = await imagePicker.pickImage(source: ImageSource.camera);
-    setState(() {
-      _selectedImageFile = File(image!.path);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      width: double.infinity,
-      height: double.infinity,
-      padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 50,
+      appBar: AppBar(
+        bottomOpacity: 0,
+        backgroundColor: custom_colors.backgroundBlack,
+        leading: IconButton(
+          onPressed: () => {Navigator.of(context).pop()},
+          icon: Icon(
+            Icons.keyboard_arrow_left_rounded,
+            size: 35,
+            color: custom_colors.white,
           ),
-          Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () => {Navigator.of(context).pop()},
-                  child: Icon(
-                    Icons.keyboard_arrow_left_rounded,
-                    size: 35,
-                    color: custom_colors.white,
-                  ),
-                ),
-              ]),
-          Container(
-              child: _selectedImageFile == null
-                  ? Container(
-                      width: 300,
-                      height: 420,
-                    )
-                  : Image.file(_selectedImageFile!)),
-          Container(
-            width: 600,
-            height: 90,
-            child: Column(children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(
-                    Icons.document_scanner_outlined,
-                    color: custom_colors.white,
-                  ),
-                  Text(
-                    'Detected : Fight',
-                    style: TextStyle(color: custom_colors.white, fontSize: 12),
-                  ),
-                  Spacer(),
-                  Container(
-                    child: Column(children: [
-                      Text(stAddress,
-                          style: TextStyle(color: custom_colors.white)),
-                      Text(stTime,
-                          style: TextStyle(
-                              color: custom_colors.accentOrange, fontSize: 12)),
-                    ]),
-                  ),
-                ]),
-                width: 500,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: custom_colors.black,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10))),
-              ),
-              GestureDetector(
-                onTap: (() {
-                  sendEmail();
-                }),
-                child: Container(
-                  width: 500,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: custom_colors.secondary,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10))),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Submit',
-                          style: TextStyle(
-                              color: custom_colors.white, fontSize: 18),
-                        )
-                      ]),
-                ),
-              ),
-            ]),
-          ),
-          Container(
-            padding: EdgeInsets.all(40),
-            child: Row(children: [
-              Icon(
-                Icons.dialpad,
-                color: custom_colors.white,
-              ),
-              Spacer(),
-              //Camera Button//
-              GestureDetector(
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: custom_colors.accentOrange,
-                        border:
-                            Border.all(color: custom_colors.white, width: 2)),
-                    child: Icon(
-                      Icons.camera_alt,
-                      color: custom_colors.white,
-                    ),
-                  ),
-                  //This is where it will pass the detected lat/lng when camera btn pressed//
-                  onTap: (() {
-                    _getCurrentLocation().then((value) async {
-                      lat = '${value.latitude}';
-                      long = '${value.longitude}';
-                      createNewPothole("Marker1", lat, long, DateTime.now());
-                      changeToAddress(double.parse(lat), double.parse(long));
-
-                      // Convert//
-
-                      print('Lat:$lat , Long:$long');
-                    });
-                    getImage();
-                  })
-                  // () => {
-
-                  //   //Navigator.of(context).pushNamed(DetectionScreen.routeName)
-                  // },
-                  ),
-              Spacer(),
-              GestureDetector(
-                onTap: () =>
-                    {Navigator.of(context).pushNamed(WriteReport.routeName)},
-                child: Icon(
-                  Icons.folder_outlined,
-                  color: custom_colors.white,
-                ),
-              ),
-            ]),
-          )
-        ],
+        ),
       ),
-    ));
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
+            _buildPhotolView(),
+            SizedBox(height: 20),
+            _buildResultView(),
+            Spacer(flex: 5),
+            _buildPickPhotoButton(
+              title: 'Take a photo',
+              source: ImageSource.camera,
+            ),
+            SizedBox(
+              height: 6,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
+  Widget _buildPhotolView() {
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        PotholePhotoView(file: _selectedImageFile),
+        _buildAnalyzingText(),
+      ],
+    );
+  }
+
+  Widget _buildAnalyzingText() {
+    if (!_isAnalyzing) {
+      return const SizedBox.shrink();
+    }
+    return Text('Analyzing...',
+        style: TextStyle(color: Colors.white, fontSize: 16));
+  }
+
+  Widget _buildTitle() {
+    return Text(
+      'ARCADIA',
+      style: TextStyle(fontSize: 24, color: custom_colors.primaryOrange),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget _buildPickPhotoButton({
+    required ImageSource source,
+    required String title,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(40),
+      child: Row(children: [
+        Icon(
+          Icons.dialpad,
+          color: custom_colors.white,
+        ),
+        Spacer(),
+        //Camera Button//
+        GestureDetector(
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: custom_colors.accentOrange,
+                  border: Border.all(color: custom_colors.white, width: 2)),
+              child: Icon(
+                Icons.camera_alt,
+                color: custom_colors.white,
+              ),
+            ),
+            //This is where it will pass the detected lat/lng when camera btn pressed//
+            onTap: (() {
+              _getCurrentLocation().then((value) async {
+                lat = '${value.latitude}';
+                long = '${value.longitude}';
+                createNewPothole("Marker1", lat, long, DateTime.now());
+                changeToAddress(double.parse(lat), double.parse(long));
+
+                // Convert//
+
+                print('Lat:$lat , Long:$long');
+              });
+              _onPickPhoto(source);
+            })),
+        Spacer(),
+        GestureDetector(
+          onTap: () => {Navigator.of(context).pushNamed(WriteReport.routeName)},
+          child: Icon(
+            Icons.folder_outlined,
+            color: custom_colors.white,
+          ),
+        ),
+      ]),
+    );
+  }
+
+  void _setAnalyzing(bool flag) {
+    setState(() {
+      _isAnalyzing = flag;
+    });
+  }
 
   void _onPickPhoto(ImageSource source) async {
-    final pickedFile = await imagePicker.pickImage(source: source);
+    final pickedFile = await picker.pickImage(source: source);
 
     if (pickedFile == null) {
       return;
@@ -297,7 +236,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
     final result = resultCategory.score >= 0.8
         ? _ResultStatus.found
         : _ResultStatus.notFound;
-    final potHoleStatus = resultCategory.label;
+    final plantLabel = resultCategory.label;
     final focus = resultCategory.score * 0.9;
     final accuracy = resultCategory.score;
 
@@ -305,12 +244,86 @@ class _DetectionScreenState extends State<DetectionScreen> {
 
     setState(() {
       _resultStatus = result;
-      _potHoleStatus = potHoleStatus;
+      _plantLabel = plantLabel;
       _focus = focus;
       _accuracy = accuracy;
     });
   }
 
+  Widget _buildResultView() {
+    var title = '';
+
+    if (_resultStatus == _ResultStatus.notFound) {
+      title = 'Fail to recognise';
+    } else if (_resultStatus == _ResultStatus.found) {
+      title = _plantLabel;
+    } else {
+      title = '';
+    }
+
+    //
+    var accuracyLabel = '';
+    var potholeLabel = '';
+    if (_resultStatus == _ResultStatus.found) {
+      potholeLabel = 'Focus: ${((_focus * 100)).toStringAsFixed(2)}%';
+      accuracyLabel = 'Accuracy: ${((_accuracy * 100)).toStringAsFixed(2)}%';
+    }
+
+    return Container(
+      width: 600,
+      height: 100,
+      child: Column(children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Icon(
+              Icons.document_scanner_outlined,
+              color: custom_colors.white,
+            ),
+            Text(
+              'Detected : ${potholeLabel}',
+              style: TextStyle(color: custom_colors.white, fontSize: 12),
+            ),
+            Spacer(),
+            Container(
+              child: Column(children: [
+                Text(stAddress, style: TextStyle(color: custom_colors.white)),
+                Text(stTime,
+                    style: TextStyle(
+                        color: custom_colors.accentOrange, fontSize: 12)),
+              ]),
+            ),
+          ]),
+          width: 500,
+          height: 50,
+          decoration: BoxDecoration(
+              color: custom_colors.black,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+        ),
+        GestureDetector(
+          onTap: (() {
+            sendEmail();
+          }),
+          child: Container(
+            width: 500,
+            height: 40,
+            decoration: BoxDecoration(
+                color: custom_colors.secondary,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10))),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                'Submit',
+                style: TextStyle(color: custom_colors.white, fontSize: 18),
+              )
+            ]),
+          ),
+        ),
+      ]),
+    );
+  }
 
   void showSnackBar(String text) {
     final snackBar = SnackBar(
@@ -347,7 +360,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
         }));
     showSnackBar('Report sent Successfully!');
     return response.statusCode;
-
+  }
 
   void _liveLocation() {
     LocationSettings locationSettings = const LocationSettings(
@@ -361,7 +374,6 @@ class _DetectionScreenState extends State<DetectionScreen> {
 
       print('Latitude:$lat , Longitude:$long');
     });
-
   }
 
   Future<void> changeToAddress(double lat, double long) async {
@@ -371,27 +383,34 @@ class _DetectionScreenState extends State<DetectionScreen> {
     print("Testing Address: ${stAddress}");
   }
 
-  Widget _buildPhotoView() {
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        PotholePhotoView(file: _selectedImageFile),
-        _buildAnalyzingText(),
-      ],
-    );
-  }
-
-  Widget _buildAnalyzingText() {
-    if (!_isAnalyzing) {
-      return const SizedBox.shrink();
-    }
-    return Text('Analyzing...',
-        style: TextStyle(color: Colors.white, fontSize: 16));
-  }
-
-  void _setAnalyzing(bool flag) {
-    setState(() {
-      _isAnalyzing = flag;
+  Future<void>? createNewPothole(
+      String title, String lat, String long, DateTime time) {
+    FirebaseFirestore.instance.collection('Pothole').doc().set({
+      "title": title,
+      "lat": lat,
+      "long": long,
+      "reportedDate": time,
     });
+  }
+
+  String stAddress = '';
+  String stTime = '';
+
+  Future<Position> _getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled');
+    }
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location permission are permanently denied');
+    }
+    return await Geolocator.getCurrentPosition();
   }
 }
