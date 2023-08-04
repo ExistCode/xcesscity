@@ -113,7 +113,6 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
             _buildPhotolView(),
             SizedBox(height: 20),
             _buildResultView(),
-            Spacer(flex: 5),
             _buildPickPhotoButton(
               title: 'Take a photo',
               source: ImageSource.camera,
@@ -265,7 +264,7 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
     var accuracyLabel = '';
     var potholeLabel = '';
     if (_resultStatus == _ResultStatus.found) {
-      potholeLabel = 'Focus: ${((_focus * 100)).toStringAsFixed(2)}%';
+      potholeLabel = 'Pothole: ${((_focus * 100)).toStringAsFixed(2)}%';
       accuracyLabel = 'Accuracy: ${((_accuracy * 100)).toStringAsFixed(2)}%';
     }
 
