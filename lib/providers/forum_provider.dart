@@ -10,13 +10,25 @@ class ForumProvider with ChangeNotifier {
     FirebaseFirestore.instance.collection('forum').doc().set(
       {
         "authorName": '',
-        "category": '',
+        "userName": '',
         "content": content,
-        'id': '',
-        'publishedDate': '',
-        'title': '',
-        'totalLikes': '',
-        'totalReplies': '',
+        'id': '',        
+        'numOfLikes': '',
+        'numOfReplies': '',
+        'numOfShares': '',
+        'userProfileUrl': '',
+        'imageUrl': '',
+
+
+        // String id;
+        // String authorName;
+        // String userName;
+        // String content;
+        // int numOfLikes;
+        // int numOfReplies;
+        // int numOfShares;
+        // String userProfileUrl;
+        // String imageUrl;
       },
     );
   }

@@ -79,7 +79,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ]),
               ),
               SizedBox(height: 10),
-              Text("Newest Addition",
+              Text("Heritage of Our City",
                   style: TextStyle(
                       color: white, fontWeight: FontWeight.bold, fontSize: 17)),
               SizedBox(height: 10),
