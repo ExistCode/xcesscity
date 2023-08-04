@@ -34,7 +34,7 @@ class _WriteReportState extends State<WriteReport> {
                     GestureDetector(
                         onTap: () => {
                               Navigator.of(context)
-                                  .pop(DetectionScreen.routeName)
+                                  .pop(PotholeDetectionScreen.routeName)
                             },
                         child: Icon(Icons.keyboard_arrow_left_rounded,
                             color: white, size: 50)),
