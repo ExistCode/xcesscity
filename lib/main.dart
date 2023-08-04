@@ -12,6 +12,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
+
 import 'package:xcesscity/screens/restaurant_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
@@ -71,7 +72,8 @@ class MyApp extends StatelessWidget {
             CommunityDetailScreen.routeName: (context) =>
                 CommunityDetailScreen(),
             CreateNewForum.routeName: (context) => CreateNewForum(),
-            DetectionScreen.routeName: (context) => DetectionScreen(),
+            PotholeDetectionScreen.routeName: (context) =>
+                PotholeDetectionScreen(),
             WriteReport.routeName: (context) => WriteReport(),
             RestaurantScreen.routeName: (context) => RestaurantScreen()
           }),
