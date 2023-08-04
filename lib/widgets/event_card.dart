@@ -32,7 +32,7 @@ class _eventsCardState extends State<eventsCard> {
             boxShadow: [
               BoxShadow(
                 color: custom_colors.secondary.withOpacity(0.9),
-                spreadRadius: 2,
+                spreadRadius: 0,
                 blurRadius: 2,
                 offset: Offset(0, 2),
               )

@@ -130,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const Spacer(),
                           FlutterSwitch(
                             activeColor: primaryOrange,
+                            inactiveColor: secondary,
                             width: 60.0,
                             height: 30.0,
                             
