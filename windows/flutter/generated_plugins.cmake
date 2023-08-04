@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_core
   geolocator_windows
   tflite_flutter_helper
+
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
