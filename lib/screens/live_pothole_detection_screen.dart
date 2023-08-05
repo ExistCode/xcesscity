@@ -38,6 +38,23 @@ class _LivePotholeDetectionScreenState
   static late String lat;
   static late String long;
   String stAddress = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getCurrentLocation().then((value) async {
+      lat = '${value.latitude}';
+      long = '${value.longitude}';
+
+      changeToAddress(double.parse(lat), double.parse(long));
+
+      // Convert//
+
+      print('Lat:$lat , Long:$long');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +116,7 @@ class _LivePotholeDetectionScreenState
                 // Convert//
 
                 print('Lat:$lat , Long:$long');
+                print("stAddress: ${stAddress}");
               });
             })),
         Spacer(),
