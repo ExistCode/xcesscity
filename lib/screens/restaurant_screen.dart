@@ -101,13 +101,13 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                           ),
                           color: accentOrange,
                         ),
-                        height: 120,
+                        height: 128,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Dragon-I Peking Duck",
                                 style: TextStyle(
-                                    fontSize: 17,
+                                    fontSize: 16,
                                     color: white,
                                     fontWeight: FontWeight.bold)),
                             Spacer(),
