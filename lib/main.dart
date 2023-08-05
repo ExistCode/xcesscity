@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xcesscity/auth_widget_tree.dart';
@@ -12,6 +13,7 @@ import 'package:xcesscity/screens/emergency_screen.dart';
 import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
+import 'package:xcesscity/screens/live_object_detection.dart';
 import 'package:xcesscity/screens/login_screen.dart';
 
 import 'package:xcesscity/screens/restaurant_screen.dart';
@@ -23,15 +25,19 @@ import 'package:xcesscity/testing_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/question_screen.dart';
 import 'package:xcesscity/screens/welcome_screen.dart';
+import 'package:xcesscity/widgets/camera_view.dart';
 import 'navigation.dart';
 import 'screens/setting_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/firebase_options.dart';
 
+List<CameraDescription>? cameras;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  cameras = await availableCameras();
 
   runApp(const MyApp());
 }
@@ -57,7 +63,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-          home: AuthWidgetTree(),
+          home: CameraView(),
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),
