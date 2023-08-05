@@ -67,6 +67,7 @@ dependencies:
     git:
       url: https://github.com/filofan1/tflite_flutter_helper.git
       ref: 783f15e5a87126159147d8ea30b98eea9207ac70
+  percent_indicator: ^4.2.3
 
 dependency overrides:
   tflite: ^1.0.4

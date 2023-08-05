@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
@@ -47,6 +48,8 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
 
   static late String lat;
   static late String long;
+  String stAddress = '';
+
   final picker = ImagePicker();
   File? _selectedImageFile;
 
@@ -183,8 +186,9 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
               _getCurrentLocation().then((value) async {
                 lat = '${value.latitude}';
                 long = '${value.longitude}';
-                createNewPothole("Marker1", lat, long, DateTime.now());
                 changeToAddress(double.parse(lat), double.parse(long));
+                createNewPothole(
+                    "Marker1", stAddress, lat, long, DateTime.now());
 
                 // Convert//
 
@@ -270,31 +274,36 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
 
     return Container(
       width: 600,
-      height: 100,
       child: Column(children: [
         Container(
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
-          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Icon(
-              Icons.document_scanner_outlined,
-              color: custom_colors.white,
-            ),
-            Text(
-              'Detected : ${potholeLabel}',
-              style: TextStyle(color: custom_colors.white, fontSize: 12),
-            ),
-            Spacer(),
-            Container(
-              child: Column(children: [
-                Text(stAddress, style: TextStyle(color: custom_colors.white)),
-                Text(stTime,
-                    style: TextStyle(
-                        color: custom_colors.accentOrange, fontSize: 12)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(
+                  Icons.document_scanner_outlined,
+                  color: custom_colors.white,
+                ),
+                Text(
+                  'Detected : ${potholeLabel}',
+                  style: TextStyle(color: custom_colors.white, fontSize: 12),
+                ),
+                Spacer(),
               ]),
-            ),
-          ]),
+
+              AutoSizeText(
+                "Located at: $stAddress",
+                style: TextStyle(color: custom_colors.white),
+              ),
+             
+              AutoSizeText("Time: ${DateTime.now().toString()}",
+                  style: TextStyle(
+                      color: custom_colors.accentOrange, fontSize: 12)),
+            ],
+          ),
           width: 500,
-          height: 50,
+          height: 70,
           decoration: BoxDecoration(
               color: custom_colors.black,
               borderRadius: BorderRadius.only(
@@ -302,7 +311,20 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
         ),
         GestureDetector(
           onTap: (() {
-            sendEmail();
+            _getCurrentLocation().then((value) async {
+              lat = '${value.latitude}';
+              long = '${value.longitude}';
+              createNewPothole("Marker1", stAddress, lat, long, DateTime.now());
+              changeToAddress(double.parse(lat), double.parse(long));
+
+              // Convert//
+
+              print('Lat:$lat , Long:$long');
+            });
+
+            changeToAddress(double.parse(lat), double.parse(long));
+            sendEmail(stAddress);
+            print(stAddress);
           }),
           child: Container(
             width: 500,
@@ -338,7 +360,7 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
       ..showSnackBar(snackBar);
   }
 
-  Future sendEmail() async {
+  Future sendEmail(String address) async {
     var url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
     const serviceId = "service_1tcx2fe";
     const templateId = "template_qax32ig";
@@ -353,9 +375,10 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
           "service_id": serviceId,
           "template_id": templateId,
           "user_id": userId,
-          // "template_params": {
-          //   "message": 'The pothole is spotted at LOCATION',
-          // }
+          "template_params": {
+            "date_time": DateTime.now().toString(),
+            "pothole_location": address,
+          }
         }));
     showSnackBar('Report sent Successfully!');
     return response.statusCode;
@@ -375,25 +398,24 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
     });
   }
 
-  Future<void> changeToAddress(double lat, double long) async {
+  Future<String> changeToAddress(double lat, double long) async {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
-    stAddress = placemark.reversed.last.subAdministrativeArea.toString();
-    stTime = DateTime.now().toString();
+    print("Placemark : ${placemark}");
+    stAddress = placemark.reversed.last.thoroughfare.toString();
     print("Testing Address: ${stAddress}");
+    return stAddress;
   }
 
   Future<void>? createNewPothole(
-      String title, String lat, String long, DateTime time) {
+      String title, String address, String lat, String long, DateTime time) {
     FirebaseFirestore.instance.collection('Pothole').doc().set({
       "title": title,
+      "address": address,
       "lat": lat,
       "long": long,
       "reportedDate": time,
     });
   }
-
-  String stAddress = '';
-  String stTime = '';
 
   Future<Position> _getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
