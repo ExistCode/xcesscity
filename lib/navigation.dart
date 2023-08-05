@@ -7,6 +7,7 @@ import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/loading_screen.dart';
+import 'package:xcesscity/screens/setting_screen.dart';
 import 'models/colors.dart';
 
 class Navigation extends StatefulWidget {
@@ -31,7 +32,7 @@ class NavigationState extends State<Navigation> {
     ExploreScreen(),
     EmergencyScreen(),
     ForumScreen(),
-    EventScreen(),
+    SettingScreen(),
   ];
 
   @override

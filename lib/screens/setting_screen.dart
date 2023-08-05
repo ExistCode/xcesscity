@@ -20,7 +20,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(context).pushNamed(Navigation.routeName),
               icon: Icon(Icons.arrow_back_ios_new_outlined)),
           backgroundColor: custom_colors.backgroundBlack,
           title: Text(
