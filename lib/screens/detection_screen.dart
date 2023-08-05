@@ -47,6 +47,8 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
 
   static late String lat;
   static late String long;
+  String stAddress = '';
+
   final picker = ImagePicker();
   File? _selectedImageFile;
 
@@ -183,8 +185,9 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
               _getCurrentLocation().then((value) async {
                 lat = '${value.latitude}';
                 long = '${value.longitude}';
-                createNewPothole("Marker1", lat, long, DateTime.now());
                 changeToAddress(double.parse(lat), double.parse(long));
+                createNewPothole(
+                    "Marker1", stAddress, lat, long, DateTime.now());
 
                 // Convert//
 
@@ -287,7 +290,7 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
             Container(
               child: Column(children: [
                 Text(stAddress, style: TextStyle(color: custom_colors.white)),
-                Text(stTime,
+                Text(DateTime.now().toString(),
                     style: TextStyle(
                         color: custom_colors.accentOrange, fontSize: 12)),
               ]),
@@ -302,7 +305,20 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
         ),
         GestureDetector(
           onTap: (() {
-            sendEmail();
+            _getCurrentLocation().then((value) async {
+              lat = '${value.latitude}';
+              long = '${value.longitude}';
+              createNewPothole("Marker1", stAddress, lat, long, DateTime.now());
+              changeToAddress(double.parse(lat), double.parse(long));
+
+              // Convert//
+
+              print('Lat:$lat , Long:$long');
+            });
+
+            changeToAddress(double.parse(lat), double.parse(long));
+            sendEmail(stAddress);
+            print(stAddress);
           }),
           child: Container(
             width: 500,
@@ -338,7 +354,7 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
       ..showSnackBar(snackBar);
   }
 
-  Future sendEmail() async {
+  Future sendEmail(String address) async {
     var url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
     const serviceId = "service_1tcx2fe";
     const templateId = "template_qax32ig";
@@ -353,9 +369,10 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
           "service_id": serviceId,
           "template_id": templateId,
           "user_id": userId,
-          // "template_params": {
-          //   "message": 'The pothole is spotted at LOCATION',
-          // }
+          "template_params": {
+            "date_time": DateTime.now().toString(),
+            "pothole_location": address,
+          }
         }));
     showSnackBar('Report sent Successfully!');
     return response.statusCode;
@@ -375,25 +392,24 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
     });
   }
 
-  Future<void> changeToAddress(double lat, double long) async {
+  Future<String> changeToAddress(double lat, double long) async {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
-    stAddress = placemark.reversed.last.subAdministrativeArea.toString();
-    stTime = DateTime.now().toString();
+    print("Placemark : ${placemark}");
+    stAddress = placemark.reversed.last.thoroughfare.toString();
     print("Testing Address: ${stAddress}");
+    return stAddress;
   }
 
   Future<void>? createNewPothole(
-      String title, String lat, String long, DateTime time) {
+      String title, String address, String lat, String long, DateTime time) {
     FirebaseFirestore.instance.collection('Pothole').doc().set({
       "title": title,
+      "address": address,
       "lat": lat,
       "long": long,
       "reportedDate": time,
     });
   }
-
-  String stAddress = '';
-  String stTime = '';
 
   Future<Position> _getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();

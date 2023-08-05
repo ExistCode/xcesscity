@@ -64,6 +64,7 @@ class MyApp extends StatelessWidget {
             primaryColor: white,
           ),
           home: AuthWidgetTree(),
+
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),
