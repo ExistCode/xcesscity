@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-
           home: AuthWidgetTree(),
 
           routes: {

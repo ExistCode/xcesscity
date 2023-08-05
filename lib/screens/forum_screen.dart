@@ -60,7 +60,7 @@ class _ForumScreenState extends State<ForumScreen> {
                 children: [
                   ForumTopBar(),
                   Container(
-                    padding:EdgeInsets.only(top: 20),
+                    padding:EdgeInsets.only(top: 20,left:20,right:20),
                           width: double.infinity,
                           height: _provider.forumIdList.length * 200 +
                               _provider.forumIdList.length * 50,
