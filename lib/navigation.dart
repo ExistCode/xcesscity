@@ -32,7 +32,7 @@ class NavigationState extends State<Navigation> {
     ExploreScreen(),
     EmergencyScreen(),
     ForumScreen(),
-    SettingScreen(),
+    EventScreen(),
   ];
 
   @override
