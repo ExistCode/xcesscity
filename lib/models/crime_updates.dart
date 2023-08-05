@@ -1,4 +1,4 @@
-import 'package:xcesscity/widgets/crime_updates.dart';
+/*import 'package:xcesscity/widgets/crime_updates.dart';
 
 class crimeUdpatesModel {
   static final updates = [
@@ -17,3 +17,4 @@ class crimeUpdates {
     required this.updates,
   });
 }
+*/

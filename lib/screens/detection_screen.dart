@@ -47,6 +47,19 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
 
   static late String lat;
   static late String long;
+
+  String stAddress = '';
+
+  Future<void>? createNewPothole(
+      String title, String address, String lat, String long, DateTime time) {
+    FirebaseFirestore.instance.collection('Pothole').doc().set({
+      "title": title,
+      "address": address,
+      "lat": lat,
+      "long": long,
+      "reportedDate": time,
+    });
+
   final picker = ImagePicker();
   File? _selectedImageFile;
 
@@ -291,6 +304,121 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
                     style: TextStyle(
                         color: custom_colors.accentOrange, fontSize: 12)),
               ]),
+          Container(
+              child: imageFile == null
+                  ? Container(
+                      width: 300,
+                      height: 420,
+                    )
+                  : Image.file(imageFile!)),
+          Container(
+            width: 600,
+            height: 90,
+            child: Column(children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(
+                    Icons.document_scanner_outlined,
+                    color: custom_colors.white,
+                  ),
+                  Text(
+                    'Detected : Fight',
+                    style: TextStyle(color: custom_colors.white, fontSize: 12),
+                  ),
+                  Spacer(),
+                  Container(
+                    child: Column(children: [
+                      Text(stAddress,
+                          style: TextStyle(color: custom_colors.white)),
+                      Text(DateTime.now().toString(),
+                          style: TextStyle(
+                              color: custom_colors.accentOrange, fontSize: 12)),
+                    ]),
+                  ),
+                ]),
+                width: 500,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: custom_colors.black,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10))),
+              ),
+              Container(
+                width: 500,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: custom_colors.secondary,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    'Submit',
+                    style: TextStyle(color: custom_colors.white, fontSize: 18),
+                  )
+                ]),
+              ),
+            ]),
+          ),
+          Container(
+            padding: EdgeInsets.all(40),
+            child: Row(children: [
+              Icon(
+                Icons.dialpad,
+                color: custom_colors.white,
+              ),
+              Spacer(),
+              //Camera Button//
+              GestureDetector(
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: custom_colors.accentOrange,
+                        border:
+                            Border.all(color: custom_colors.white, width: 2)),
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: custom_colors.white,
+                    ),
+                  ),
+                  //This is where it will pass the detected lat/lng when camera btn pressed//
+                  onTap: (() {
+                    _getCurrentLocation().then((value) async {
+                      lat = '${value.latitude}';
+                      long = '${value.longitude}';
+                      changeToAddress(double.parse(lat), double.parse(long));
+                      createNewPothole(
+                          "Marker1", stAddress, lat, long, DateTime.now());
+
+                      // Convert//
+
+                      print('Lat:$lat , Long:$long');
+                    });
+                    getImage();
+                  })
+                  // () => {
+
+                  //   //Navigator.of(context).pushNamed(DetectionScreen.routeName)
+                  // },
+                  ),
+              Spacer(),
+              GestureDetector(
+                onTap: () =>
+                    {Navigator.of(context).pushNamed(WriteReport.routeName)},
+                child: Icon(
+                  Icons.folder_outlined,
+                  color: custom_colors.white,
+                ),
+              ),
+            ]),
+          )
+        ],
             ),
           ]),
           width: 500,
@@ -329,6 +457,7 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
       content: Text(
         text,
         style: TextStyle(fontSize: 20),
+
       ),
       backgroundColor: Colors.green[400],
     );
@@ -375,11 +504,11 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
     });
   }
 
-  Future<void> changeToAddress(double lat, double long) async {
+  Future<String> changeToAddress(double lat, double long) async {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
-    stAddress = placemark.reversed.last.subAdministrativeArea.toString();
-    stTime = DateTime.now().toString();
+    stAddress = placemark.reversed.last.subLocality.toString();
     print("Testing Address: ${stAddress}");
+    return stAddress;
   }
 
   Future<void>? createNewPothole(
