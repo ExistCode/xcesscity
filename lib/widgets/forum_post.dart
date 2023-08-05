@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import '../models/colors.dart';
 
 class ForumPost extends StatelessWidget {
-  const ForumPost({super.key});
+  String authorName;
+  String userName;
+  String content;
+
+  ForumPost(this.authorName, this.userName, this.content);
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +32,19 @@ class ForumPost extends StatelessWidget {
                 height: 50,
                 width: 50,
                 decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: accentOrange),
+                    BoxDecoration(shape: BoxShape.circle,),
+                    child:Icon(Icons.account_circle_rounded, size:50, color:Colors.grey)
               ),
               SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Name",
+                    authorName,
                     style: TextStyle(color: white),
                   ),
                   Text(
-                    "@UserName",
+                    "${userName}",
                     style: TextStyle(color: white),
                   )
                 ],
@@ -48,10 +53,10 @@ class ForumPost extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            "Someone hit my car and ran at Taylor’s Nania, that guy driving 1920 Bugatti Chiron, plate number BNC8888, bad guy +1. Help me find him and be beat him up. 👊 👊 ",
+            content,
             style: TextStyle(color: white),
           ),
-          SizedBox(height:20),
+          SizedBox(height: 20),
           Row(
             children: [
               Icon(Icons.thumb_up_alt, color: white),

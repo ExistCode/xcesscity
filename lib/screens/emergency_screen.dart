@@ -170,7 +170,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () => Navigator.of(context)
-                          .pushNamed(DetectionScreen.routeName),
+                          .pushNamed(PotholeDetectionScreen.routeName),
                       child: Container(
                         width: 350,
                         height: 35,

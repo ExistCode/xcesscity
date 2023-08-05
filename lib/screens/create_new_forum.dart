@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/widgets/create_new_forum_category.dart';
 
 import '../models/colors.dart';
+import '../models/forum_model.dart';
+import '../models/user_model.dart';
+import '../providers/forum_provider.dart';
+import '../providers/user_provider.dart';
 
 class CreateNewForum extends StatefulWidget {
   const CreateNewForum({super.key});
@@ -10,10 +16,28 @@ class CreateNewForum extends StatefulWidget {
   State<CreateNewForum> createState() => _CreateNewForumState();
 }
 
+
 class _CreateNewForumState extends State<CreateNewForum> {
   TextEditingController postController = TextEditingController();
+
+    
+
   @override
   Widget build(BuildContext context) {
+    var _provider = Provider.of<ForumProvider>(context, listen: false);
+    UserModel currentUser =
+        Provider.of<UserProvider>(context, listen: false).userProviderData;
+    ForumModel _loadedForum = ForumModel(
+          id: "",
+          authorName: currentUser.name,
+          userName: currentUser.userName,          
+          content: postController.text,
+          numOfLikes: 0,
+          numOfShares: 0,
+          numOfReplies: 0,
+          userProfileUrl: "",
+          imageUrl: "",
+        );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -70,18 +94,19 @@ class _CreateNewForumState extends State<CreateNewForum> {
                     height: 60,
                     width: 60,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: accentOrange),
+                        shape: BoxShape.circle, ),
+                        child:Icon(Icons.account_circle_rounded,color:Colors.grey,size:60)
                   ),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Name",
+                        currentUser.name,
                         style: TextStyle(color: white),
                       ),
                       Text(
-                        "@UserName",
+                        "@${currentUser.userName}",
                         style: TextStyle(color: white.withOpacity(0.5)),
                       ),
                     ],
@@ -119,25 +144,34 @@ class _CreateNewForumState extends State<CreateNewForum> {
                       CreateNewForumCategory(
                           Icons.diversity_1_rounded, "Community"),
                       SizedBox(height: 20),
-                      Container(
-                        alignment: Alignment.center,
-                        width: 225,
-                        height: 55,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: black.withOpacity(0.7),
-                                spreadRadius: 1,
-                                blurRadius: 5,
-                                ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: white,
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                             _provider.loadedForumList.add(_loadedForum);
+
+                             Navigator.of(context).pop();
+                          });           
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 225,
+                          height: 55,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: black.withOpacity(0.7),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  ),
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            color: white,
+                          ),
+                          child: Text("Post",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: accentOrange)),
                         ),
-                        child: Text("Post",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: accentOrange)),
                       ),
                     ],
                   )),
