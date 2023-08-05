@@ -16,8 +16,9 @@ class _ReadListViewState extends State<ReadListView> {
       FirebaseFirestore.instance.collection("Pothole").snapshots();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder(
+    return Container(
+      padding:EdgeInsets.only(left:5),
+      child: StreamBuilder(
         stream: _userStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -64,7 +65,7 @@ class _ReadListViewState extends State<ReadListView> {
                             Expanded(
                               child: Container(
                                 width: 4,
-                                color: custom_colors.backgroundBlack,
+                                color: custom_colors.white,
                               ),
                             )
                           ]),
