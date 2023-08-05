@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
@@ -273,31 +274,36 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
 
     return Container(
       width: 600,
-      height: 100,
       child: Column(children: [
         Container(
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
-          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Icon(
-              Icons.document_scanner_outlined,
-              color: custom_colors.white,
-            ),
-            Text(
-              'Detected : ${potholeLabel}',
-              style: TextStyle(color: custom_colors.white, fontSize: 12),
-            ),
-            Spacer(),
-            Container(
-              child: Column(children: [
-                Text(stAddress, style: TextStyle(color: custom_colors.white)),
-                Text(DateTime.now().toString(),
-                    style: TextStyle(
-                        color: custom_colors.accentOrange, fontSize: 12)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(
+                  Icons.document_scanner_outlined,
+                  color: custom_colors.white,
+                ),
+                Text(
+                  'Detected : ${potholeLabel}',
+                  style: TextStyle(color: custom_colors.white, fontSize: 12),
+                ),
+                Spacer(),
               ]),
-            ),
-          ]),
+
+              AutoSizeText(
+                "Located at: $stAddress",
+                style: TextStyle(color: custom_colors.white),
+              ),
+             
+              AutoSizeText("Time: ${DateTime.now().toString()}",
+                  style: TextStyle(
+                      color: custom_colors.accentOrange, fontSize: 12)),
+            ],
+          ),
           width: 500,
-          height: 50,
+          height: 70,
           decoration: BoxDecoration(
               color: custom_colors.black,
               borderRadius: BorderRadius.only(
