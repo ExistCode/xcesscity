@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-          home: CameraView(),
+          home: AuthWidgetTree(),
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),

@@ -35,7 +35,7 @@ class _SettingScreenState extends State<SettingScreen> {
           child: Container(
             width: double.infinity,
             child: Column(children: [
-              TopBanner(300, 'lib/assets/images/banner.png', 'Edit Banner'),
+              TopBanner(300, AssetImage('lib/assets/images/banner.png'), 'Edit Banner'),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 height: 200,
