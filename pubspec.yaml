@@ -114,6 +114,7 @@ flutter:
     - lib/assets/images/cottage.png
     - assets/labels.txt
     - assets/model_unquant.tflite
+    - lib/assets/images/mockMaprewardPage.png
 
   fonts:
     - family: Poppins
