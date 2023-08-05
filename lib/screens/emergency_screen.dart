@@ -9,6 +9,7 @@ import 'package:xcesscity/models/crime_updates.dart';
 import 'package:xcesscity/providers/location_provider.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
 import 'package:xcesscity/screens/detection_screen.dart';
+import 'package:xcesscity/screens/live_pothole_detection_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/widgets/crime_map.dart';
 import 'package:xcesscity/widgets/crime_updates.dart';
@@ -145,7 +146,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       clipBehavior: Clip.hardEdge,
-                      child: MapSample(),
+                      child: CrimeMap(),
                     ),
                     SizedBox(height: 20),
                     Text(
@@ -170,7 +171,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () => Navigator.of(context)
-                          .pushNamed(PotholeDetectionScreen.routeName),
+                          .pushNamed(LivePotholeDetectionScreen.routeName),
                       child: Container(
                         width: 350,
                         height: 35,

@@ -10,8 +10,9 @@ class LocationProvider with ChangeNotifier {
   List<PotholeReportModel> loadedPotholeReported = [];
 
   Future<void>? createNewPothole(
-      String title, String lat, String long, DateTime time) {
+      String title, String address, String lat, String long, DateTime time) {
     FirebaseFirestore.instance.collection('Pothole').doc().set({
+      "address": address,
       "title": title,
       "lat": lat,
       "long": long,
@@ -57,6 +58,7 @@ class LocationProvider with ChangeNotifier {
           latitude: snapshot.data()!['lat'],
           longitude: snapshot.data()!['long'],
           potholeReportDate: DateTime.now(),
+          address: snapshot.data()!['address'],
         );
         loadedPotholeReported.add(loadedPothole);
         print('fetched ${snapshot.data()!['title']}');

@@ -32,20 +32,21 @@ class _EventScreenState extends State<EventScreen> {
               alignment: Alignment.centerLeft,
               width: double.infinity,
               height: 100,
-              padding:EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                   color: primaryOrange,
                   borderRadius: BorderRadius.circular(20)),
-                  child:Row(children: [
-              Text("POTHOLE HUNTER",
-                  style: TextStyle(
-                      fontSize: 20, color: white, fontWeight: FontWeight.bold)),
-              const SizedBox(width: 10),
-              Icon(Icons.location_pin, color: white, size: 20)
-            ]),
+              child: Row(children: [
+                Text("POTHOLE HUNTER",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: white,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(width: 10),
+                Icon(Icons.location_pin, color: white, size: 20)
+              ]),
             ),
-            
-            const SizedBox(height: 20),                                              
+            const SizedBox(height: 20),
             Text("You have reported 520 potholes",
                 style: TextStyle(
                     color: white, fontWeight: FontWeight.bold, fontSize: 20)),
@@ -58,7 +59,7 @@ class _EventScreenState extends State<EventScreen> {
                   borderRadius: BorderRadius.circular(14),
                   // border:Border.all(width: 1)
                 ),
-                child: MapSample()),
+                child: CrimeMap()),
             const SizedBox(
               height: 10,
             ),
@@ -82,17 +83,22 @@ class _EventScreenState extends State<EventScreen> {
                       fontWeight: FontWeight.normal),
                 ),
               ],
-            ),            
+            ),
             const SizedBox(height: 50),
-            
             new CircularPercentIndicator(
-                  radius: 60.0,
-                  lineWidth: 10.0,
-                  percent: 237.0/520,                
-                  progressColor: accentOrange,
-                ),
-                SizedBox(height: 20,),
-            Text("237 / 520 Potholes Has Been fixed",style: TextStyle(fontWeight: FontWeight.bold,fontSize:20,color:white),),
+              radius: 60.0,
+              lineWidth: 10.0,
+              percent: 237.0 / 520,
+              progressColor: accentOrange,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "237 / 520 Potholes Has Been fixed",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: white),
+            ),
           ],
         ),
       ),

@@ -1,14 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:xcesscity/models/colors.dart' as custom_colors;
+import 'package:xcesscity/screens/write_report_screen.dart';
+import 'package:xcesscity/widgets/camera_view.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
-import 'package:xcesscity/models/colors.dart' as custom_colors;
-
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -24,141 +24,47 @@ import 'package:xcesscity/widgets/explore_row_category.dart';
 import 'package:xcesscity/widgets/pothole_view.dart';
 import 'package:http/http.dart' as http;
 
-import '../classifier/classifier.dart';
-
-const _labelsFileName = 'assets/labels.txt';
-const _modelFileName = 'model_unquant.tflite';
-
-class PotholeDetectionScreen extends StatefulWidget {
-  const PotholeDetectionScreen({super.key});
-  static const routeName = '/detectionScreen';
+class LivePotholeDetectionScreen extends StatefulWidget {
+  static const routeName = '/live-pothole-detection';
+  const LivePotholeDetectionScreen({super.key});
 
   @override
-  State<PotholeDetectionScreen> createState() => _PotholeDetectionScreenState();
+  State<LivePotholeDetectionScreen> createState() =>
+      _LivePotholeDetectionScreenState();
 }
 
-enum _ResultStatus {
-  notStarted,
-  notFound,
-  found,
-}
-
-class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
-  bool _isAnalyzing = false;
-
+class _LivePotholeDetectionScreenState
+    extends State<LivePotholeDetectionScreen> {
   static late String lat;
   static late String long;
   String stAddress = '';
-
-  final picker = ImagePicker();
-  File? _selectedImageFile;
-
-  // Result
-  _ResultStatus _resultStatus = _ResultStatus.notStarted;
-  String _plantLabel = ''; // Name of Error Message
-  double _accuracy = 0.0;
-  double _focus = 0.0;
-
-  late Classifier _classifier;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadClassifier();
-  }
-
-  Future<void> _loadClassifier() async {
-    debugPrint(
-      'Start loading of Classifier with '
-      'labels at $_labelsFileName, '
-      'model at $_modelFileName',
-    );
-
-    final classifier = await Classifier.loadWith(
-      labelsFileName: _labelsFileName,
-      modelFileName: _modelFileName,
-    );
-
-    if (classifier != null) {
-      setState(() {
-        _classifier = classifier;
-      });
-    } else {
-      debugPrint('Failed to load classifier');
-      // Handle the error if necessary
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        bottomOpacity: 0,
         backgroundColor: custom_colors.backgroundBlack,
         leading: IconButton(
-          onPressed: () => {Navigator.of(context).pop()},
-          icon: Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: 35,
-            color: custom_colors.white,
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(Icons.arrow_back_ios_new_outlined)),
+      ),
+      body: Stack(children: [
+        CameraView(),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            height: 320,
+            width: double.infinity,
+            decoration: BoxDecoration(color: custom_colors.backgroundBlack),
+            child:
+                Column(children: [_buildResultView(), _buildPickPhotoButton()]),
           ),
-        ),
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
-            _buildPhotolView(),
-            SizedBox(height: 20),
-            _buildResultView(),
-            _buildPickPhotoButton(
-              title: 'Take a photo',
-              source: ImageSource.camera,
-            ),
-            SizedBox(
-              height: 6,
-            ),
-          ],
-        ),
-      ),
+        )
+      ]),
     );
   }
 
-  Widget _buildPhotolView() {
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        PotholePhotoView(file: _selectedImageFile),
-        _buildAnalyzingText(),
-      ],
-    );
-  }
-
-  Widget _buildAnalyzingText() {
-    if (!_isAnalyzing) {
-      return const SizedBox.shrink();
-    }
-    return Text('Analyzing...',
-        style: TextStyle(color: Colors.white, fontSize: 16));
-  }
-
-  Widget _buildTitle() {
-    return Text(
-      'ARCADIA',
-      style: TextStyle(fontSize: 24, color: custom_colors.primaryOrange),
-      textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _buildPickPhotoButton({
-    required ImageSource source,
-    required String title,
-  }) {
+  Widget _buildPickPhotoButton() {
     return Container(
       padding: EdgeInsets.all(40),
       child: Row(children: [
@@ -194,7 +100,6 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
 
                 print('Lat:$lat , Long:$long');
               });
-              _onPickPhoto(source);
             })),
         Spacer(),
         GestureDetector(
@@ -208,96 +113,40 @@ class _PotholeDetectionScreenState extends State<PotholeDetectionScreen> {
     );
   }
 
-  void _setAnalyzing(bool flag) {
-    setState(() {
-      _isAnalyzing = flag;
-    });
-  }
-
-  void _onPickPhoto(ImageSource source) async {
-    final pickedFile = await picker.pickImage(source: source);
-
-    if (pickedFile == null) {
-      return;
-    }
-
-    final imageFile = File(pickedFile.path);
-    setState(() {
-      _selectedImageFile = imageFile;
-    });
-
-    _analyzeImage(imageFile);
-  }
-
-  void _analyzeImage(File image) {
-    _setAnalyzing(true);
-
-    final imageInput = img.decodeImage(image.readAsBytesSync())!;
-
-    final resultCategory = _classifier.predict(imageInput);
-
-    final result = resultCategory.score >= 0.8
-        ? _ResultStatus.found
-        : _ResultStatus.notFound;
-    final plantLabel = resultCategory.label;
-    final focus = resultCategory.score * 0.9;
-    final accuracy = resultCategory.score;
-
-    _setAnalyzing(false);
-
-    setState(() {
-      _resultStatus = result;
-      _plantLabel = plantLabel;
-      _focus = focus;
-      _accuracy = accuracy;
-    });
-  }
-
   Widget _buildResultView() {
-    var title = '';
+    // var title = '';
 
-    if (_resultStatus == _ResultStatus.notFound) {
-      title = 'Fail to recognise';
-    } else if (_resultStatus == _ResultStatus.found) {
-      title = _plantLabel;
-    } else {
-      title = '';
-    }
+    // if (_resultStatus == _ResultStatus.notFound) {
+    //   title = 'Fail to recognise';
+    // } else if (_resultStatus == _ResultStatus.found) {
+    //   title = _plantLabel;
+    // } else {
+    //   title = '';
+    // }
 
-    //
-    var accuracyLabel = '';
-    var potholeLabel = '';
-    if (_resultStatus == _ResultStatus.found) {
-      potholeLabel = 'Pothole: ${((_focus * 100)).toStringAsFixed(2)}%';
-      accuracyLabel = 'Accuracy: ${((_accuracy * 100)).toStringAsFixed(2)}%';
-    }
+    // //
+    // var accuracyLabel = '';
+    // var potholeLabel = '';
+    // if (_resultStatus == _ResultStatus.found) {
+    //   potholeLabel = 'Pothole: ${((_focus * 100)).toStringAsFixed(2)}%';
+    //   accuracyLabel = 'Accuracy: ${((_accuracy * 100)).toStringAsFixed(2)}%';
+    // }
 
     return Container(
       width: 600,
       child: Column(children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(
-                  Icons.document_scanner_outlined,
-                  color: custom_colors.white,
-                ),
-                Text(
-                  'Detected : ${potholeLabel}',
-                  style: TextStyle(color: custom_colors.white, fontSize: 12),
-                ),
-                Spacer(),
-              ]),
               AutoSizeText(
-                "Located at: $stAddress",
+                "Located at: ${stAddress}",
                 style: TextStyle(color: custom_colors.white),
               ),
-              AutoSizeText("Time: ${DateTime.now().toString()}",
+              Text("Time: ${DateTime.now().toString()}",
                   style: TextStyle(
-                      color: custom_colors.accentOrange, fontSize: 12)),
+                      color: custom_colors.accentOrange, fontSize: 13)),
             ],
           ),
           width: 500,

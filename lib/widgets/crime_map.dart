@@ -11,12 +11,12 @@ import '../providers/location_provider.dart';
 
 String mapTheme = '';
 
-class MapSample extends StatefulWidget {
+class CrimeMap extends StatefulWidget {
   @override
-  _MapSampleState createState() => _MapSampleState();
+  _CrimeMapState createState() => _CrimeMapState();
 }
 
-class _MapSampleState extends State<MapSample> {
+class _CrimeMapState extends State<CrimeMap> {
   bool _isLoading = true;
   double _currentLatitude = 0;
   double _currentLongitude = 0;
@@ -122,7 +122,7 @@ class _MapSampleState extends State<MapSample> {
   _setMarker(String title, double lat, double long) {
     return Marker(
         markerId: MarkerId(title),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
         position: LatLng(lat, long));
   }
 }
