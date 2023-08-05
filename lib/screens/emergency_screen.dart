@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:xcesscity/firebase/readistview.dart';
 import 'package:xcesscity/models/crime_updates.dart';
 import 'package:xcesscity/providers/location_provider.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
@@ -13,7 +15,6 @@ import 'package:xcesscity/widgets/crime_updates.dart';
 import 'package:xcesscity/widgets/explore_row_category.dart';
 import '../models/colors.dart' as custom_colors;
 import '../navigation.dart';
-
 import '../models/colors.dart';
 
 class EmergencyScreen extends StatefulWidget {
@@ -48,8 +49,8 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
   @override
   Widget build(BuildContext context) {
     //Create dummylist first...//
-    final dummyList = List.generate(3, (index) => crimeUdpatesModel.updates[0]);
-    var _provider = Provider.of<LocationProvider>(context, listen: false);
+    //final dummyList = List.generate(3, (index) => crimeUdpatesModel.updates[0]);
+    //var _provider = Provider.of<LocationProvider>(context, listen: false);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -164,12 +165,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         color: secondary,
                       ),
                       width: double.infinity,
-                      child: ListView.builder(
-                          itemCount: dummyList.length,
-                          itemBuilder: (context, index) {
-                            return crimeUpdateWidget(
-                                crimeupdates: dummyList[index]);
-                          }),
+                      child: ReadListView(),
                     ),
                     SizedBox(height: 20),
                     GestureDetector(

@@ -25,12 +25,12 @@ class _DetectionScreenState extends State<DetectionScreen> {
   static late String lat;
   static late String long;
   String stAddress = '';
-  String stTime = '';
 
   Future<void>? createNewPothole(
-      String title, String lat, String long, DateTime time) {
+      String title, String address, String lat, String long, DateTime time) {
     FirebaseFirestore.instance.collection('Pothole').doc().set({
       "title": title,
+      "address": address,
       "lat": lat,
       "long": long,
       "reportedDate": time,
@@ -125,7 +125,7 @@ class _DetectionScreenState extends State<DetectionScreen> {
                     child: Column(children: [
                       Text(stAddress,
                           style: TextStyle(color: custom_colors.white)),
-                      Text(stTime,
+                      Text(DateTime.now().toString(),
                           style: TextStyle(
                               color: custom_colors.accentOrange, fontSize: 12)),
                     ]),
@@ -185,8 +185,9 @@ class _DetectionScreenState extends State<DetectionScreen> {
                     _getCurrentLocation().then((value) async {
                       lat = '${value.latitude}';
                       long = '${value.longitude}';
-                      createNewPothole("Marker1", lat, long, DateTime.now());
                       changeToAddress(double.parse(lat), double.parse(long));
+                      createNewPothole(
+                          "Marker1", stAddress, lat, long, DateTime.now());
 
                       // Convert//
 
@@ -229,10 +230,10 @@ class _DetectionScreenState extends State<DetectionScreen> {
     });
   }
 
-  Future<void> changeToAddress(double lat, double long) async {
+  Future<String> changeToAddress(double lat, double long) async {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
-    stAddress = placemark.reversed.last.subAdministrativeArea.toString();
-    stTime = DateTime.now().toString();
+    stAddress = placemark.reversed.last.subLocality.toString();
     print("Testing Address: ${stAddress}");
+    return stAddress;
   }
 }

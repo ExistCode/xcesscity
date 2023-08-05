@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: backgroundBlack,
             primaryColor: white,
           ),
-          home: DetectionScreen(),
+          home: EmergencyScreen(),
           routes: {
             QuestionScreen.routeName: (context) => QuestionScreen(),
             SettingScreen.routeName: (context) => SettingScreen(),

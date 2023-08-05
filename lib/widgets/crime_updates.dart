@@ -3,9 +3,7 @@ import 'package:xcesscity/models/crime_updates.dart';
 import '../models/colors.dart' as custom_colors;
 
 class crimeUpdateWidget extends StatelessWidget {
-  final crimeUpdates crimeupdates;
-
-  const crimeUpdateWidget({super.key, required this.crimeupdates});
+  const crimeUpdateWidget({super.key});
 
   Widget build(BuildContext context) {
     return Container(
@@ -56,7 +54,7 @@ class crimeUpdateWidget extends StatelessWidget {
                   width: 8,
                 ),
                 // Text
-                Container(
+                /*Container(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -71,7 +69,6 @@ class crimeUpdateWidget extends StatelessWidget {
                         Container(
                           width: 310,
                           child: Text(
-                            crimeupdates.updates,
                             style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontSize: 16,
@@ -79,7 +76,7 @@ class crimeUpdateWidget extends StatelessWidget {
                           ),
                         )
                       ]),
-                )
+                )*/
               ]),
             ),
           ],
