@@ -17,7 +17,7 @@ class _ReadListViewState extends State<ReadListView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:EdgeInsets.only(left:5),
+      padding: EdgeInsets.only(left: 8, right: 8),
       child: StreamBuilder(
         stream: _userStream,
         builder: (context, snapshot) {
@@ -46,8 +46,8 @@ class _ReadListViewState extends State<ReadListView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              height: 20,
-                              width: 20,
+                              height: 16,
+                              width: 16,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: custom_colors.accentOrange,
@@ -79,7 +79,8 @@ class _ReadListViewState extends State<ReadListView> {
                           children: [
                             Text(
                               'There is a pothole at ${docs[index]['address']} \n at ${docs[index]['reportedDate'].toDate()} ',
-                              style: TextStyle(color: custom_colors.white),
+                              style: TextStyle(
+                                  fontSize: 12.5, color: custom_colors.white),
                             ),
                           ]),
                     )

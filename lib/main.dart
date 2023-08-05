@@ -14,6 +14,7 @@ import 'package:xcesscity/screens/event_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/live_object_detection.dart';
+import 'package:xcesscity/screens/live_pothole_detection_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
 
 import 'package:xcesscity/screens/restaurant_screen.dart';
@@ -83,7 +84,9 @@ class MyApp extends StatelessWidget {
             PotholeDetectionScreen.routeName: (context) =>
                 PotholeDetectionScreen(),
             WriteReport.routeName: (context) => WriteReport(),
-            RestaurantScreen.routeName: (context) => RestaurantScreen()
+            RestaurantScreen.routeName: (context) => RestaurantScreen(),
+            LivePotholeDetectionScreen.routeName: (context) =>
+                LivePotholeDetectionScreen(),
           }),
     );
   }

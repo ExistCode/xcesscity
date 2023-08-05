@@ -27,7 +27,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 child: Row(
                   children: [
                     GestureDetector(
-                      onTap: ()=>{Navigator.of(context).pop()},
+                      onTap: () => {Navigator.of(context).pop()},
                       child: Icon(Icons.keyboard_arrow_left_rounded,
                           color: white, size: 50),
                     ),
@@ -66,7 +66,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 clipBehavior: Clip.hardEdge,
-                child: MapSample(),
+                child: CrimeMap(),
               ),
               SizedBox(height: 40),
               Container(
