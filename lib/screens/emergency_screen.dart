@@ -1,19 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:xcesscity/firebase/readistview.dart';
-import 'package:xcesscity/models/crime_updates.dart';
 import 'package:xcesscity/providers/location_provider.dart';
-import 'package:xcesscity/screens/create_new_forum.dart';
-import 'package:xcesscity/screens/detection_screen.dart';
 import 'package:xcesscity/screens/live_pothole_detection_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
-import 'package:xcesscity/widgets/crime_map.dart';
-import 'package:xcesscity/widgets/crime_updates.dart';
-import 'package:xcesscity/widgets/explore_row_category.dart';
+import 'package:xcesscity/widgets/pothole_map_card.dart';
 import '../models/colors.dart' as custom_colors;
 import '../navigation.dart';
 import '../models/colors.dart';
@@ -112,13 +103,13 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                             ]),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         GestureDetector(
                           onTap: () => Navigator.of(context)
                               .pushNamed(RulesPolicy.routeName),
                           child: Container(
                             child: Row(children: [
-                              Icon(
+                              const Icon(
                                 Icons.flag,
                                 size: 18,
                                 color: Colors.red,
@@ -139,16 +130,16 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                     Container(
                       height: 310,
                       width: double.infinity,
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: 8,
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                       ),
                       clipBehavior: Clip.hardEdge,
-                      child: CrimeMap(),
+                      child: PotholeMap(),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       "Pothole Alert",
                       style: TextStyle(
@@ -157,7 +148,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     Container(
                       height: 230,
@@ -166,9 +157,9 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                         color: secondary,
                       ),
                       width: double.infinity,
-                      child: ReadListView(),
+                      child: const ReadListView(),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () => Navigator.of(context)
                           .pushNamed(LivePotholeDetectionScreen.routeName),

@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:xcesscity/widgets/crime_updates.dart';
-import 'package:xcesscity/widgets/crime_updates_card.dart';
 import '../models/colors.dart' as custom_colors;
 
 class ReadListView extends StatefulWidget {

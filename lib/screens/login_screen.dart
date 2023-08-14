@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             suffixIcon: IconButton(
-                              icon: Icon(Icons.remove_red_eye_outlined),
+                              icon: const Icon(Icons.remove_red_eye_outlined),
                               color:
                                   custom_colors.primaryOrange.withOpacity(0.8),
                               onPressed: () {},
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             hintText: "Password...",
                             fillColor: custom_colors.white),
                       ),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                       Row(
                         children: [
                           Text(
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             inactiveColor: secondary,
                             width: 60.0,
                             height: 30.0,
-                            
+
                             toggleSize: 25.0,
                             value: status,
                             borderRadius: 30.0,
@@ -194,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           )),
                         ),
                       ),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                       Center(
                         child: Text(
                           " OR",
@@ -203,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           )),
                         ),
                       ),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                       Container(
                         width: double.infinity,
                         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -213,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  gradient: SweepGradient(
+                                  gradient: const SweepGradient(
                                     colors: [
                                       Color.fromRGBO(246, 0, 0, 1),
                                       Color.fromRGBO(255, 215, 83, 1),
@@ -227,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Container(
                                   width: double.infinity,
                                   height: 40,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                     color: white,
                                     borderRadius: BorderRadius.circular(20),
@@ -239,8 +239,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         Container(
                                           height: 40.0,
                                           width: 40.0,
-                                          decoration: BoxDecoration(
-                                            image: const DecorationImage(
+                                          decoration: const BoxDecoration(
+                                            image: DecorationImage(
                                                 image: AssetImage(
                                                     "lib/assets/images/googleicon.png"),
                                                 fit: BoxFit.cover),

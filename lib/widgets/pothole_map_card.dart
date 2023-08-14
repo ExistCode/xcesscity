@@ -4,19 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:xcesscity/screens/detection_screen.dart';
 import 'package:xcesscity/screens/loading_screen.dart';
 
 import '../providers/location_provider.dart';
 
 String mapTheme = '';
 
-class CrimeMap extends StatefulWidget {
+class PotholeMap extends StatefulWidget {
   @override
-  _CrimeMapState createState() => _CrimeMapState();
+  _PotholeMapState createState() => _PotholeMapState();
 }
 
-class _CrimeMapState extends State<CrimeMap> {
+class _PotholeMapState extends State<PotholeMap> {
   bool _isLoading = true;
   double _currentLatitude = 0;
   double _currentLongitude = 0;

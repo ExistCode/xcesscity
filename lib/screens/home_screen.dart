@@ -1,20 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/screens/setting_screen.dart';
 import 'package:xcesscity/widgets/top_banner.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import '../models/colors.dart' as custom_colors;
 import '../models/user_model.dart';
 import '../navigation.dart';
 import '../providers/user_provider.dart';
-import '../widgets/explore_main_card.dart';
-import 'loading_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,27 +21,15 @@ BottomNavigationBar get navigationBar {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // bool _isLoading = false;
-  // @override
-  // void initState() {
-  //   var _userProvider =
-  //       Provider.of<UserProvider>(context, listen: false).userProviderData;
-  //   if (!_userProvider.name.isEmpty) {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     UserModel currentUser =
         Provider.of<UserProvider>(context, listen: false).userProviderData;
 
-    final bannerURL = currentUser.userBackgroundUrl;    
+    final bannerURL = currentUser.userBackgroundUrl;
 
     return Scaffold(
-      backgroundColor: Color(0xFF1A172F),
+      backgroundColor: const Color(0xFF1A172F),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -62,42 +42,47 @@ class _HomeScreenState extends State<HomeScreen> {
                             .pushNamed(SettingScreen.routeName),
                       },
                   child: TopBanner(
-                      300, NetworkImage(bannerURL), 'Change Info')),
+                      300,
+                      const AssetImage('lib/assets/images/banner.png'),
+                      'Change Info')),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                   shape: BoxShape.circle,),
-                                  child:Icon(Icons.account_circle_rounded, size:80, color:Colors.grey)
-                            ),
-
+                                height: 80,
+                                width: 80,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.account_circle_rounded,
+                                    size: 80, color: Colors.grey)),
                             Column(
                               children: [
                                 Text(currentUser.name,
                                     style:
                                         TextStyle(color: white, fontSize: 28)),
                                 Text("@${currentUser.userName}",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey, fontSize: 16))
                               ],
-                            ),                           
+                            ),
                             Container(
                               height: 98,
                               width: 85,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               decoration: BoxDecoration(
-                                  color: Color(0xFF4D5390).withOpacity(0.5),
+                                  color:
+                                      const Color(0xFF4D5390).withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(20)),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -105,19 +90,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Row(children: [
                                     Icon(Icons.thumb_up_alt,
                                         color: accentOrange),
-                                    Spacer(),
-                                    Text("150",
+                                    const Spacer(),
+                                    const Text("150",
                                         style: TextStyle(color: Colors.white))
                                   ]),
                                   Row(children: [
                                     Icon(Icons.star, color: accentOrange),
-                                    Spacer(),
+                                    const Spacer(),
                                     Text("1.2k", style: TextStyle(color: white))
                                   ]),
                                   Row(children: [
                                     Icon(Icons.remove_red_eye_sharp,
                                         color: accentOrange),
-                                    Spacer(),
+                                    const Spacer(),
                                     Text("528", style: TextStyle(color: white))
                                   ]),
                                 ],
@@ -126,22 +111,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       Text("Latest News",
                           style: TextStyle(
                               color: white, fontWeight: FontWeight.w600)),
-                      SizedBox(height: 8),
-                      Image(image: AssetImage('lib/assets/images/news.png')),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 8),
+                      const Image(
+                          image: AssetImage('lib/assets/images/news.png')),
+                      const SizedBox(height: 12),
                       Container(
-                          child: Text("Announcements",
+                          child: const Text("Announcements",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600)),
                           alignment: Alignment.centerLeft),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       Container(
-                        child: Image(
+                        child: const Image(
                             image: AssetImage(
                                 'lib/assets/images/discountpromo.png')),
                       ),

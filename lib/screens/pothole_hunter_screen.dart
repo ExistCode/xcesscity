@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:xcesscity/screens/community_detail_screen.dart';
-import 'package:xcesscity/widgets/community_card.dart';
-import 'package:xcesscity/widgets/crime_map.dart';
-import 'package:xcesscity/widgets/event_card.dart';
-import 'package:xcesscity/models/colors.dart' as custom_colors;
+import 'package:xcesscity/widgets/pothole_map_card.dart';
 
 import '../models/colors.dart';
 
-class EventScreen extends StatefulWidget {
+class PotholeHunterScreen extends StatefulWidget {
   static const routeName = '/event';
   @override
-  State<EventScreen> createState() => _EventScreenState();
+  State<PotholeHunterScreen> createState() => _PotholeHunterScreenState();
 }
 
-class _EventScreenState extends State<EventScreen> {
+class _PotholeHunterScreenState extends State<PotholeHunterScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -32,7 +27,7 @@ class _EventScreenState extends State<EventScreen> {
               alignment: Alignment.centerLeft,
               width: double.infinity,
               height: 100,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   color: primaryOrange,
                   borderRadius: BorderRadius.circular(20)),
@@ -59,7 +54,7 @@ class _EventScreenState extends State<EventScreen> {
                   borderRadius: BorderRadius.circular(14),
                   // border:Border.all(width: 1)
                 ),
-                child: CrimeMap()),
+                child: PotholeMap()),
             const SizedBox(
               height: 10,
             ),
@@ -73,7 +68,7 @@ class _EventScreenState extends State<EventScreen> {
                       fontSize: 15,
                       fontWeight: FontWeight.normal),
                 ),
-                Spacer(),
+                const Spacer(),
                 Icon(Icons.location_pin, color: white, size: 20),
                 Text(
                   " : Current Location",
@@ -85,13 +80,13 @@ class _EventScreenState extends State<EventScreen> {
               ],
             ),
             const SizedBox(height: 50),
-            new CircularPercentIndicator(
+            CircularPercentIndicator(
               radius: 60.0,
               lineWidth: 10.0,
               percent: 237.0 / 520,
               progressColor: accentOrange,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
