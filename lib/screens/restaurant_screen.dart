@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart';
 
-import '../widgets/crime_map.dart';
+import '../widgets/pothole_map_card.dart';
 
 class RestaurantScreen extends StatefulWidget {
   const RestaurantScreen({super.key});
@@ -20,7 +20,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 20),
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
               Container(
@@ -39,7 +39,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
                 alignment: Alignment.center,
                 height: 50,
@@ -54,11 +54,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                     fillColor: white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(width: 5)),
+                        borderSide: const BorderSide(width: 5)),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 height: 310,
                 width: double.infinity,
@@ -66,9 +66,9 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 clipBehavior: Clip.hardEdge,
-                child: CrimeMap(),
+                child: PotholeMap(),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text("Nearest Restaurants",
@@ -77,25 +77,25 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                         color: white,
                         fontWeight: FontWeight.bold)),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     borderRadius:
                         BorderRadius.only(topRight: Radius.circular(20))),
                 height: 120,
                 child: Row(
                   children: [
                     Container(
-                      child: Image(
-                          image:
-                              AssetImage('lib/assets/images/restaurant1.png')),
+                      child: const Image(
+                          image: AssetImage(
+                              'lib/assets/images/nearby-restaurant.png')),
                     ),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(10),
                             bottomRight: Radius.circular(10),
                           ),
@@ -110,12 +110,13 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                     fontSize: 16,
                                     color: white,
                                     fontWeight: FontWeight.bold)),
-                            Spacer(),
+                            const Spacer(),
                             Row(
                               children: [
-                                Spacer(),
+                                const Spacer(),
                                 Container(
-                                  padding: EdgeInsets.only(right: 5, left: 5),
+                                  padding:
+                                      const EdgeInsets.only(right: 5, left: 5),
                                   width: 75,
                                   height: 30,
                                   decoration: BoxDecoration(
@@ -127,7 +128,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                         Icons.star,
                                         color: secondary,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
                                       Text("4.5",

@@ -3,25 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 import 'package:xcesscity/screens/write_report_screen.dart';
-import 'package:xcesscity/widgets/camera_view.dart';
+import 'package:xcesscity/widgets/live_camera_view_card.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server/gmail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 
-import 'package:xcesscity/screens/emergency_screen.dart';
-import 'package:xcesscity/screens/write_report_screen.dart';
-import 'package:image/image.dart' as img;
-import 'package:xcesscity/widgets/crime_map.dart';
-import 'package:xcesscity/widgets/explore_row_category.dart';
-import 'package:xcesscity/widgets/pothole_view.dart';
 import 'package:http/http.dart' as http;
 
 class LivePotholeDetectionScreen extends StatefulWidget {
@@ -48,10 +35,6 @@ class _LivePotholeDetectionScreenState
       long = '${value.longitude}';
 
       changeToAddress(double.parse(lat), double.parse(long));
-
-      // Convert//
-
-      print('Lat:$lat , Long:$long');
     });
   }
 
@@ -62,14 +45,14 @@ class _LivePotholeDetectionScreenState
         backgroundColor: custom_colors.backgroundBlack,
         leading: IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back_ios_new_outlined)),
+            icon: const Icon(Icons.arrow_back_ios_new_outlined)),
       ),
       body: Stack(children: [
-        CameraView(),
+        const LiveCameraView(),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
             height: 320,
             width: double.infinity,
             decoration: BoxDecoration(color: custom_colors.backgroundBlack),
@@ -81,15 +64,16 @@ class _LivePotholeDetectionScreenState
     );
   }
 
+// Pick Photo
   Widget _buildPickPhotoButton() {
     return Container(
-      padding: EdgeInsets.all(40),
+      padding: const EdgeInsets.all(40),
       child: Row(children: [
         Icon(
           Icons.dialpad,
           color: custom_colors.white,
         ),
-        Spacer(),
+        const Spacer(),
         //Camera Button//
         GestureDetector(
             child: Container(
@@ -109,7 +93,10 @@ class _LivePotholeDetectionScreenState
               _getCurrentLocation().then((value) async {
                 lat = '${value.latitude}';
                 long = '${value.longitude}';
-                changeToAddress(double.parse(lat), double.parse(long));
+                setState(() {
+                  changeToAddress(double.parse(lat), double.parse(long));
+                });
+
                 createNewPothole(
                     "Marker1", stAddress, lat, long, DateTime.now());
 
@@ -119,7 +106,7 @@ class _LivePotholeDetectionScreenState
                 print("stAddress: ${stAddress}");
               });
             })),
-        Spacer(),
+        const Spacer(),
         GestureDetector(
           onTap: () => {Navigator.of(context).pushNamed(WriteReport.routeName)},
           child: Icon(
@@ -132,29 +119,11 @@ class _LivePotholeDetectionScreenState
   }
 
   Widget _buildResultView() {
-    // var title = '';
-
-    // if (_resultStatus == _ResultStatus.notFound) {
-    //   title = 'Fail to recognise';
-    // } else if (_resultStatus == _ResultStatus.found) {
-    //   title = _plantLabel;
-    // } else {
-    //   title = '';
-    // }
-
-    // //
-    // var accuracyLabel = '';
-    // var potholeLabel = '';
-    // if (_resultStatus == _ResultStatus.found) {
-    //   potholeLabel = 'Pothole: ${((_focus * 100)).toStringAsFixed(2)}%';
-    //   accuracyLabel = 'Accuracy: ${((_accuracy * 100)).toStringAsFixed(2)}%';
-    // }
-
     return Container(
       width: 600,
       child: Column(children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -171,7 +140,7 @@ class _LivePotholeDetectionScreenState
           height: 80,
           decoration: BoxDecoration(
               color: custom_colors.black,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         ),
         GestureDetector(
@@ -196,7 +165,7 @@ class _LivePotholeDetectionScreenState
             height: 40,
             decoration: BoxDecoration(
                 color: custom_colors.secondary,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10))),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -215,7 +184,7 @@ class _LivePotholeDetectionScreenState
     final snackBar = SnackBar(
       content: Text(
         text,
-        style: TextStyle(fontSize: 20),
+        style: const TextStyle(fontSize: 20),
       ),
       backgroundColor: Colors.green[400],
     );
@@ -280,6 +249,7 @@ class _LivePotholeDetectionScreenState
       "long": long,
       "reportedDate": time,
     });
+    return null;
   }
 
   Future<Position> _getCurrentLocation() async {

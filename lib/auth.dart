@@ -44,12 +44,6 @@ class Auth {
     return null;
   }
 
-  // Future<void> signOut(BuildContext context) async {
-  //   print('logout');
-  //   await _firebaseAuth.signOut();
-  //   Navigator.of(context).pushReplacementNamed(LoginRegisterScreen.routeName);
-  // }
-
   signInWithGoogle() async {
     final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication gAuth = await gUser!.authentication;

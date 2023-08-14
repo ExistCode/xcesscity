@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xcesscity/widgets/top_banner.dart';
 import '../models/colors.dart' as custom_colors;
-import '../models/colors.dart';
 
 class WelcomePageView extends StatelessWidget {
   String imageUrl;
@@ -16,17 +15,19 @@ class WelcomePageView extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        color: backgroundBlack,
+        color: custom_colors.backgroundBlack,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TopBanner(500, AssetImage(imageUrl), 'Welcome to XcessCITY'),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: white, fontSize: 28, fontWeight: FontWeight.w900)),
+                    color: custom_colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w900)),
             const SizedBox(
               height: 20,
             ),
@@ -34,7 +35,7 @@ class WelcomePageView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 description,
-                style: TextStyle(color: white, fontSize: 14),
+                style: TextStyle(color: custom_colors.white, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             )

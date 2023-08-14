@@ -5,7 +5,6 @@ import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
 import 'package:xcesscity/screens/welcome_screen.dart';
-import 'package:xcesscity/testing_screen.dart';
 import 'auth.dart';
 import 'models/user_model.dart';
 import 'navigation.dart';
@@ -26,11 +25,8 @@ class _AuthWidgetTreeState extends State<AuthWidgetTree> {
       stream: Auth().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          print("navigation");
-          print(currentUser.name);
           return Navigation();
         } else {
-          print('welcome');
           return WelcomeScreen();
         }
       },

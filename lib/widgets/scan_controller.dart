@@ -53,17 +53,6 @@ class ScanController extends GetxController {
   }
 
   objectDetector(CameraImage image) async {
-    // var detector = await Tflite.runModelOnFrame(
-    //     bytesList: image.planes.map((e) {
-    //       return e.bytes;
-    //     }).toList(),
-    //     asynch: true,
-    //     imageHeight: image.height,
-    //     imageWidth: image.width,
-    //     imageMean: 127.5,
-    //     imageStd: 127.5,
-    //     rotation: 90,
-    //     threshold: 0.4);
     var detector = await Tflite.runModelOnFrame(
         bytesList: image.planes.map((e) {
           return e.bytes;
@@ -78,19 +67,9 @@ class ScanController extends GetxController {
         threshold: 0.1);
 
     if (detector != null) {
-      print("jalan");
-      print("Result is $detector.first");
-      // print("Test: ${detector.first['confidence']}");
-      // print("Test2:${detector.first['rect']['h']}");
       var ourDetectedObject = detector.first;
-      print(detector.first['confidence'] * 100);
       if ((detector.first['confidence'] * 100) > 45) {
         label = detector.first['label'].toString();
-        print(label);
-        //   h = detector.first['rect']['h'];
-        //   w = detector.first['rect']['w'];
-        //   x = detector.first['rect']['x'];
-        //   y = detector.first['rect']['y'];
       } else {
         print("confidence = null");
       }
