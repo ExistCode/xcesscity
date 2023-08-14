@@ -6,32 +6,22 @@ import 'package:xcesscity/models/colors.dart';
 import 'package:xcesscity/providers/forum_provider.dart';
 import 'package:xcesscity/providers/location_provider.dart';
 import 'package:xcesscity/providers/user_provider.dart';
-import 'package:xcesscity/screens/community_detail_screen.dart';
 import 'package:xcesscity/screens/create_new_forum.dart';
-import 'package:xcesscity/screens/detection_screen.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
-import 'package:xcesscity/screens/event_screen.dart';
+import 'package:xcesscity/screens/pothole_hunter_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
-import 'package:xcesscity/screens/live_object_detection.dart';
 import 'package:xcesscity/screens/live_pothole_detection_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
-
 import 'package:xcesscity/screens/restaurant_screen.dart';
 import 'package:xcesscity/screens/rulespolicy_screen.dart';
 import 'package:xcesscity/screens/sign_up_screen.dart';
-
 import 'package:xcesscity/screens/write_report_screen.dart';
-import 'package:xcesscity/testing_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/question_screen.dart';
-import 'package:xcesscity/screens/welcome_screen.dart';
-import 'package:xcesscity/widgets/camera_view.dart';
 import 'navigation.dart';
 import 'screens/setting_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:xcesscity/firebase_options.dart';
 
 List<CameraDescription>? cameras;
 
@@ -73,16 +63,11 @@ class MyApp extends StatelessWidget {
             Navigation.routeName: (context) => Navigation(),
             ForumScreen.routeName: (context) => ForumScreen(),
             ExploreScreen.routeName: (context) => ExploreScreen(),
-            EventScreen.routeName: (context) => EventScreen(),
+            PotholeHunterScreen.routeName: (context) => PotholeHunterScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
             SignUpScreen.routeName: (context) => SignUpScreen(),
-            TestingScreen.routeName: (context) => TestingScreen(),
             RulesPolicy.routeName: (context) => RulesPolicy(),
-            CommunityDetailScreen.routeName: (context) =>
-                CommunityDetailScreen(),
             CreateNewForum.routeName: (context) => CreateNewForum(),
-            PotholeDetectionScreen.routeName: (context) =>
-                PotholeDetectionScreen(),
             WriteReport.routeName: (context) => WriteReport(),
             RestaurantScreen.routeName: (context) => RestaurantScreen(),
             LivePotholeDetectionScreen.routeName: (context) =>

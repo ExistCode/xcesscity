@@ -65,28 +65,4 @@ class LocationProvider with ChangeNotifier {
       },
     );
   }
-
-  // Future<void>? createUserWithEmailAndPassword(
-  //   String email,
-  //   String password,
-  // ) async {
-  //   await _firebaseAuth
-  //       .createUserWithEmailAndPassword(
-  //     email: email,
-  //     password: password,
-  //   )
-  //       .then((value) {
-  //     FirebaseFirestore.instance.collection('user').doc(value.user!.uid).set({
-  //       "email": value.user!.email,
-  //       "id": value.user!.uid,
-  //       'name': '',
-  //       'userName': '',
-  //       'age': '',
-  //       'gender': '',
-  //       'userProfileUrl': '',
-  //       'userBackgroundUrl': '',
-  //     });
-  //   });
-  //   return null;
-  // }
 }

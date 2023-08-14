@@ -19,7 +19,7 @@ class _eventsCardState extends State<eventsCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         width: 152,
         height: 200,
         decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class _eventsCardState extends State<eventsCard> {
                 color: custom_colors.secondary.withOpacity(0.9),
                 spreadRadius: 0,
                 blurRadius: 2,
-                offset: Offset(0, 2),
+                offset: const Offset(0, 2),
               )
             ]),
         child: Column(
@@ -55,11 +55,11 @@ class _eventsCardState extends State<eventsCard> {
                     fontSize: 12),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               // Change to the title
               widget.title,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
                   color: Colors.white),

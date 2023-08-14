@@ -2,11 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 
-class crimeUpdateCard extends StatelessWidget {
+class PotholeUpdateCard extends StatelessWidget {
   String time;
   String updates;
 
-  crimeUpdateCard({
+  PotholeUpdateCard({
     required this.time,
     required this.updates,
   });
@@ -21,7 +21,7 @@ class crimeUpdateCard extends StatelessWidget {
           height: 160,
           width: double.infinity,
           child: Row(children: [
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             // Circle
@@ -53,7 +53,7 @@ class crimeUpdateCard extends StatelessWidget {
                 )
               ]),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             // Text

@@ -103,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             suffixIcon: IconButton(
-                              icon: Icon(Icons.remove_red_eye_outlined),
+                              icon: const Icon(Icons.remove_red_eye_outlined),
                               color:
                                   custom_colors.primaryOrange.withOpacity(0.8),
                               onPressed: () {},
@@ -111,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hintText: "Password...",
                             fillColor: custom_colors.white),
                       ),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                       Row(
                         children: [
                           Text(
@@ -173,16 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                   color: custom_colors.white),
-                            )
-
-                            // Text(
-                            //   "LOGIN",
-                            //   style: (TextStyle(
-                            //       fontWeight: FontWeight.bold,
-                            //       color: white,
-                            //       fontSize: 16)),
-                            // ),
-                            ),
+                            )),
                       ),
                       const SizedBox(
                         height: 10,
@@ -199,7 +190,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           )),
                         ),
                       ),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                       Center(
                         child: Text(
                           " OR",
@@ -208,7 +199,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           )),
                         ),
                       ),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                       Container(
                         width: double.infinity,
                         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -218,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  gradient: SweepGradient(
+                                  gradient: const SweepGradient(
                                     colors: [
                                       Color.fromRGBO(246, 0, 0, 1),
                                       Color.fromRGBO(255, 215, 83, 1),
@@ -230,7 +221,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Container(
                                 width: double.infinity,
                                 height: 40,
-                                margin: EdgeInsets.all(2),
+                                margin: const EdgeInsets.all(2),
                                 decoration: BoxDecoration(
                                   color: custom_colors.white,
                                   borderRadius: BorderRadius.circular(20),
@@ -241,8 +232,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       Container(
                                         height: 40.0,
                                         width: 40.0,
-                                        decoration: BoxDecoration(
-                                          image: const DecorationImage(
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
                                               image: AssetImage(
                                                   "lib/assets/images/googleicon.png"),
                                               fit: BoxFit.cover),

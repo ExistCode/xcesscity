@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xcesscity/providers/user_provider.dart';
 import 'package:xcesscity/screens/emergency_screen.dart';
-import 'package:xcesscity/screens/event_screen.dart';
+import 'package:xcesscity/screens/pothole_hunter_screen.dart';
 import 'package:xcesscity/screens/explore_screen.dart';
 import 'package:xcesscity/screens/forum_screen.dart';
 import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/loading_screen.dart';
-import 'package:xcesscity/screens/setting_screen.dart';
 import 'models/colors.dart';
 
 class Navigation extends StatefulWidget {
@@ -32,7 +31,7 @@ class NavigationState extends State<Navigation> {
     ExploreScreen(),
     EmergencyScreen(),
     ForumScreen(),
-    EventScreen(),
+    PotholeHunterScreen(),
   ];
 
   @override

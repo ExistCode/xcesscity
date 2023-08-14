@@ -12,7 +12,7 @@ class SettingCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(15),
+      margin: const EdgeInsets.all(15),
       child: Row(
         children: [
           Container(
@@ -22,7 +22,7 @@ class SettingCategory extends StatelessWidget {
               color: white,
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
             category,
             style: TextStyle(
@@ -30,7 +30,7 @@ class SettingCategory extends StatelessWidget {
               fontSize: 14,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Text(
             data,
             style: TextStyle(fontSize: 14, color: white.withOpacity(0.5)),

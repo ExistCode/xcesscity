@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:xcesscity/widgets/explore_row_category.dart';
-
 import '../models/colors.dart';
 import '../navigation.dart';
 import '../providers/user_provider.dart';
@@ -64,10 +62,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 100),
+                const SizedBox(height: 100),
                 Row(
                   children: [
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Text(
                       'Tell us about yourself',
                       style: TextStyle(
@@ -77,10 +75,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: secondary,
@@ -89,19 +87,19 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         inputField(text: 'Name', controller: _controllerName),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         inputField(
                             text: 'Username', controller: _controllerUserName),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Text("Choose Gender",
                             style: TextStyle(
                                 fontSize: 17,
                                 color: white,
                                 fontWeight: FontWeight.bold)),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 6),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: white),
@@ -131,9 +129,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                   .toList(),
                               onChanged: dropdownCallBack),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         inputField(text: 'Age', controller: _controllerAge),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
                         Center(child: _submitButton())
                       ],
                     ),
@@ -142,38 +140,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ],
             )));
   }
-
-  // Widget inputField(text, controller) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Text(text,
-  //           style: TextStyle(
-  //               fontSize: 17, color: white, fontWeight: FontWeight.bold)),
-  //       SizedBox(height: 5),
-  //       TextField(
-  //         textInputAction: TextInputAction.next,
-  //         cursorColor: accentOrange,
-  //         controller: controller,
-  //         decoration: InputDecoration(
-  //           filled: true,
-  //           fillColor: white,
-
-  //           hintText: "Enter ${text} ...",
-  //           // hintStyle: TextStyle(
-  //           //   fontSize: 14,
-  //           //   fontWeight: FontWeight.bold,
-  //           //   color: accentOrange.withOpacity(0.5),
-  //           // ),
-  //           border: OutlineInputBorder(
-  //             borderRadius: BorderRadius.circular(10),
-  //             borderSide: BorderSide(width: 10),
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget _submitButton() {
     return ClipRRect(

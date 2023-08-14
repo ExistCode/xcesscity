@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:xcesscity/navigation.dart';
-import 'package:xcesscity/screens/home_screen.dart';
 import 'package:xcesscity/screens/login_screen.dart';
-import 'package:xcesscity/screens/question_screen.dart';
 import '../models/colors.dart';
 import '../widgets/welcome_page_view.dart';
 
@@ -64,10 +62,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 controller: _controller,
                 children: [
                   WelcomePageView(
-                    imageUrl: 'lib/assets/images/police.png',
-                    title: "Crime & Incident Report",
+                    imageUrl: 'lib/assets/images/first-bg-welcome.jpeg',
+                    title: "Pothole Report",
                     description:
-                        " With XcessCity, you can report and stay informed about any potential criminal activities or incidents, promoting a safer city environment",
+                        " With XcessCity, you can automatically report and stay informed about any potholes on the road, promoting a safer city environment",
                   ),
                   WelcomePageView(
                       imageUrl: 'lib/assets/images/event.jpg',
@@ -75,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       description:
                           " We also facilitates seamless connections among city dwellers, offering a diverse range of local events and experiences"),
                   WelcomePageView(
-                    imageUrl: 'lib/assets/images/connectingPeople.jpeg',
+                    imageUrl: 'lib/assets/images/second-bg-welcome.jpeg',
                     title: "Connecting People",
                     description:
                         "XcessCITY enables users in the same city to discover and connect others, fostering real-life connections and community engagement.",

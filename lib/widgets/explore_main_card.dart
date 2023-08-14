@@ -11,7 +11,7 @@ class ExploreMainCard extends StatelessWidget {
       height: 250,
       alignment: Alignment.bottomCenter,
       clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage('lib/assets/images/new-restaurant.jpg'),
             fit: BoxFit.cover),
@@ -20,7 +20,7 @@ class ExploreMainCard extends StatelessWidget {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         color: accentOrange,
         width: double.infinity,
         height: 80,

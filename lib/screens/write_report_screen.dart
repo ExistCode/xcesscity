@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xcesscity/models/colors.dart';
-import 'package:xcesscity/screens/detection_screen.dart';
+import 'package:xcesscity/screens/live_pothole_detection_screen.dart';
 
 class WriteReport extends StatefulWidget {
   static const routeName = '/writeReport';
@@ -27,14 +27,14 @@ class _WriteReportState extends State<WriteReport> {
             height: double.infinity,
             child: Column(children: [
               Container(
-                padding: EdgeInsets.only(left: 10, right: 20),
+                padding: const EdgeInsets.only(left: 10, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                         onTap: () => {
                               Navigator.of(context)
-                                  .pop(PotholeDetectionScreen.routeName)
+                                  .pop(LivePotholeDetectionScreen.routeName)
                             },
                         child: Icon(Icons.keyboard_arrow_left_rounded,
                             color: white, size: 50)),
@@ -51,34 +51,34 @@ class _WriteReportState extends State<WriteReport> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                   child: Expanded(
                 child: Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: Color(0xFF433957),
+                        color: const Color(0xFF433957),
                         borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFieldWidget("Name :", 45.0, 1, nameController),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFieldWidget(
                             "Location :", 45.0, 1, locationController),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFieldWidget(
                             "Date & Time :", 45.0, 1, datetimeController),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFieldWidget(
                             "Incident Type :", 45.0, 1, incidentController),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFieldWidget(
                             "Details :", 100.0, 3, detailsController),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Center(
                           child: Container(
                             width: 200,
@@ -96,9 +96,9 @@ class _WriteReportState extends State<WriteReport> {
                                 ),
                               ],
                             ),
-                            child: Text(
+                            child: const Text(
                               "Submit",
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -120,7 +120,7 @@ class _WriteReportState extends State<WriteReport> {
         Text(text,
             style: TextStyle(
                 color: white, fontWeight: FontWeight.bold, fontSize: 17.5)),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Container(
           height: height,
           child: TextField(
@@ -133,7 +133,7 @@ class _WriteReportState extends State<WriteReport> {
               fillColor: white,
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 5)),
+                  borderSide: const BorderSide(width: 5)),
             ),
           ),
         )

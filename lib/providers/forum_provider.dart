@@ -12,23 +12,12 @@ class ForumProvider with ChangeNotifier {
         "authorName": '',
         "userName": '',
         "content": content,
-        'id': '',        
+        'id': '',
         'numOfLikes': '',
         'numOfReplies': '',
         'numOfShares': '',
         'userProfileUrl': '',
         'imageUrl': '',
-
-
-        // String id;
-        // String authorName;
-        // String userName;
-        // String content;
-        // int numOfLikes;
-        // int numOfReplies;
-        // int numOfShares;
-        // String userProfileUrl;
-        // String imageUrl;
       },
     );
   }
@@ -66,19 +55,10 @@ class ForumProvider with ChangeNotifier {
         .get()
         .then(
       (snapshot) {
-        // String id;
-        // String authorName;
-        // String userName;
-        // String content;
-        // int numOfLikes;
-        // int numOfReplies;
-        // int numOfShares;
-        // String userProfileUrl;
-        // String imageUrl;
         ForumModel loadedForum = ForumModel(
           id: snapshot.data()!['id'],
           authorName: snapshot.data()!['authorName'],
-          userName: snapshot.data()!['userName'],          
+          userName: snapshot.data()!['userName'],
           content: snapshot.data()!['content'],
           numOfLikes: snapshot.data()!['numOfLikes'],
           numOfShares: snapshot.data()!['numOfShares'],

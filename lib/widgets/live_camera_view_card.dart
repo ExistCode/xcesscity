@@ -4,13 +4,11 @@ import 'package:get/get.dart';
 import 'package:xcesscity/widgets/scan_controller.dart';
 import 'package:xcesscity/models/colors.dart' as custom_colors;
 
-class CameraView extends StatelessWidget {
-  const CameraView({super.key});
+class LiveCameraView extends StatelessWidget {
+  const LiveCameraView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool _isPothole;
-
     return Scaffold(
       body: GetBuilder<ScanController>(
           init: ScanController(),
@@ -33,7 +31,7 @@ class CameraView extends StatelessWidget {
                       ],
                     ),
                   )
-                : Center(
+                : const Center(
                     child: Text("Loading Preview"),
                   );
           }),

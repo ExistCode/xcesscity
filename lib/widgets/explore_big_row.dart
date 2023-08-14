@@ -9,14 +9,15 @@ class ExploreBigRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {Navigator.of(context).pushNamed(RestaurantScreen.routeName)},
+      onTap: () =>
+          {Navigator.of(context).pushNamed(RestaurantScreen.routeName)},
       child: Container(
           height: 135,
           width: 190,
           clipBehavior: Clip.hardEdge,
-          margin: EdgeInsets.only(right:10),
+          margin: const EdgeInsets.only(right: 10),
           decoration: BoxDecoration(
-              image: DecorationImage(
+              image: const DecorationImage(
                   image: AssetImage('lib/assets/images/splashMania.png'),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(20)),
@@ -27,7 +28,10 @@ class ExploreBigRow extends StatelessWidget {
                 height: 40,
                 width: 190,
                 color: accentOrange,
-                child: AutoSizeText('SplashMania',style: TextStyle(fontWeight: FontWeight.bold,color: white),),
+                child: AutoSizeText(
+                  'SplashMania',
+                  style: TextStyle(fontWeight: FontWeight.bold, color: white),
+                ),
               ))),
     );
   }

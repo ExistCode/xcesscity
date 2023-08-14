@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../assets/repositories/storage/storage_repository.dart';
 import '../auth.dart';
 import '../models/user_model.dart';
 
@@ -83,17 +82,5 @@ class UserProvider with ChangeNotifier {
             snapshot.data()!['userBackgroundUrl'];
       },
     );
-  }
-
-  Future<void> updateUserPictures(UserModel user, String imageName) async {
-    String downloadUrl =
-        await StorageRepository().getDownloadUrl(user, imageName);
-
-    return _firebaseFirestore
-        .collection('user')
-        .doc(Auth().currentUser!.uid)
-        .update({
-      'userProfileUrl': FieldValue.arrayUnion([downloadUrl])
-    });
   }
 }
