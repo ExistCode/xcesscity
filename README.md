@@ -73,11 +73,11 @@ External Packages and Dependencies:
 
   
 ## Datasets
-- [1st Dataset] (https://www.kaggle.com/datasets/rajdalsaniya/pothole-detection-dataset)
-- [2nd Dataset] (https://www.kaggle.com/datasets/sachinpatel21/pothole-image-dataset)
-- [3rd Dataset] (https://www.kaggle.com/datasets/sovitrath/road-pothole-images-for-pothole-detection)
-- [4th Dataset] (https://www.kaggle.com/datasets/ashishkumarak/test-zip)
-- [5th Dataset] (https://www.kaggle.com/datasets/denisg04/pothle-detect)
+- [1st Dataset](https://www.kaggle.com/datasets/rajdalsaniya/pothole-detection-dataset)
+- [2nd Dataset](https://www.kaggle.com/datasets/sachinpatel21/pothole-image-dataset)
+- [3rd Dataset](https://www.kaggle.com/datasets/sovitrath/road-pothole-images-for-pothole-detection)
+- [4th Dataset](https://www.kaggle.com/datasets/ashishkumarak/test-zip)
+- [5th Dataset](https://www.kaggle.com/datasets/denisg04/pothle-detect)
 ## Contributors
 
 - [Gregorius Hans Andreanto](https://github.com/ExistCode)
