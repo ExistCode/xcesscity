@@ -69,7 +69,8 @@ External Packages and Dependencies:
 
 ## Screenshots
 
-![xcessCITY-screens](https://github.com/ExistCode/xcesscity/assets/76140889/e5d97b32-ee21-4706-8ad3-c710beb16c57)
+![xcessCITY-screens](https://github.com/ExistCode/xcesscity/assets/76140889/389aa791-8701-4cb7-a87a-5471f7ffacf5)
+
 
   
 ## Datasets
